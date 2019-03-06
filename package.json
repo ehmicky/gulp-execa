@@ -1,0 +1,42 @@
+{
+  "name": "gulp-execa",
+  "version": "0.0.1",
+  "main": "build/src/index.js",
+  "files": [
+    "build/src"
+  ],
+  "scripts": {
+    "test": "gulp test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "gulp check"
+    }
+  },
+  "description": "",
+  "keywords": [],
+  "license": "Apache-2.0",
+  "homepage": "https://git.io/fhp8z",
+  "repository": "ehmicky/gulp-execa",
+  "bugs": {
+    "url": "https://github.com/ehmicky/gulp-execa/issues"
+  },
+  "author": "ehmicky <ehmicky@gmail.com> (https://github.com/ehmicky)",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.3.4",
+    "core-js": "^2.6.5"
+  },
+  "devDependencies": {
+    "ava": "^1.3.1",
+    "gulp": "^4.0.0",
+    "gulp-shared-tasks": "^0.18.2",
+    "husky": "^1.3.1"
+  },
+  "engines": {
+    "node": ">=8.10.0"
+  }
+}
