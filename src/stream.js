@@ -1,6 +1,6 @@
 'use strict'
 
-const through = require('through2')
+const through = require('through2-concurrent')
 
 const { exec } = require('./exec')
 const { getError } = require('./error')
@@ -12,9 +12,11 @@ const { getError } = require('./error')
 // call to those functions would be more efficient that creating lots of
 // child processes through streaming.
 const execStream = function(mapFunc, opts) {
-  const optsA = { ...DEFAULT_OPTS, ...opts }
+  const { maxConcurrency, ...optsA } = { ...DEFAULT_OPTS, ...opts }
 
-  return through.obj(execVinyl.bind(null, { mapFunc, opts: optsA }))
+  return through.obj(execVinyl.bind(null, { mapFunc, opts: optsA }), {
+    maxConcurrency,
+  })
 }
 
 const DEFAULT_OPTS = {
@@ -25,6 +27,7 @@ const DEFAULT_OPTS = {
   stderr: 'pipe',
   // Prevents echoing by default because it would be done on each iteration.
   echo: false,
+  maxConcurrency: 100,
 }
 
 // eslint-disable-next-line max-params, promise/prefer-await-to-callbacks
