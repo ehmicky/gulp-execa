@@ -33,7 +33,7 @@ const DEFAULT_OPTS = {
 // eslint-disable-next-line max-params, promise/prefer-await-to-callbacks
 const execVinyl = async function({ mapFunc, opts }, file, encoding, cb) {
   try {
-    const input = mapFunc(file)
+    const input = await mapFunc(file)
 
     const result = await fireCommand({ input, opts })
 
