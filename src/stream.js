@@ -27,7 +27,6 @@ const DEFAULT_OPTS = {
   stderr: 'pipe',
   // Prevents echoing by default because it would be done on each iteration.
   echo: false,
-  maxConcurrency: 100,
 }
 
 // eslint-disable-next-line max-params, promise/prefer-await-to-callbacks
