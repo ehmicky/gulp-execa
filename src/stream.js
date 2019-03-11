@@ -12,11 +12,13 @@ const { getError } = require('./error')
 // call to those functions would be more efficient that creating lots of
 // child processes through streaming.
 const execStream = function(mapFunc, opts) {
-  const { maxConcurrency, ...optsA } = { ...DEFAULT_OPTS, ...opts }
+  const optsA = { ...DEFAULT_OPTS, ...opts }
 
-  return through.obj(execVinyl.bind(null, { mapFunc, opts: optsA }), {
-    maxConcurrency,
-  })
+  // `maxConcurrency` `through2` option is not specified because `gulp.src()`
+  // always has a `highWaterMark` of `16` meaning only 16 files are processed
+  // at a time in parallel. `maxConcurrency` can then only be used to decrease
+  // that level of parallelism but `16` is already quite low.
+  return through.obj(execVinyl.bind(null, { mapFunc, opts: optsA }))
 }
 
 const DEFAULT_OPTS = {
