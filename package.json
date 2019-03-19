@@ -3,7 +3,8 @@
   "version": "0.2.0",
   "main": "build/src/index.js",
   "files": [
-    "build/src"
+    "build/src",
+    "!~"
   ],
   "scripts": {
     "test": "gulp test"
