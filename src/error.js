@@ -10,7 +10,9 @@ const ms = require('ms')
 // Throw a Gulp error
 const getError = function({ error, input, opts }) {
   const message = getErrorMessage({ error, input, opts })
-  const errorA = new PluginError('gulp-execa', message)
+  const errorA = new PluginError('gulp-execa', message, {
+    showProperties: false,
+  })
   // Keep `execa` error properties
   // eslint-disable-next-line fp/no-mutating-assign
   Object.assign(errorA, error)
