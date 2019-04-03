@@ -8,8 +8,13 @@ const PluginError = require('plugin-error')
 const ms = require('ms')
 
 // Throw a Gulp error
-const getError = function(message) {
-  return new PluginError('gulp-execa', message)
+const getError = function({ error, input, opts }) {
+  const message = getErrorMessage({ error, input, opts })
+  const errorA = new PluginError('gulp-execa', message)
+  // Keep `execa` error properties
+  // eslint-disable-next-line fp/no-mutating-assign
+  Object.assign(errorA, error)
+  return errorA
 }
 
 // Retrieve error message to print
@@ -75,5 +80,4 @@ const getExitCode = function({ code }) {
 
 module.exports = {
   getError,
-  getErrorMessage,
 }

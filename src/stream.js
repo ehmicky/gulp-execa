@@ -3,7 +3,6 @@
 const through = require('through2-concurrent')
 
 const { exec } = require('./exec')
-const { getError } = require('./error')
 
 // Creates a stream to use in Gulp e.g.
 //   src(...).pipe(stream(({ path }) => ['command', [path]]))
@@ -48,9 +47,8 @@ const execVinyl = async function({ mapFunc, opts }, file, encoding, cb) {
     // eslint-disable-next-line promise/prefer-await-to-callbacks
     return cb(null, file)
   } catch (error) {
-    const errorA = getError(error)
     // eslint-disable-next-line promise/prefer-await-to-callbacks
-    return cb(errorA)
+    return cb(error)
   }
 }
 

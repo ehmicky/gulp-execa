@@ -4,7 +4,7 @@ const execa = require('execa')
 
 const { printEcho } = require('./echo')
 const { splitInput } = require('./split')
-const { getError, getErrorMessage } = require('./error')
+const { getError } = require('./error')
 
 // Fire the command with `execa()`
 const execCommand = async function(input, opts) {
@@ -15,8 +15,8 @@ const execCommand = async function(input, opts) {
   try {
     return await execa(command, args, opts)
   } catch (error) {
-    const message = getErrorMessage({ error, input, opts })
-    throw getError(message)
+    const errorA = getError({ error, input, opts })
+    throw errorA
   }
 }
 
