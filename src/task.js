@@ -3,7 +3,7 @@ import { execCommand } from './command.js'
 import { splitInput } from './split.js'
 
 // Create a Gulp task
-const createTask = function(input, opts) {
+export const createTask = function(input, opts) {
   const optsA = parseOpts(opts)
 
   const task = execCommand.bind(null, input, optsA)
@@ -23,8 +23,4 @@ const setDisplayName = function({ task, input }) {
   const { command } = splitInput({ input })
   // eslint-disable-next-line fp/no-mutation, no-param-reassign
   task.displayName = String(command)
-}
-
-module.exports = {
-  task: createTask,
 }

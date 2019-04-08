@@ -1,7 +1,7 @@
 import isCi from 'is-ci'
 
 // Parse main arguments and options
-const parseOpts = function(opts) {
+export const parseOpts = function(opts) {
   const optsA = { ...DEFAULT_OPTS, ...opts }
   const optsB = addStdio({ opts: optsA })
   const optsC = { ...optsB, ...REQUIRED_OPTS }
@@ -30,8 +30,4 @@ const REQUIRED_OPTS = {
   shell: false,
   // This encourages shell-specific syntax as well
   windowsVerbatimArguments: false,
-}
-
-module.exports = {
-  parseOpts,
 }

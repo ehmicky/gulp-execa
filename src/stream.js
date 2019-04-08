@@ -8,7 +8,7 @@ import { exec } from './exec.js'
 // (through variadic arguments, globbing or directory recursion) as a single
 // call to those functions would be more efficient that creating lots of
 // child processes through streaming.
-const execStream = function(mapFunc, opts) {
+export const stream = function(mapFunc, opts) {
   const { maxConcurrency, ...optsA } = { ...DEFAULT_OPTS, ...opts }
 
   // `maxConcurrency` `through2` option is not specified because `gulp.src()`
@@ -63,8 +63,4 @@ const fireCommand = function({ input, opts }) {
 const addToVinyl = function({ file, result }) {
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.exec = [...(file.exec || []), result]
-}
-
-module.exports = {
-  stream: execStream,
 }

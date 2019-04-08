@@ -6,7 +6,7 @@ import PluginError from 'plugin-error'
 import ms from 'ms'
 
 // Throw a Gulp error
-const getError = function({ error, input, opts }) {
+export const getError = function({ error, input, opts }) {
   const message = getErrorMessage({ error, input, opts })
   const errorA = new PluginError('gulp-execa', message, {
     showProperties: false,
@@ -76,8 +76,4 @@ const getExitCode = function({ code }) {
   }
 
   return `${codeNum} (${code})`
-}
-
-module.exports = {
-  getError,
 }

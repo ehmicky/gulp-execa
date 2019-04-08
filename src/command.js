@@ -5,7 +5,7 @@ import { splitInput } from './split.js'
 import { getError } from './error.js'
 
 // Fire the command with `execa()`
-const execCommand = async function(input, opts) {
+export const execCommand = async function(input, opts) {
   printEcho({ input, opts })
 
   const { command, args } = splitInput({ input })
@@ -16,8 +16,4 @@ const execCommand = async function(input, opts) {
     const errorA = getError({ error, input, opts })
     throw errorA
   }
-}
-
-module.exports = {
-  execCommand,
 }

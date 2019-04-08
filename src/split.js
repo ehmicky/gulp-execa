@@ -3,7 +3,7 @@
 // cross-platform and faster.
 // See https://github.com/sindresorhus/execa/issues/176
 // Here we split the string input to the arguments expected by `execa()`
-const splitInput = function({ input }) {
+export const splitInput = function({ input }) {
   const [command, ...args] = input
     .trim()
     .split(SPACES_REGEXP)
@@ -34,7 +34,3 @@ const handleEscaping = function(parts, part, index) {
 }
 
 const ESCAPE_CHAR = '\\'
-
-module.exports = {
-  splitInput,
-}
