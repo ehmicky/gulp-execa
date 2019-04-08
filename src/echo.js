@@ -1,5 +1,3 @@
-'use strict'
-
 const fancyLog = require('fancy-log')
 const { cyan } = require('chalk')
 

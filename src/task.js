@@ -1,5 +1,3 @@
-'use strict'
-
 const { parseOpts } = require('./options')
 const { execCommand } = require('./command')
 const { splitInput } = require('./split')

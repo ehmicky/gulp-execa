@@ -1,5 +1,3 @@
-'use strict'
-
 const through = require('through2-concurrent')
 
 const { exec } = require('./exec')

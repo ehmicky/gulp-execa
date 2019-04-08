@@ -1,5 +1,3 @@
-'use strict'
-
 const isCi = require('is-ci')
 
 // Parse main arguments and options

@@ -1,5 +1,3 @@
-'use strict'
-
 // We allow a single string (command + arguments) as input but we pass it
 // to `execa()` instead of `execa.shell()` because it is more secure,
 // cross-platform and faster.

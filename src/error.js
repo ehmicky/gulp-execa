@@ -1,5 +1,3 @@
-'use strict'
-
 const {
   constants: { errno },
 } = require('os')
