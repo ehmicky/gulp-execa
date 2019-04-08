@@ -1,9 +1,9 @@
-import {
-  constants: { errno },
-} from 'os'
+import { constants as osConstants } from 'os'
 
 import PluginError from 'plugin-error'
 import ms from 'ms'
+
+const { errno } = osConstants
 
 // Throw a Gulp error
 export const getError = function({ error, input, opts }) {
