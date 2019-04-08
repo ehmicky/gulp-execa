@@ -1,6 +1,6 @@
-const through = require('through2-concurrent')
+import through from 'through2-concurrent'
 
-const { exec } = require('./exec')
+import { exec } from './exec.js'
 
 // Creates a stream to use in Gulp e.g.
 //   src(...).pipe(stream(({ path }) => ['command', [path]]))

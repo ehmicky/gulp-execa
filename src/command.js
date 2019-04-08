@@ -1,8 +1,8 @@
-const execa = require('execa')
+import execa from 'execa'
 
-const { printEcho } = require('./echo')
-const { splitInput } = require('./split')
-const { getError } = require('./error')
+import { printEcho } from './echo.js'
+import { splitInput } from './split.js'
+import { getError } from './error.js'
 
 // Fire the command with `execa()`
 const execCommand = async function(input, opts) {

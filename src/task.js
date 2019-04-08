@@ -1,6 +1,6 @@
-const { parseOpts } = require('./options')
-const { execCommand } = require('./command')
-const { splitInput } = require('./split')
+import { parseOpts } from './options.js'
+import { execCommand } from './command.js'
+import { splitInput } from './split.js'
 
 // Create a Gulp task
 const createTask = function(input, opts) {

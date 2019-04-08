@@ -1,4 +1,4 @@
-const isCi = require('is-ci')
+import isCi from 'is-ci'
 
 // Parse main arguments and options
 const parseOpts = function(opts) {

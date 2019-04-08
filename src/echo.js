@@ -1,5 +1,5 @@
-const fancyLog = require('fancy-log')
-const { cyan } = require('chalk')
+import fancyLog from 'fancy-log'
+import { cyan } from 'chalk'
 
 // If `opts.echo` is `true` echo the command on the terminal
 const printEcho = function({ input, opts: { echo } }) {

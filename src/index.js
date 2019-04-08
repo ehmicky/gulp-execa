@@ -1,5 +1,5 @@
 module.exports = {
-  ...require('./exec'),
-  ...require('./task'),
-  ...require('./stream'),
+  ...require('./exec.js'),
+  ...require('./task.js'),
+  ...require('./stream.js'),
 }

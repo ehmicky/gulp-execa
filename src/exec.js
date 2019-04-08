@@ -1,5 +1,5 @@
-const { parseOpts } = require('./options')
-const { execCommand } = require('./command')
+import { parseOpts } from './options.js'
+import { execCommand } from './command.js'
 
 // Execute a shell command
 // To create a Gulp task, one should not use `bind()` as it removes
