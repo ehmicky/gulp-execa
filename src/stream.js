@@ -1,3 +1,5 @@
+import { callbackify } from 'util'
+
 import through from 'through2-concurrent'
 
 import { exec } from './exec.js'
@@ -33,22 +35,17 @@ const DEFAULT_OPTS = {
   maxConcurrency: 100,
 }
 
-// eslint-disable-next-line max-params, promise/prefer-await-to-callbacks
-const execVinyl = async function({ mapFunc, opts }, file, encoding, cb) {
-  try {
-    const input = await mapFunc(file)
+const cExecVinyl = async function({ mapFunc, opts }, file) {
+  const input = await mapFunc(file)
 
-    const result = await fireCommand({ input, opts })
+  const result = await fireCommand({ input, opts })
 
-    addToVinyl({ file, result })
+  addToVinyl({ file, result })
 
-    // eslint-disable-next-line promise/prefer-await-to-callbacks
-    return cb(null, file)
-  } catch (error) {
-    // eslint-disable-next-line promise/prefer-await-to-callbacks
-    return cb(error)
-  }
+  return file
 }
+
+const execVinyl = callbackify(cExecVinyl)
 
 const fireCommand = function({ input, opts }) {
   // Returning `undefined` or invalid command skips it silently.
