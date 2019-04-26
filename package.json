@@ -1,6 +1,6 @@
 {
   "name": "gulp-execa",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "build/src/main.js",
   "files": [
     "build/src",
