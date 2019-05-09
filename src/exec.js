@@ -37,6 +37,7 @@ const execCommand = async function(input, opts) {
 
 // Buld a Gulp error
 // TODO: when error is due to wrong input (not normal Execa error)
+// Maybe using options.reject false?
 // TODO: sometimes execa adds stdout|stderr, but we don't want that
 // (maybe removes anything after first newline?)
 const getError = function({ error, error: { message } }) {
