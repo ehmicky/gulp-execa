@@ -1,11 +1,8 @@
-import { parseOpts } from './options.js'
-import { execCommand } from './command.js'
+import { execBind } from './exec.js'
 
 // Create a Gulp task
 export const task = function(input, opts) {
-  const optsA = parseOpts(opts)
-
-  const gulpTask = execCommand.bind(null, input, optsA)
+  const gulpTask = execBind(input, opts)
 
   // We want to allow users to do `const gulpTask = execa(...)` instead of the
   // more verbose `const gulpTask = () => execa(...)`. This is especially

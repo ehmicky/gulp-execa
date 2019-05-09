@@ -1,5 +1,8 @@
+import execa from 'execa'
+import PluginError from 'plugin-error'
+
 import { parseOpts } from './options.js'
-import { execCommand } from './command.js'
+import { printEcho } from './echo.js'
 
 // Execute a shell command
 // To create a Gulp task, one should not use `bind()` as it removes
@@ -12,4 +15,37 @@ import { execCommand } from './command.js'
 export const exec = function(input, opts) {
   const optsA = parseOpts(opts)
   return execCommand(input, optsA)
+}
+
+// Same but delayed.
+// Options are parsed right away, in case there are validation errors.
+export const execBind = function(input, opts) {
+  const optsA = parseOpts(opts)
+  return execCommand.bind(null, input, optsA)
+}
+
+// Fire the command with `execa()`
+const execCommand = async function(input, opts) {
+  printEcho({ input, opts })
+
+  try {
+    return await execa(input, opts)
+  } catch (error) {
+    throw getError({ error })
+  }
+}
+
+// Buld a Gulp error
+// TODO: when error is due to wrong input (not normal Execa error)
+// TODO: sometimes execa adds stdout|stderr, but we don't want that
+// (maybe removes anything after first newline?)
+const getError = function({ error, error: { message } }) {
+  // TODO: try passing `error` instead of `error.message`
+  const errorA = new PluginError('gulp-execa', message, {
+    showProperties: false,
+  })
+  // Keep `execa` error properties
+  // eslint-disable-next-line fp/no-mutating-assign
+  Object.assign(errorA, error)
+  return errorA
 }
