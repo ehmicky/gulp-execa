@@ -42,9 +42,7 @@ const execCommand = async function(input, opts) {
 // (maybe removes anything after first newline?)
 const getError = function({ error }) {
   // By passing `error`, we make sure `execa` `error` properties are kept.
-  return new PluginError('gulp-execa', error, {
-    // All error properties are summarized in the error message, i.e. we don't
-    // need to print them.
-    showProperties: false,
-  })
+  // All error properties are summarized in the error message, i.e. we don't
+  // need to print them.
+  return new PluginError('gulp-execa', error, { showProperties: false })
 }
