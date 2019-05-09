@@ -42,6 +42,7 @@ const execCommand = async function(input, opts) {
 const getError = function({ error, error: { message } }) {
   // TODO: try passing `error` instead of `error.message`
   const errorA = new PluginError('gulp-execa', message, {
+    // TODO: remove?
     showProperties: false,
   })
   // Keep `execa` error properties
