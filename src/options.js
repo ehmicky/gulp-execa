@@ -4,8 +4,7 @@ import isCi from 'is-ci'
 export const parseOpts = function(opts) {
   const optsA = { ...DEFAULT_OPTS, ...opts }
   const optsB = addStdio({ opts: optsA })
-  const optsC = { ...optsB, ...REQUIRED_OPTS }
-  return optsC
+  return optsB
 }
 
 const DEFAULT_OPTS = {
@@ -22,12 +21,4 @@ const addStdio = function({ opts, opts: { stdio } }) {
   }
 
   return { stdout: 'inherit', stderr: 'inherit', ...opts }
-}
-
-const REQUIRED_OPTS = {
-  // `shell` option encourages shell-specific syntax like globbing or
-  // variables expansion
-  shell: false,
-  // This encourages shell-specific syntax as well
-  windowsVerbatimArguments: false,
 }
