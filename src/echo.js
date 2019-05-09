@@ -7,6 +7,6 @@ export const printEcho = function({ input, opts: { echo } }) {
     return
   }
 
-  const inputA = cyan.dim(`[gulp-execa] ${input}`)
-  fancyLog(inputA)
+  const log = cyan.dim(`[gulp-execa] ${input}`)
+  fancyLog(log)
 }
