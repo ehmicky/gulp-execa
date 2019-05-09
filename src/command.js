@@ -10,7 +10,6 @@ export const execCommand = async function(input, opts) {
   try {
     return await execa(input, opts)
   } catch (error) {
-    const errorA = getError({ error, input, opts })
-    throw errorA
+    throw getError({ error, input, opts })
   }
 }
