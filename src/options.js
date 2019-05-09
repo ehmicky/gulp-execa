@@ -1,6 +1,7 @@
 import isCi from 'is-ci'
 
 // Parse main arguments and options
+// TODO: validate options (including that `input` is a string)
 export const parseOpts = function(opts) {
   const optsA = { ...DEFAULT_OPTS, ...opts }
   const optsB = addStdio({ opts: optsA })
