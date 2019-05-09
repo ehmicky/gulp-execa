@@ -35,20 +35,15 @@ const execCommand = async function(input, opts) {
   }
 }
 
-// Buld a Gulp error
+// Build a Gulp error
 // TODO: when error is due to wrong input (not normal Execa error)
 // Maybe using options.reject false?
 // TODO: sometimes execa adds stdout|stderr, but we don't want that
 // (maybe removes anything after first newline?)
-const getError = function({ error, error: { message } }) {
-  // TODO: try passing `error` instead of `error.message`
-  const errorA = new PluginError('gulp-execa', message, {
+const getError = function({ error }) {
+  return new PluginError('gulp-execa', error, {
     // All error properties are summarized in the error message, i.e. we don't
     // need to print them.
     showProperties: false,
   })
-  // Keep `execa` error properties
-  // eslint-disable-next-line fp/no-mutating-assign
-  Object.assign(errorA, error)
-  return errorA
 }
