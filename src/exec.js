@@ -41,6 +41,7 @@ const execCommand = async function(input, opts) {
 // TODO: sometimes execa adds stdout|stderr, but we don't want that
 // (maybe removes anything after first newline?)
 const getError = function({ error }) {
+  // By passing `error`, we make sure `execa` `error` properties are kept.
   return new PluginError('gulp-execa', error, {
     // All error properties are summarized in the error message, i.e. we don't
     // need to print them.
