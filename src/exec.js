@@ -16,9 +16,9 @@ import { printEcho } from './echo.js'
 // `cmd.exe` only use double quotes not single quotes.
 export const exec = function(input, opts) {
   validateInput({ input })
-  const optsB = parseOpts({ opts, defaultOpts })
+  const optsA = parseOpts({ opts, defaultOpts })
 
-  return execCommand(input, optsB)
+  return execCommand(input, optsA)
 }
 
 const defaultOpts = { verbose: isCi }
