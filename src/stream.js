@@ -27,7 +27,7 @@ export const stream = function(mapFunc, opts) {
 
 const defaultOpts = {
   // Prevents by default because it would be done on each iteration.
-  // Also without `stdout|stderr: pipe`, `vinyl.exec` does not get
+  // Also without `stdout|stderr: pipe`, `vinyl.execa` does not get
   // `stdout|stderr` properties.
   verbose: false,
   // The default is 16 which is too low
@@ -48,7 +48,7 @@ const execVinyl = callbackify(cExecVinyl)
 
 const fireCommand = function({ input, opts }) {
   // Returning `undefined` or invalid command skips it silently.
-  // `file.exec` array will be pushed with `undefined`.
+  // `file.execa` array will be pushed with `undefined`.
   if (!isValidInput({ input })) {
     return
   }
@@ -56,7 +56,7 @@ const fireCommand = function({ input, opts }) {
   return execCommand(input, opts)
 }
 
-const addToVinyl = function({ file, file: { exec = [] }, result }) {
+const addToVinyl = function({ file, file: { execa = [] }, result }) {
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.exec = [...exec, result]
+  file.execa = [...execa, result]
 }
