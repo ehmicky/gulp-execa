@@ -14,7 +14,7 @@ export const parseOpts = function({ opts = {}, defaultOpts, forcedOpts = {} }) {
   validate(optsA, { exampleConfig })
 
   const optsB = { ...DEFAULT_OPTS, ...defaultOpts, ...optsA, ...forcedOpts }
-  const optsC = addStdio({ opts: optsB })
+  const optsC = addVerbose({ opts: optsB })
   return optsC
 }
 
@@ -25,12 +25,15 @@ const EXAMPLE_OPTS = {
   echo: true,
 }
 
-// Default to printing shell output to console.
-const addStdio = function({ opts, opts: { stdio } }) {
-  // `execa` does not allow mixing `stdio` and `stdout|stderr` options
-  if (stdio !== undefined) {
+const addVerbose = function({ opts: { verbose, ...opts }, opts: { stdio } }) {
+  if (!verbose) {
     return opts
   }
 
-  return { stdout: 'inherit', stderr: 'inherit', ...opts }
+  // `execa` does not allow mixing `stdio` and `stdout|stderr` options
+  if (stdio !== undefined) {
+    return { echo: true, ...opts }
+  }
+
+  return { stdout: 'inherit', stderr: 'inherit', echo: true, ...opts }
 }
