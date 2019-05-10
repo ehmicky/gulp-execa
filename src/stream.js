@@ -2,6 +2,7 @@ import { callbackify } from 'util'
 
 import through from 'through2-concurrent'
 
+import { isValidInput } from './input.js'
 import { parseOpts } from './options.js'
 import { execCommand } from './exec.js'
 
@@ -48,7 +49,7 @@ const execVinyl = callbackify(cExecVinyl)
 const fireCommand = function({ input, opts }) {
   // Returning `undefined` or invalid command skips it silently.
   // `file.exec` array will be pushed with `undefined`.
-  if (typeof input !== 'string' || input.trim() === '') {
+  if (!isValidInput({ input })) {
     return
   }
 

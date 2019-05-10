@@ -1,11 +1,13 @@
 import isCi from 'is-ci'
 import renameFn from 'rename-fn'
 
+import { validateInput } from './input.js'
 import { parseOpts } from './options.js'
 import { execCommand } from './exec.js'
 
 // Create a Gulp task
 export const task = function(input, opts) {
+  validateInput({ input })
   const optsA = parseOpts({ opts, defaultOpts, forcedOpts })
 
   const gulpTask = execCommand.bind(null, input, optsA)

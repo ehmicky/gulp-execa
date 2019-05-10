@@ -2,6 +2,7 @@ import isCi from 'is-ci'
 import execa from 'execa'
 import PluginError from 'plugin-error'
 
+import { validateInput } from './input.js'
 import { parseOpts } from './options.js'
 import { printEcho } from './echo.js'
 
@@ -14,6 +15,7 @@ import { printEcho } from './echo.js'
 // with whitespaces escaping. Also escaping is shell-specific, e.g. on Windows
 // `cmd.exe` only use double quotes not single quotes.
 export const exec = function(input, opts) {
+  validateInput({ input })
   const optsB = parseOpts({ opts, defaultOpts })
   return execCommand(input, optsB)
 }
