@@ -6,14 +6,14 @@ import { pickBy } from './utils.js'
 // TODO: validate options (including that `input` is a string)
 export const parseOpts = function({ opts = {}, defaultOpts, forcedOpts = {} }) {
   const optsA = pickBy(opts, value => value !== undefined)
-  const optsB = { ...DEFAULT_OPTS, ...defaultOpts, ...optsA, ...forcedOpts }
 
   const exampleConfig = pickBy(
     { ...EXAMPLE_OPTS, ...defaultOpts },
     (value, key) => forcedOpts[key] === undefined,
   )
-  validate(optsB, { exampleConfig })
+  validate(optsA, { exampleConfig })
 
+  const optsB = { ...DEFAULT_OPTS, ...defaultOpts, ...optsA, ...forcedOpts }
   const optsC = addStdio({ opts: optsB })
   return optsC
 }
