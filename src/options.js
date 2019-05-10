@@ -3,7 +3,6 @@ import { validate } from 'jest-validate'
 import { pickBy } from './utils.js'
 
 // Parse options
-// TODO: validate options (including that `input` is a string)
 export const parseOpts = function({ opts = {}, defaultOpts, forcedOpts = {} }) {
   const optsA = pickBy(opts, value => value !== undefined)
 
