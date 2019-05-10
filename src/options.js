@@ -1,3 +1,5 @@
+import isCi from 'is-ci'
+
 // Parse main arguments and options
 // TODO: validate options (including that `input` is a string)
 export const parseOpts = function(opts) {
@@ -7,7 +9,9 @@ export const parseOpts = function(opts) {
 }
 
 const DEFAULT_OPTS = {
-  echo: true,
+  // We default `opts.echo` to `false` for less verbosity.
+  // However on CI we want to be verbose.
+  echo: isCi,
 }
 
 // Default to printing shell output to console.
