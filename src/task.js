@@ -1,10 +1,14 @@
 import renameFn from 'rename-fn'
 
-import { execBind } from './exec.js'
+import { parseOpts } from './options.js'
+import { execCommand } from './exec.js'
 
 // Create a Gulp task
 export const task = function(input, opts) {
-  const gulpTask = execBind(input, { ...opts, ...FORCED_OPTS })
+  const optsA = { ...opts, ...FORCED_OPTS }
+  const optsB = parseOpts(optsA)
+
+  const gulpTask = execCommand.bind(null, input, optsB)
 
   // Log the command and arguments as the inner function name
   renameFn(gulpTask, input)

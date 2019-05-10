@@ -17,15 +17,8 @@ export const exec = function(input, opts) {
   return execCommand(input, optsA)
 }
 
-// Same but delayed.
-// Options are parsed right away, in case there are validation errors.
-export const execBind = function(input, opts) {
-  const optsA = parseOpts(opts)
-  return execCommand.bind(null, input, optsA)
-}
-
 // Fire the command with `execa()`
-const execCommand = async function(input, opts) {
+export const execCommand = async function(input, opts) {
   printEcho({ input, opts })
 
   try {
