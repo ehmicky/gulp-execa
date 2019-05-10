@@ -35,8 +35,6 @@ export const execCommand = async function(input, opts) {
 }
 
 // Build a Gulp error
-// TODO: when error is due to wrong input (not normal Execa error)
-// Maybe using options.reject false?
 const getError = function({ error }) {
   // By passing `error`, we make sure `execa` `error` properties are kept.
   // All error properties are summarized in the error message, i.e. we don't
