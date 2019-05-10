@@ -1,3 +1,4 @@
+import isCi from 'is-ci'
 import renameFn from 'rename-fn'
 
 import { parseOpts } from './options.js'
@@ -5,10 +6,9 @@ import { execCommand } from './exec.js'
 
 // Create a Gulp task
 export const task = function(input, opts) {
-  const optsA = { ...opts, ...FORCED_OPTS }
-  const optsB = parseOpts(optsA)
+  const optsA = parseOpts({ opts, defaultOpts, forcedOpts })
 
-  const gulpTask = execCommand.bind(null, input, optsB)
+  const gulpTask = execCommand.bind(null, input, optsA)
 
   // Log the command and arguments as the inner function name
   renameFn(gulpTask, input)
@@ -16,5 +16,6 @@ export const task = function(input, opts) {
   return gulpTask
 }
 
+const defaultOpts = { verbose: isCi }
 // The `echo` option is not needed since the function name shows it already
-const FORCED_OPTS = { echo: false }
+const forcedOpts = { echo: false }

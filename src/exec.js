@@ -1,3 +1,4 @@
+import isCi from 'is-ci'
 import execa from 'execa'
 import PluginError from 'plugin-error'
 
@@ -13,9 +14,11 @@ import { printEcho } from './echo.js'
 // with whitespaces escaping. Also escaping is shell-specific, e.g. on Windows
 // `cmd.exe` only use double quotes not single quotes.
 export const exec = function(input, opts) {
-  const optsA = parseOpts(opts)
-  return execCommand(input, optsA)
+  const optsB = parseOpts({ opts, defaultOpts })
+  return execCommand(input, optsB)
 }
+
+const defaultOpts = { verbose: isCi }
 
 // Fire the command with `execa()`
 export const execCommand = async function(input, opts) {

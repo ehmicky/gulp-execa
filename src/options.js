@@ -1,25 +1,24 @@
 import { validate } from 'jest-validate'
-import isCi from 'is-ci'
 
 import { pickBy } from './utils.js'
 
 // Parse main arguments and options
 // TODO: validate options (including that `input` is a string)
-export const parseOpts = function(opts = {}) {
+export const parseOpts = function({ opts = {}, defaultOpts, forcedOpts = {} }) {
   const optsA = pickBy(opts, value => value !== undefined)
+  const optsB = { ...DEFAULT_OPTS, ...defaultOpts, ...optsA, ...forcedOpts }
 
-  validate(optsA, { exampleConfig: EXAMPLE_OPTS })
+  const exampleConfig = pickBy(
+    { ...EXAMPLE_OPTS, ...defaultOpts },
+    (value, key) => forcedOpts[key] === undefined,
+  )
+  validate(optsB, { exampleConfig })
 
-  const optsB = { ...DEFAULT_OPTS, ...optsA }
   const optsC = addStdio({ opts: optsB })
   return optsC
 }
 
-const DEFAULT_OPTS = {
-  // We default `opts.echo` to `false` for less verbosity.
-  // However on CI we want to be verbose.
-  echo: isCi,
-}
+const DEFAULT_OPTS = {}
 
 const EXAMPLE_OPTS = {
   ...DEFAULT_OPTS,

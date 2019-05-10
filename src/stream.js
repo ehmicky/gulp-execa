@@ -12,8 +12,7 @@ import { execCommand } from './exec.js'
 // call to those functions would be more efficient that creating lots of
 // child processes through streaming.
 export const stream = function(mapFunc, opts) {
-  const optsA = { ...DEFAULT_OPTS, ...opts }
-  const { maxConcurrency, ...optsB } = parseOpts(optsA)
+  const { maxConcurrency, ...optsA } = parseOpts({ opts, defaultOpts })
 
   // `maxConcurrency` `through2` option is not specified because `gulp.src()`
   // always has a `highWaterMark` of `16` meaning only 16 files are processed
@@ -21,18 +20,15 @@ export const stream = function(mapFunc, opts) {
   // that level of parallelism but `16` is already quite low.
   return through.obj(
     { maxConcurrency },
-    execVinyl.bind(null, { mapFunc, opts: optsB }),
+    execVinyl.bind(null, { mapFunc, opts: optsA }),
   )
 }
 
-const DEFAULT_OPTS = {
-  // Without `pipe`, `vinyl.exec` does not get `stdout|stderr` properties.
-  // Also we do not want to print to console by default because it would be
-  // done on each iteration.
-  stdout: 'pipe',
-  stderr: 'pipe',
-  // Prevents echoing by default because it would be done on each iteration.
-  echo: false,
+const defaultOpts = {
+  // Prevents by default because it would be done on each iteration.
+  // Also without `stdout|stderr: pipe`, `vinyl.exec` does not get
+  // `stdout|stderr` properties.
+  verbose: false,
   // The default is 16 which is too low
   maxConcurrency: 100,
 }
