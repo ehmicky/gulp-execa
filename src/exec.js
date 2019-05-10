@@ -17,6 +17,7 @@ import { printEcho } from './echo.js'
 export const exec = function(input, opts) {
   validateInput({ input })
   const optsB = parseOpts({ opts, defaultOpts })
+
   return execCommand(input, optsB)
 }
 
