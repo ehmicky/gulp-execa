@@ -22,6 +22,7 @@ const DEFAULT_OPTS = {}
 
 const EXAMPLE_OPTS = {
   ...DEFAULT_OPTS,
+  echo: true,
 }
 
 // Default to printing shell output to console.
