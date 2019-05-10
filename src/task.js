@@ -1,17 +1,16 @@
+import renameFn from 'rename-fn'
+
 import { execBind } from './exec.js'
 
 // Create a Gulp task
 export const task = function(input, opts) {
-  const gulpTask = execBind(input, opts)
+  const gulpTask = execBind(input, { ...opts, ...FORCED_OPTS })
 
-  // We want to allow users to do `const gulpTask = execa(...)` instead of the
-  // more verbose `const gulpTask = () => execa(...)`. This is especially
-  // important when using `gulp.series()` or `gulp.parallel()`.
-  // However after binding a function or using a closure, assigning it to
-  // a variable does not change its `function.name` anymore. But this is
-  // used by Gulp as the displayed task name. So we use the command instead.
-  // eslint-disable-next-line fp/no-mutation
-  gulpTask.displayName = input
+  // Log the command and arguments as the inner function name
+  renameFn(gulpTask, input)
 
   return gulpTask
 }
+
+// The `echo` option is not needed since the function name shows it already
+const FORCED_OPTS = { echo: false }
