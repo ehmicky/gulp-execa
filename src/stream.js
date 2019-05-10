@@ -56,7 +56,7 @@ const fireCommand = function({ input, opts }) {
   return execCommand(input, opts)
 }
 
-const addToVinyl = function({ file, result }) {
+const addToVinyl = function({ file, file: { exec = [] }, result }) {
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.exec = [...(file.exec || []), result]
+  file.exec = [...exec, result]
 }
