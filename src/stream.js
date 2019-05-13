@@ -32,16 +32,16 @@ const defaultOpts = {
   // We use `through2-concurrent` because `through2` processes files serially
   // The default is 16 which is too low
   maxConcurrency: 100,
-  // What to do with the result, among 'save', 'overwrite', 'stream' or 'create'
+  // What to do with the result, among 'save', 'overwrite' or 'stream'
   result: 'save',
 }
 
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
   const input = await mapFunc(file)
 
-  const result = await fireCommand({ input, opts })
+  const childProcess = fireCommand({ input, opts })
 
-  handleResult[resultOpt]({ file, result })
+  await handleResult[resultOpt]({ file, childProcess })
 
   return file
 }
@@ -58,11 +58,29 @@ const fireCommand = function({ input, opts }) {
   return execCommand(input, opts)
 }
 
-const saveResult = function({ file, file: { execa = [] }, result }) {
+const saveResult = async function({
+  file,
+  file: { execa = [] },
+  childProcess,
+}) {
+  const result = await childProcess
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.execa = [...execa, result]
 }
 
+const overwriteResult = async function({ file, childProcess }) {
+  const { all } = await childProcess
+  // eslint-disable-next-line no-param-reassign, fp/no-mutation
+  file.contents = all
+}
+
+const streamResult = function({ file, childProcess }) {
+  // eslint-disable-next-line no-param-reassign, fp/no-mutation
+  file.contents = childProcess.all
+}
+
 const handleResult = {
   save: saveResult,
+  overwrite: overwriteResult,
+  stream: streamResult,
 }
