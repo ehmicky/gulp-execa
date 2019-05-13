@@ -15,10 +15,6 @@ import { execCommand } from './exec.js'
 export const stream = function(mapFunc, opts) {
   const { maxConcurrency, ...optsA } = parseOpts({ opts, defaultOpts })
 
-  // `maxConcurrency` `through2` option is not specified because `gulp.src()`
-  // always has a `highWaterMark` of `16` meaning only 16 files are processed
-  // at a time in parallel. `maxConcurrency` can then only be used to decrease
-  // that level of parallelism but `16` is already quite low.
   return through.obj(
     { maxConcurrency },
     execVinyl.bind(null, { mapFunc, opts: optsA }),
@@ -30,6 +26,7 @@ const defaultOpts = {
   // Also without `stdout|stderr: pipe`, `vinyl.execa` does not get
   // `stdout|stderr` properties.
   verbose: false,
+  // We use `through2-concurrent` because `through2` processes files serially
   // The default is 16 which is too low
   maxConcurrency: 100,
 }
