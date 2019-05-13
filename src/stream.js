@@ -1,4 +1,5 @@
 import { callbackify } from 'util'
+import { Buffer } from 'buffer'
 
 import through from 'through2-concurrent'
 
@@ -16,6 +17,7 @@ export const stream = function(mapFunc, opts) {
   const { maxConcurrency, result: resultOpt, ...optsA } = parseOpts({
     opts,
     defaultOpts,
+    forcedOpts,
   })
 
   return through.obj(
@@ -25,15 +27,18 @@ export const stream = function(mapFunc, opts) {
 }
 
 const defaultOpts = {
-  // Prevents by default because it would be done on each iteration.
-  // Also without `stdout|stderr: pipe`, `vinyl.execa` does not get
-  // `stdout|stderr|all` properties.
-  verbose: false,
   // We use `through2-concurrent` because `through2` processes files serially
   // The default is 16 which is too low
   maxConcurrency: 100,
   // What to do with the result, among 'save', 'overwrite' or 'stream'
   result: 'save',
+}
+
+const forcedOpts = {
+  // Prevents by default because it would be done on each iteration.
+  // Also without `stdout|stderr: pipe`, `vinyl.execa` does not get
+  // `stdout|stderr|all` properties and `vinyl.contents` cannot be updated.
+  verbose: false,
 }
 
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
@@ -71,7 +76,7 @@ const saveResult = async function({
 const overwriteResult = async function({ file, childProcess }) {
   const { all } = await childProcess
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = all
+  file.contents = Buffer.from(all)
 }
 
 const streamResult = function({ file, childProcess }) {
