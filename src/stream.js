@@ -27,7 +27,7 @@ export const stream = function(mapFunc, opts) {
 const defaultOpts = {
   // Prevents by default because it would be done on each iteration.
   // Also without `stdout|stderr: pipe`, `vinyl.execa` does not get
-  // `stdout|stderr` properties.
+  // `stdout|stderr|all` properties.
   verbose: false,
   // We use `through2-concurrent` because `through2` processes files serially
   // The default is 16 which is too low
