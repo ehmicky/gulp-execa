@@ -45,7 +45,9 @@ const addDefaultOpts = function({ opts, opts: { result } }) {
   const encoding = ['overwrite', 'stream'].includes(result)
     ? { encoding: 'buffer' }
     : {}
-  return { ...encoding, ...opts }
+  const stripFinalNewline =
+    result === 'overwrite' ? { stripFinalNewline: false } : {}
+  return { ...encoding, ...stripFinalNewline, ...opts }
 }
 
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
