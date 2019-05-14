@@ -1,5 +1,4 @@
 import { callbackify } from 'util'
-import { Buffer } from 'buffer'
 
 import through from 'through2-concurrent'
 
@@ -14,15 +13,16 @@ import { execCommand, streamCommand } from './exec.js'
 // call to those functions would be more efficient that creating lots of
 // child processes through streaming.
 export const stream = function(mapFunc, opts) {
-  const { maxConcurrency, result: resultOpt, ...optsA } = parseOpts({
+  const { maxConcurrency, ...optsA } = parseOpts({
     opts,
     defaultOpts,
     forcedOpts,
   })
+  const { result: resultOpt, ...optsB } = addDefaultOpts({ opts: optsA })
 
   return through.obj(
     { maxConcurrency },
-    execVinyl.bind(null, { mapFunc, opts: optsA, resultOpt }),
+    execVinyl.bind(null, { mapFunc, opts: optsB, resultOpt }),
   )
 }
 
@@ -41,6 +41,13 @@ const forcedOpts = {
   verbose: false,
 }
 
+const addDefaultOpts = function({ opts, opts: { result } }) {
+  const encoding = ['overwrite', 'stream'].includes(result)
+    ? { encoding: 'buffer' }
+    : {}
+  return { ...encoding, ...opts }
+}
+
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
   const input = await mapFunc(file)
 
@@ -55,12 +62,7 @@ const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
 
 const execVinyl = callbackify(cExecVinyl)
 
-const saveResult = async function({
-  file,
-  file: { execa = [] },
-  input,
-  opts,
-}) {
+const saveResult = async function({ file, file: { execa = [] }, input, opts }) {
   const result = await execCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.execa = [...execa, result]
@@ -69,7 +71,7 @@ const saveResult = async function({
 const overwriteResult = async function({ file, input, opts }) {
   const { all } = await execCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = Buffer.from(all)
+  file.contents = all
 }
 
 const streamResult = function({ file, input, opts }) {
