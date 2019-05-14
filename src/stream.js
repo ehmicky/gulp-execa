@@ -5,7 +5,7 @@ import through from 'through2-concurrent'
 
 import { isValidInput } from './input.js'
 import { parseOpts } from './options.js'
-import { execCommand } from './exec.js'
+import { execCommand, streamCommand } from './exec.js'
 
 // Creates a stream to use in Gulp e.g.
 //   src(...).pipe(stream(({ path }) => ['command', [path]]))
@@ -44,44 +44,38 @@ const forcedOpts = {
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
   const input = await mapFunc(file)
 
-  const childProcess = fireCommand({ input, opts })
-
-  await handleResult[resultOpt]({ file, childProcess })
+  // Returning `undefined` or invalid command skips it silently.
+  // `file.execa` array will be pushed with `undefined`.
+  if (isValidInput({ input })) {
+    await handleResult[resultOpt]({ file, input, opts })
+  }
 
   return file
 }
 
 const execVinyl = callbackify(cExecVinyl)
 
-const fireCommand = function({ input, opts }) {
-  // Returning `undefined` or invalid command skips it silently.
-  // `file.execa` array will be pushed with `undefined`.
-  if (!isValidInput({ input })) {
-    return
-  }
-
-  return execCommand(input, opts)
-}
-
 const saveResult = async function({
   file,
   file: { execa = [] },
-  childProcess,
+  input,
+  opts,
 }) {
-  const result = await childProcess
+  const result = await execCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.execa = [...execa, result]
 }
 
-const overwriteResult = async function({ file, childProcess }) {
-  const { all } = await childProcess
+const overwriteResult = async function({ file, input, opts }) {
+  const { all } = await execCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.contents = Buffer.from(all)
 }
 
-const streamResult = function({ file, childProcess }) {
+const streamResult = function({ file, input, opts }) {
+  const { all } = streamCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = childProcess.all
+  file.contents = all
 }
 
 const handleResult = {

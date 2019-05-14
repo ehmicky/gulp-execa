@@ -23,7 +23,7 @@ export const exec = function(input, opts) {
 
 const defaultOpts = { verbose: isCi }
 
-// Fire the command with `execa()`
+// Fire the command with `execa()` in promise mode
 export const execCommand = async function(input, opts) {
   printEcho({ input, opts })
 
@@ -40,4 +40,10 @@ export const execCommand = async function(input, opts) {
   } catch (error) {
     throw new PluginError('gulp-execa', error, { showProperties: false })
   }
+}
+
+// Fire the command with `execa()` in stream mode
+export const streamCommand = function(input, opts) {
+  printEcho({ input, opts })
+  return execa(input, opts)
 }
