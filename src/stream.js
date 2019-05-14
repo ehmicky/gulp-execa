@@ -5,6 +5,7 @@ import through from 'through2-concurrent'
 import { isValidInput } from './input.js'
 import { parseOpts } from './options.js'
 import { execCommand, streamCommand } from './exec.js'
+import { pickBy } from './utils.js'
 
 // Creates a stream to use in Gulp e.g.
 //   src(...).pipe(stream(({ path }) => ['command', [path]]))
@@ -35,10 +36,12 @@ const defaultOpts = {
 }
 
 const forcedOpts = {
-  // Prevents by default because it would be done on each iteration.
-  // Also without `stdout|stderr: pipe`, `vinyl.execa` does not get
-  // `stdout|stderr|all` properties and `vinyl.contents` cannot be updated.
-  verbose: false,
+  // Forces piping stdout|stderr because:
+  //  - `inherit` would be too verbose if done on each iteration.
+  //  - `save` mode would not get `stdout|stderr|all` properties.
+  //  - `overwrite|stream` mode would not work.
+  stdout: 'pipe',
+  stderr: 'pipe',
 }
 
 const addDefaultOpts = function({ opts, opts: { result } }) {
@@ -47,7 +50,11 @@ const addDefaultOpts = function({ opts, opts: { result } }) {
     : {}
   const stripFinalNewline =
     result === 'overwrite' ? { stripFinalNewline: false } : {}
-  return { ...encoding, ...stripFinalNewline, ...opts }
+
+  // `stdio` cannot be combined with `stdout|stderr` (`forcedOpts`) with execa
+  const optsA = pickBy(opts, (value, key) => key !== 'stdio')
+
+  return { ...encoding, ...stripFinalNewline, ...optsA }
 }
 
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
