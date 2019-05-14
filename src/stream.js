@@ -31,7 +31,7 @@ const defaultOpts = {
   // The default is 16 which is too low
   maxConcurrency: 100,
   // What to do with the result, among 'save', 'overwrite' or 'stream'
-  result: 'save',
+  result: 'overwrite',
 }
 
 const forcedOpts = {
