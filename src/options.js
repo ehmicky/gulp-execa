@@ -20,8 +20,9 @@ export const parseOpts = function({ opts = {}, defaultOpts, forcedOpts = {} }) {
 const DEFAULT_OPTS = {}
 
 const EXAMPLE_OPTS = {
-  ...DEFAULT_OPTS,
   echo: true,
+  verbose: true,
+  ...DEFAULT_OPTS,
 }
 
 const addVerbose = function({ opts: { verbose, ...opts }, opts: { stdio } }) {
