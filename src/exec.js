@@ -35,8 +35,8 @@ export const execCommand = async function(input, opts) {
     // need to print them.
     // There are ways `execa()` can throw:
     //   - invalid parameters, where core Node.js will throw a plain error.
-    //   - anything else (exit code !== 0, process killed, timeout, runtime error,
-    //     stream error) will throw an execa-specific richer error.
+    //   - anything else (exit code !== 0, process killed, timeout, runtime
+    //     error, stream error) will throw an execa-specific richer error.
   } catch (error) {
     throw new PluginError('gulp-execa', error, { showProperties: false })
   }
