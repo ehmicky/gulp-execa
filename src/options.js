@@ -41,20 +41,6 @@ const EXAMPLE_OPTS = {
   echo: true,
 }
 
-const addVerbose = function({ opts: { verbose, ...opts }, opts: { stdio } }) {
-  if (!verbose) {
-    // The default value for `echo` must be added here, not in `DEFAULT_OPTS`
-    return { echo: false, ...opts }
-  }
-
-  // `execa` does not allow mixing `stdio` and `stdout|stderr` options
-  if (stdio !== undefined) {
-    return { echo: true, ...opts }
-  }
-
-  return { stdout: 'inherit', stderr: 'inherit', echo: true, ...opts }
-}
-
 // Validation that cannot be handled by `jest-validate`
 const validateCustom = function({ opts }) {
   Object.entries(ENUM_OPTS).forEach(([attrName, allowed]) => {
@@ -80,4 +66,18 @@ const validateEnum = function({
   throw new Error(
     `option '${attrName}' '${value}' must be one of: ${allowed.join(', ')}`,
   )
+}
+
+const addVerbose = function({ opts: { verbose, ...opts }, opts: { stdio } }) {
+  if (!verbose) {
+    // The default value for `echo` must be added here, not in `DEFAULT_OPTS`
+    return { echo: false, ...opts }
+  }
+
+  // `execa` does not allow mixing `stdio` and `stdout|stderr` options
+  if (stdio !== undefined) {
+    return { echo: true, ...opts }
+  }
+
+  return { stdout: 'inherit', stderr: 'inherit', echo: true, ...opts }
 }
