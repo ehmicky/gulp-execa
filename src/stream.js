@@ -33,6 +33,8 @@ const getDefaultOpts = function({ opts: { result = 'replace' } = {} }) {
     maxConcurrency: 100,
     // What to do with the result. Either 'save' or 'replace'
     result: 'replace',
+    // With `result: 'replace'` which stream to use: `stdout`, `stderr` or `all`
+    from: 'stdout',
     ...resultDefaultOpts[result],
   }
 }
@@ -86,16 +88,16 @@ const replaceResult = function({ file, input, opts }) {
   return overwriteResult({ file, input, opts })
 }
 
-const streamResult = function({ file, input, opts }) {
-  const { all } = streamCommand(input, opts)
+const streamResult = function({ file, input, opts, opts: { from } }) {
+  const { [from]: result } = streamCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = all
+  file.contents = result
 }
 
-const overwriteResult = async function({ file, input, opts }) {
-  const { all } = await execCommand(input, opts)
+const overwriteResult = async function({ file, input, opts, opts: { from } }) {
+  const { [from]: result } = await execCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = all
+  file.contents = result
 }
 
 const handleResult = {
