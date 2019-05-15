@@ -7,12 +7,8 @@ import { parseOpts } from '../options.js'
 import { getDefaultOpts, forcedOpts } from './options.js'
 import { handleResult } from './result.js'
 
-// Creates a stream to use in Gulp e.g.
-//   src(...).pipe(stream(({ path }) => ['command', [path]]))
-// This should not be used with commands that allow several files as arguments
-// (through variadic arguments, globbing or directory recursion) as a single
-// call to those functions would be more efficient that creating lots of
-// child processes through streaming.
+// Creates a stream that fires child processes on each file:
+//   gulp.src(...).pipe(stream(({ path }) => `command ${path}`))
 export const stream = function(mapFunc, opts) {
   const defaultOpts = getDefaultOpts({ opts })
   const { maxConcurrency, result: resultOpt, ...optsA } = parseOpts({
