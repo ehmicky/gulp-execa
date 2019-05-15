@@ -5,7 +5,7 @@ import through from 'through2-concurrent'
 import { parseOpts } from '../options.js'
 
 import { getDefaultOpts, forcedOpts } from './options.js'
-import { handleResult } from './result.js'
+import { setResult } from './result.js'
 
 // Creates a stream that fires child processes on each file:
 //   gulp.src(...).pipe(stream(({ path }) => `command ${path}`))
@@ -28,7 +28,7 @@ const cExecVinyl = async function({ getInput, opts, resultOpt }, file) {
   // error, not a plugin error
   const input = await getInput(file)
 
-  await handleResult({ file, input, opts, resultOpt })
+  await setResult({ file, input, opts, resultOpt })
 
   return file
 }

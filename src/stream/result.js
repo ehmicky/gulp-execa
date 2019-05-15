@@ -4,7 +4,7 @@ import { execCommand, streamCommand } from '../exec.js'
 // Decides what to do with the child process result, either:
 //  - `save`: pushed to `file.execa`
 //  - `replace`: overwrite file's content
-export const handleResult = function({ file, input, opts, resultOpt }) {
+export const setResult = function({ file, input, opts, resultOpt }) {
   // Returning `undefined` or invalid command skips it silently.
   // `file.execa` array will be pushed with `undefined`.
   if (!isValidInput({ input })) {
