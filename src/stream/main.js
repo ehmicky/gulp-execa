@@ -24,6 +24,8 @@ export const stream = function(getInput, opts) {
 }
 
 const cExecVinyl = async function({ getInput, opts, resultOpt }, file) {
+  // We don't wrap exceptions with `plugin-error` because this would be a user
+  // error, not a plugin error
   const input = await getInput(file)
 
   await handleResult({ file, input, opts, resultOpt })
