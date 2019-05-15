@@ -31,8 +31,8 @@ const defaultOpts = {
   // We use `through2-concurrent` because `through2` processes files serially
   // The default is 16 which is too low
   maxConcurrency: 100,
-  // What to do with the result, among 'save', 'overwrite' or 'stream'
-  result: 'overwrite',
+  // What to do with the result. Either 'save' or 'replace'
+  result: 'replace',
 }
 
 const forcedOpts = {
@@ -45,16 +45,15 @@ const forcedOpts = {
 }
 
 const addDefaultOpts = function({ opts, opts: { result } }) {
-  const encoding = ['overwrite', 'stream'].includes(result)
-    ? { encoding: 'buffer' }
-    : {}
-  const stripFinalNewline =
-    result === 'overwrite' ? { stripFinalNewline: false } : {}
+  // `save` should retrieve output as string, but this is not needed for
+  // `replace`. Same thing with final newline stripping.
+  const replaceOpts =
+    result === 'replace' ? { encoding: 'buffer', stripFinalNewline: false } : {}
 
   // `stdio` cannot be combined with `stdout|stderr` (`forcedOpts`) with execa
   const optsA = pickBy(opts, (value, key) => key !== 'stdio')
 
-  return { ...encoding, ...stripFinalNewline, ...optsA }
+  return { ...replaceOpts, ...optsA }
 }
 
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
@@ -77,10 +76,16 @@ const saveResult = async function({ file, file: { execa = [] }, input, opts }) {
   file.execa = [...execa, result]
 }
 
-const overwriteResult = async function({ file, input, opts }) {
-  const { all } = await execCommand(input, opts)
-  // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = all
+// If the `file` already uses streams, we do it as well as it's more efficient.
+// This is done usually by using `gulp.src(..., { buffer: false })`
+// Otherwise we don't since many Gulp plugins don't support `file.contents`
+// being a stream.
+const replaceResult = function({ file, input, opts }) {
+  if (file.isStream()) {
+    return streamResult({ file, input, opts })
+  }
+
+  return overwriteResult({ file, input, opts })
 }
 
 const streamResult = function({ file, input, opts }) {
@@ -89,8 +94,13 @@ const streamResult = function({ file, input, opts }) {
   file.contents = all
 }
 
+const overwriteResult = async function({ file, input, opts }) {
+  const { all } = await execCommand(input, opts)
+  // eslint-disable-next-line no-param-reassign, fp/no-mutation
+  file.contents = all
+}
+
 const handleResult = {
   save: saveResult,
-  overwrite: overwriteResult,
-  stream: streamResult,
+  replace: replaceResult,
 }
