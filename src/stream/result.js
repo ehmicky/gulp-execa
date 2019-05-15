@@ -6,7 +6,6 @@ import { execCommand, streamCommand } from '../exec.js'
 //  - `replace`: overwrite file's content
 export const setResult = function({ file, input, opts, resultOpt }) {
   // Returning `undefined` or invalid command skips it silently.
-  // `file.execa` array will be pushed with `undefined`.
   if (!isValidInput({ input })) {
     return
   }
