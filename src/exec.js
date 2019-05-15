@@ -35,5 +35,6 @@ export const execCommand = async function(input, opts) {
 // Fire the command with `execa()` in stream mode
 export const streamCommand = function(input, opts) {
   printEcho({ input, opts })
+
   return execa(input, opts)
 }
