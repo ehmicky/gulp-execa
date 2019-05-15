@@ -36,7 +36,19 @@ const DEFAULT_OPTS = {
   verbose: isCi,
 }
 
+// Examples for the core `child_process.spawn()` options
+const CHILD_PROCESS_OPTS = {
+  windowsHide: true,
+}
+
+// Examples for the `execa` options
+const EXECA_OPTS = {
+
+}
+
 const EXAMPLE_OPTS = {
+  ...CHILD_PROCESS_OPTS,
+  ...EXECA_OPTS,
   ...DEFAULT_OPTS,
   echo: true,
 }
