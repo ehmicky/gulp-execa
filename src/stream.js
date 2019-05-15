@@ -51,7 +51,7 @@ const forcedOpts = {
   // Forces piping stdout|stderr because:
   //  - `inherit` would be too verbose if done on each iteration.
   //  - `save` mode would not get `stdout|stderr|all` properties.
-  //  - `overwrite|stream` mode would not work.
+  //  - `replace` mode would not work.
   stdout: 'pipe',
   stderr: 'pipe',
   // `stdio` cannot be combined with `stdout|stderr` (`forcedOpts`) with execa
