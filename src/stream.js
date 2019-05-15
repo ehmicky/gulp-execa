@@ -45,12 +45,14 @@ const forcedOpts = {
   stdio: undefined,
 }
 
+// `save` should retrieve output as string, but this is not needed for
+// `replace`. Same thing with final newline stripping.
 const addDefaultOpts = function({ opts, opts: { result } }) {
-  // `save` should retrieve output as string, but this is not needed for
-  // `replace`. Same thing with final newline stripping.
-  const replaceOpts =
-    result === 'replace' ? { encoding: 'buffer', stripFinalNewline: false } : {}
-  return { ...replaceOpts, ...opts }
+  if (result === 'save') {
+    return opts
+  }
+
+  return { encoding: 'buffer', stripFinalNewline: false, ...opts }
 }
 
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
