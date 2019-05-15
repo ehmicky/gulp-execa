@@ -2,10 +2,10 @@ export const getDefaultOpts = function({ opts: { result = 'replace' } = {} }) {
   return {
     // This is too verbose if done on each iteration, even on CI
     verbose: false,
-    // We use `through2-concurrent` because `through2` processes files serially
-    // The default is 16 which is too low
+    // We use `through2-concurrent` because `through2` processes files serially.
+    // The default is 16 which is too low.
     maxConcurrency: 100,
-    // What to do with the result. Either 'save' or 'replace'
+    // What to do with the result. Either 'save' or 'replace'.
     result: 'replace',
     // With `result: 'replace'` which stream to use: `stdout`, `stderr` or `all`
     from: 'stdout',
