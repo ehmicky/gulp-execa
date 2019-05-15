@@ -9,7 +9,7 @@ import { handleResult } from './result.js'
 
 // Creates a stream that fires child processes on each file:
 //   gulp.src(...).pipe(stream(({ path }) => `command ${path}`))
-export const stream = function(mapFunc, opts) {
+export const stream = function(getInput, opts) {
   const defaultOpts = getDefaultOpts({ opts })
   const { maxConcurrency, result: resultOpt, ...optsA } = parseOpts({
     opts,
@@ -19,12 +19,12 @@ export const stream = function(mapFunc, opts) {
 
   return through.obj(
     { maxConcurrency },
-    execVinyl.bind(null, { mapFunc, opts: optsA, resultOpt }),
+    execVinyl.bind(null, { getInput, opts: optsA, resultOpt }),
   )
 }
 
-const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
-  const input = await mapFunc(file)
+const cExecVinyl = async function({ getInput, opts, resultOpt }, file) {
+  const input = await getInput(file)
 
   await handleResult({ file, input, opts, resultOpt })
 
