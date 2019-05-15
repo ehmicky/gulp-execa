@@ -5,3 +5,12 @@ export const pickBy = function(object, condition) {
   )
   return Object.fromEntries(pairs)
 }
+
+// Is a plain object, including `Object.create(null)`
+export const isPlainObject = function(val) {
+  return (
+    typeof val === 'object' &&
+    val !== null &&
+    (val.constructor === Object || val.constructor === undefined)
+  )
+}

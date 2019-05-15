@@ -1,7 +1,7 @@
 import { validate } from 'jest-validate'
 import isCi from 'is-ci'
 
-import { pickBy } from './utils.js'
+import { isPlainObject, pickBy } from './utils.js'
 
 // Parse options
 export const parseOpts = function({
@@ -9,6 +9,8 @@ export const parseOpts = function({
   defaultOpts = {},
   forcedOpts = {},
 }) {
+  validateOpts({ opts })
+
   const optsA = pickBy(opts, value => value !== undefined)
 
   const exampleConfig = pickBy(
@@ -22,6 +24,12 @@ export const parseOpts = function({
   const optsB = { ...DEFAULT_OPTS, ...defaultOpts, ...optsA, ...forcedOpts }
   const optsC = addVerbose({ opts: optsB })
   return optsC
+}
+
+const validateOpts = function({ opts }) {
+  if (!isPlainObject(opts)) {
+    throw new Error(`options must be a plain object: ${opts}`)
+  }
 }
 
 const DEFAULT_OPTS = {
