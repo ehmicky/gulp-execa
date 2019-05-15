@@ -89,7 +89,12 @@ const replaceResult = function({ file, input, opts }) {
 }
 
 const streamResult = function({ file, input, opts, opts: { from } }) {
-  const { [from]: result } = streamCommand(input, opts)
+  const execaResult = streamCommand(input, opts)
+  const { [from]: result } = execaResult
+
+  // Make stream fail if the command fails
+  execaResult.catch(error => result.emit('error', error))
+
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.contents = result
 }
