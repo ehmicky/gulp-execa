@@ -4,7 +4,7 @@ import { validateInput } from './input.js'
 import { parseOpts } from './options.js'
 import { execCommand } from './exec.js'
 
-// Create a Gulp task
+// Create a Gulp task that fires a child process (command + arguments)
 export const task = function(input, opts) {
   validateInput({ input })
   const optsA = parseOpts({ opts, forcedOpts })
