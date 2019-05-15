@@ -1,7 +1,7 @@
 import { isValidInput } from '../input.js'
 import { execCommand, streamCommand } from '../exec.js'
 
-// Decides what to do with the child process result, either:
+// Decides what to do with the child process result according to `opts.result`:
 //  - `save`: pushed to `file.execa`
 //  - `replace`: overwrite file's content
 export const setResult = function({ file, input, opts, resultOpt }) {
