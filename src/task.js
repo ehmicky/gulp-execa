@@ -1,4 +1,3 @@
-import isCi from 'is-ci'
 import renameFn from 'rename-fn'
 
 import { validateInput } from './input.js'
@@ -8,7 +7,7 @@ import { execCommand } from './exec.js'
 // Create a Gulp task
 export const task = function(input, opts) {
   validateInput({ input })
-  const optsA = parseOpts({ opts, defaultOpts, forcedOpts })
+  const optsA = parseOpts({ opts, forcedOpts })
 
   const gulpTask = execCommand.bind(null, input, optsA)
 
@@ -18,6 +17,5 @@ export const task = function(input, opts) {
   return gulpTask
 }
 
-const defaultOpts = { verbose: isCi }
 // The `echo` option is not needed since the function name shows it already
 const forcedOpts = { echo: false }

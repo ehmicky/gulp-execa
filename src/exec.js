@@ -1,4 +1,3 @@
-import isCi from 'is-ci'
 import execa from 'execa'
 import PluginError from 'plugin-error'
 
@@ -16,12 +15,10 @@ import { printEcho } from './echo.js'
 // `cmd.exe` only use double quotes not single quotes.
 export const exec = function(input, opts) {
   validateInput({ input })
-  const optsA = parseOpts({ opts, defaultOpts })
+  const optsA = parseOpts({ opts })
 
   return execCommand(input, optsA)
 }
-
-const defaultOpts = { verbose: isCi }
 
 // Fire the command with `execa()` in promise mode
 export const execCommand = async function(input, opts) {

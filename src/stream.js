@@ -28,6 +28,8 @@ export const stream = function(mapFunc, opts) {
 
 const getDefaultOpts = function({ opts: { result = 'replace' } = {} }) {
   return {
+    // This is too verbose if done on each iteration
+    verbose: false,
     // We use `through2-concurrent` because `through2` processes files serially
     // The default is 16 which is too low
     maxConcurrency: 100,

@@ -1,9 +1,14 @@
 import { validate } from 'jest-validate'
+import isCi from 'is-ci'
 
 import { pickBy } from './utils.js'
 
 // Parse options
-export const parseOpts = function({ opts = {}, defaultOpts, forcedOpts = {} }) {
+export const parseOpts = function({
+  opts = {},
+  defaultOpts = {},
+  forcedOpts = {},
+}) {
   const optsA = pickBy(opts, value => value !== undefined)
 
   const exampleConfig = pickBy(
@@ -17,12 +22,13 @@ export const parseOpts = function({ opts = {}, defaultOpts, forcedOpts = {} }) {
   return optsC
 }
 
-const DEFAULT_OPTS = {}
+const DEFAULT_OPTS = {
+  verbose: isCi,
+}
 
 const EXAMPLE_OPTS = {
-  echo: true,
-  verbose: true,
   ...DEFAULT_OPTS,
+  echo: true,
 }
 
 const addVerbose = function({ opts: { verbose, ...opts }, opts: { stdio } }) {
