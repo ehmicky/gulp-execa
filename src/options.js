@@ -17,6 +17,8 @@ export const parseOpts = function({
   )
   validate(optsA, { exampleConfig })
 
+  validateCustom({ opts: optsA })
+
   const optsB = { ...DEFAULT_OPTS, ...defaultOpts, ...optsA, ...forcedOpts }
   const optsC = addVerbose({ opts: optsB })
   return optsC
@@ -43,4 +45,31 @@ const addVerbose = function({ opts: { verbose, ...opts }, opts: { stdio } }) {
   }
 
   return { stdout: 'inherit', stderr: 'inherit', echo: true, ...opts }
+}
+
+// Validation that cannot be handled by `jest-validate`
+const validateCustom = function({ opts }) {
+  Object.entries(ENUM_OPTS).forEach(([attrName, allowed]) => {
+    validateEnum({ attrName, allowed, opts })
+  })
+}
+
+const ENUM_OPTS = {
+  result: ['save', 'replace'],
+  from: ['stdout', 'stderr', 'all'],
+}
+
+// Validate an enum option
+const validateEnum = function({
+  attrName,
+  allowed,
+  opts: { [attrName]: value },
+}) {
+  if (value === undefined || allowed.includes(value)) {
+    return
+  }
+
+  throw new Error(
+    `option '${attrName}' '${value}' must be one of: ${allowed.join(', ')}`,
+  )
 }
