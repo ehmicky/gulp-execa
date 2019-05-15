@@ -54,7 +54,7 @@ const forcedOpts = {
   //  - `replace` mode would not work.
   stdout: 'pipe',
   stderr: 'pipe',
-  // `stdio` cannot be combined with `stdout|stderr` (`forcedOpts`) with execa
+  // `stdio` cannot be combined with `stdout|stderr` with execa
   stdio: undefined,
 }
 
