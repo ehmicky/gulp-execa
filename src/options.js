@@ -33,7 +33,7 @@ const EXAMPLE_OPTS = {
 
 const addVerbose = function({ opts: { verbose, ...opts }, opts: { stdio } }) {
   if (!verbose) {
-    return opts
+    return { echo: false, ...opts }
   }
 
   // `execa` does not allow mixing `stdio` and `stdout|stderr` options
