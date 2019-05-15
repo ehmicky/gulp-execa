@@ -26,24 +26,24 @@ export const setResult = function({ file, input, opts, resultOpt }) {
 }
 
 const saveResult = async function({ file, file: { execa = [] }, input, opts }) {
-  const result = await execCommand(input, opts)
+  const execaResult = await execCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.execa = [...execa, result]
+  file.execa = [...execa, execaResult]
 }
 
 const streamResult = function({ file, input, opts, opts: { from } }) {
-  const execaResult = streamCommand(input, opts)
-  const { [from]: stream } = execaResult
+  const execaPromise = streamCommand(input, opts)
+  const { [from]: stream } = execaPromise
 
   // Make stream fail if the command fails
-  execaResult.catch(error => stream.emit('error', error))
+  execaPromise.catch(error => stream.emit('error', error))
 
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.contents = stream
 }
 
 const bufferResult = async function({ file, input, opts, opts: { from } }) {
-  const { [from]: result } = await execCommand(input, opts)
+  const { [from]: buffer } = await execCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = result
+  file.contents = buffer
 }
