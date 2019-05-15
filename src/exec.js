@@ -23,7 +23,7 @@ export const execCommand = async function(input, opts) {
     // By passing `error`, we make sure `execa` `error` properties are kept.
     // All error properties are summarized in the error message, i.e. we don't
     // need to print them.
-    // There are ways `execa()` can throw:
+    // There are two ways `execa()` can throw:
     //   - invalid parameters, where core Node.js will throw a plain error.
     //   - anything else (exit code !== 0, process killed, timeout, runtime
     //     error, stream error) will throw an execa-specific richer error.
