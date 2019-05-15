@@ -4,6 +4,4 @@ export const CHILD_PROCESS_OPTS = {
 }
 
 // Examples for the `execa` options
-export const EXECA_OPTS = {
-
-}
+export const EXECA_OPTS = {}
