@@ -33,13 +33,13 @@ const saveResult = async function({ file, file: { execa = [] }, input, opts }) {
 
 const streamResult = function({ file, input, opts, opts: { from } }) {
   const execaResult = streamCommand(input, opts)
-  const { [from]: result } = execaResult
+  const { [from]: stream } = execaResult
 
   // Make stream fail if the command fails
-  execaResult.catch(error => result.emit('error', error))
+  execaResult.catch(error => stream.emit('error', error))
 
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = result
+  file.contents = stream
 }
 
 const bufferResult = async function({ file, input, opts, opts: { from } }) {
