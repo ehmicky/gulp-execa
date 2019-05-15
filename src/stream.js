@@ -5,7 +5,6 @@ import through from 'through2-concurrent'
 import { isValidInput } from './input.js'
 import { parseOpts } from './options.js'
 import { execCommand, streamCommand } from './exec.js'
-import { pickBy } from './utils.js'
 
 // Creates a stream to use in Gulp e.g.
 //   src(...).pipe(stream(({ path }) => ['command', [path]]))
@@ -42,6 +41,8 @@ const forcedOpts = {
   //  - `overwrite|stream` mode would not work.
   stdout: 'pipe',
   stderr: 'pipe',
+  // `stdio` cannot be combined with `stdout|stderr` (`forcedOpts`) with execa
+  stdio: undefined,
 }
 
 const addDefaultOpts = function({ opts, opts: { result } }) {
@@ -49,11 +50,7 @@ const addDefaultOpts = function({ opts, opts: { result } }) {
   // `replace`. Same thing with final newline stripping.
   const replaceOpts =
     result === 'replace' ? { encoding: 'buffer', stripFinalNewline: false } : {}
-
-  // `stdio` cannot be combined with `stdout|stderr` (`forcedOpts`) with execa
-  const optsA = pickBy(opts, (value, key) => key !== 'stdio')
-
-  return { ...replaceOpts, ...optsA }
+  return { ...replaceOpts, ...opts }
 }
 
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
