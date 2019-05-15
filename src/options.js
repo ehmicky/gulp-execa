@@ -33,6 +33,7 @@ const EXAMPLE_OPTS = {
 
 const addVerbose = function({ opts: { verbose, ...opts }, opts: { stdio } }) {
   if (!verbose) {
+    // The default value for `echo` must be added here, not in `DEFAULT_OPTS`
     return { echo: false, ...opts }
   }
 
