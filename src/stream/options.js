@@ -1,6 +1,6 @@
 export const getDefaultOpts = function({ opts: { result = 'replace' } = {} }) {
   return {
-    // This is too verbose if done on each iteration
+    // This is too verbose if done on each iteration, even on CI
     verbose: false,
     // We use `through2-concurrent` because `through2` processes files serially
     // The default is 16 which is too low
