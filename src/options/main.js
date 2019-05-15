@@ -1,7 +1,7 @@
 import { validate } from 'jest-validate'
 import isCi from 'is-ci'
 
-import { isPlainObject, pickBy } from './utils.js'
+import { isPlainObject, pickBy } from '../utils.js'
 
 // Parse options
 export const parseOpts = function({

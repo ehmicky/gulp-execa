@@ -2,7 +2,7 @@ import { callbackify } from 'util'
 
 import through from 'through2-concurrent'
 
-import { parseOpts } from '../options.js'
+import { parseOpts } from '../options/main.js'
 
 import { getDefaultOpts, forcedOpts } from './options.js'
 import { setResult } from './result.js'

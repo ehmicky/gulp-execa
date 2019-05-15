@@ -2,7 +2,7 @@ import execa from 'execa'
 import PluginError from 'plugin-error'
 
 import { validateInput } from './input.js'
-import { parseOpts } from './options.js'
+import { parseOpts } from './options/main.js'
 import { printEcho } from './echo.js'
 
 // Execute a child process (command + arguments)
