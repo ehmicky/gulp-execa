@@ -13,25 +13,34 @@ import { execCommand, streamCommand } from './exec.js'
 // call to those functions would be more efficient that creating lots of
 // child processes through streaming.
 export const stream = function(mapFunc, opts) {
-  const { maxConcurrency, ...optsA } = parseOpts({
+  const defaultOpts = getDefaultOpts({ opts })
+  const { maxConcurrency, result: resultOpt, ...optsA } = parseOpts({
     opts,
     defaultOpts,
     forcedOpts,
   })
-  const { result: resultOpt, ...optsB } = addDefaultOpts({ opts: optsA })
 
   return through.obj(
     { maxConcurrency },
-    execVinyl.bind(null, { mapFunc, opts: optsB, resultOpt }),
+    execVinyl.bind(null, { mapFunc, opts: optsA, resultOpt }),
   )
 }
 
-const defaultOpts = {
-  // We use `through2-concurrent` because `through2` processes files serially
-  // The default is 16 which is too low
-  maxConcurrency: 100,
-  // What to do with the result. Either 'save' or 'replace'
-  result: 'replace',
+const getDefaultOpts = function({ opts: { result = 'replace' } = {} }) {
+  return {
+    // We use `through2-concurrent` because `through2` processes files serially
+    // The default is 16 which is too low
+    maxConcurrency: 100,
+    // What to do with the result. Either 'save' or 'replace'
+    result: 'replace',
+    ...resultDefaultOpts[result],
+  }
+}
+
+const resultDefaultOpts = {
+  // `save` should retrieve output as string, but this is not needed for
+  // `replace`. Same thing with final newline stripping.
+  replace: { encoding: 'buffer', stripFinalNewline: false },
 }
 
 const forcedOpts = {
@@ -43,16 +52,6 @@ const forcedOpts = {
   stderr: 'pipe',
   // `stdio` cannot be combined with `stdout|stderr` (`forcedOpts`) with execa
   stdio: undefined,
-}
-
-// `save` should retrieve output as string, but this is not needed for
-// `replace`. Same thing with final newline stripping.
-const addDefaultOpts = function({ opts, opts: { result } }) {
-  if (result === 'save') {
-    return opts
-  }
-
-  return { encoding: 'buffer', stripFinalNewline: false, ...opts }
 }
 
 const cExecVinyl = async function({ mapFunc, opts, resultOpt }, file) {
