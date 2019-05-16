@@ -7,7 +7,7 @@ import { execCommand } from './exec.js'
 // Create a Gulp task that fires a child process (command + arguments)
 export const task = function(input, opts) {
   validateInput({ input })
-  const optsA = parseOpts({ opts, forcedOpts })
+  const optsA = parseOpts({ opts })
 
   const gulpTask = execCommand.bind(null, input, optsA)
 
@@ -16,6 +16,3 @@ export const task = function(input, opts) {
 
   return gulpTask
 }
-
-// The `echo` option is not needed since the function name shows it already
-const forcedOpts = { echo: false }
