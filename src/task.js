@@ -11,7 +11,8 @@ export const task = function(input, opts) {
 
   const gulpTask = execCommand.bind(null, input, optsA)
 
-  // Log the command and arguments as the inner function name
+  // Log the command and arguments as the task name.
+  // This does not work when this is the top-level task.
   renameFn(gulpTask, input)
 
   return gulpTask
