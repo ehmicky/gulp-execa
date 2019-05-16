@@ -20,8 +20,13 @@ export const streamError = function(stream, error, opts) {
 // are kept. They are not printed though, as error message should be enough.
 const createError = function(error, opts) {
   const errorA = error instanceof Error ? error : new Error(error)
-  fixStack(errorA)
-  return new PluginError({ ...PLUGIN_ERROR_OPTS, ...opts, error: errorA })
+  const stack = getStack(errorA)
+  return new PluginError({
+    ...PLUGIN_ERROR_OPTS,
+    ...opts,
+    error: errorA,
+    stack,
+  })
 }
 
 const PLUGIN_ERROR_OPTS = {
@@ -32,9 +37,8 @@ const PLUGIN_ERROR_OPTS = {
 
 // `plugin-error` repeats the error message by printing both `error.message`
 // and the first line of `error.stack`. We remove that last one.
-const fixStack = function(error) {
-  // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  error.stack = error.stack
+const getStack = function({ stack }) {
+  return stack
     .split('\n')
     .slice(1)
     .join('\n')
