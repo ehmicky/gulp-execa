@@ -6,29 +6,35 @@ import execa from 'execa'
 const GULPFILE = `${__dirname}/helpers/test.gulpfile.js`
 
 const DATA = [
-  // { method: 'exec', command: true },
-  // { method: 'task', command: true },
-  // { method: 'stream', command: true },
-  // { method: 'stream', command: true, streamOpts: { buffer: false } },
-  // { method: 'stream', command: true, streamOpts: { result: 'save' } },
-  // { method: 'exec', command: ' ' },
-  // { method: 'task', command: ' ' },
-  // { method: 'stream', command: ' ' },
-  // { method: 'stream', command: ' ', streamOpts: { buffer: false } },
-  // { method: 'stream', command: ' ', streamOpts: { result: 'save' } },
-  { method: 'stream', command: 'echo test', opts: { verbose: true }, streamOpts: { result: 'save' }, buffer: false },
+  { command: true },
+  { command: ' ' },
+  { command: 'echo test', opts: { verbose: true } },
 ]
 
-DATA.forEach(datum => {
-  test(`[${inspect(datum)}] Dummy test`, async t => {
-    const { exitCode, stdout, stderr } = await fireTask(datum)
-    // eslint-disable-next-line no-restricted-globals, no-console
-    console.log(exitCode)
-    // eslint-disable-next-line no-restricted-globals, no-console
-    console.log(stdout)
-    // eslint-disable-next-line no-restricted-globals, no-console
-    console.log(stderr)
-    t.pass()
+const METHODS = [
+  { method: 'exec' },
+  { method: 'task' },
+  { method: 'stream' },
+  { method: 'stream', buffer: false },
+  { method: 'stream', streamOpts: { result: 'save' } },
+]
+
+METHODS.forEach(methodProps => {
+  DATA.forEach(datum => {
+    // eslint-disable-next-line max-nested-callbacks
+    test(`[${inspect(methodProps)}] [${inspect(datum)}] Dummy test`, async t => {
+      const { exitCode, stdout, stderr } = await fireTask({
+        ...methodProps,
+        ...datum,
+      })
+      // eslint-disable-next-line no-restricted-globals, no-console
+      console.log(exitCode)
+      // eslint-disable-next-line no-restricted-globals, no-console
+      console.log(stdout)
+      // eslint-disable-next-line no-restricted-globals, no-console
+      console.log(stderr)
+      t.pass()
+    })
   })
 })
 
