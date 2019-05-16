@@ -21,17 +21,21 @@ export const streamError = function(stream, error, opts) {
 const createError = function(error, opts) {
   const errorA = error instanceof Error ? error : new Error(error)
   fixStack(errorA)
-  return new PluginError('gulp-execa', errorA, {
-    ...PLUGIN_ERROR_OPTS,
-    ...opts,
-  })
+  return new PluginError({ ...PLUGIN_ERROR_OPTS, ...opts, error: errorA })
 }
 
-const PLUGIN_ERROR_OPTS = { showProperties: false, showStack: true }
+const PLUGIN_ERROR_OPTS = {
+  plugin: 'gulp-execa',
+  showProperties: false,
+  showStack: true,
+}
 
 // `plugin-error` repeats the error message by printing both `error.message`
 // and the first line of `error.stack`. We remove that last one.
 const fixStack = function(error) {
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  error.stack = error.stack.split('\n').slice(1).join('\n')
+  error.stack = error.stack
+    .split('\n')
+    .slice(1)
+    .join('\n')
 }
