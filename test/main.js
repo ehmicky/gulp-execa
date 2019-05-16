@@ -51,7 +51,7 @@ METHODS.forEach(methodProps => {
   DATA.forEach(datum => {
     test(`[${inspect(methodProps)}] [${inspect(
       datum,
-    // eslint-disable-next-line max-nested-callbacks
+      // eslint-disable-next-line max-nested-callbacks
     )}] Dummy test`, async t => {
       const { exitCode, stdout, stderr } = await fireTask({
         ...methodProps,
