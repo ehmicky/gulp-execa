@@ -32,6 +32,7 @@ export const parseOpts = function({
   return optsC
 }
 
+// `jest-validate` `error.stack` just repeats `error.message`
 const kValidate = handleError(validate, { showStack: false })
 
 const validateOpts = function({ opts }) {
