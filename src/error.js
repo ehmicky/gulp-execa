@@ -20,9 +20,17 @@ export const streamError = function(stream, error, opts) {
 // are kept. They are not printed though, as error message should be enough.
 const createError = function(error, opts) {
   const errorA = error instanceof Error ? error : new Error(error)
+  fixStack(errorA)
   return new PluginError('gulp-execa', errorA, {
     showProperties: false,
     showStack: true,
     ...opts,
   })
+}
+
+// `plugin-error` repeats the error message by printing both `error.message`
+// and the first line of `error.stack`. We remove that last one.
+const fixStack = function(error) {
+  // eslint-disable-next-line no-param-reassign, fp/no-mutation
+  error.stack = error.stack.split('\n').slice(1).join('\n')
 }
