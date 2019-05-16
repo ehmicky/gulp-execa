@@ -63,7 +63,7 @@ const REPLACEMENTS = [
   // Stack traces
   [/ +at [^]+/gu, '    at STACK TRACE'],
   // Gulp shows file content that triggered an error
-  [/[^]+Error: /gu, ''],
+  [/[^]+Error:/gu, ''],
   // Timestamps
   [/\[\d{2}:\d{2}:\d{2}\]/gu, '[12:00:00]'],
   // Duration
