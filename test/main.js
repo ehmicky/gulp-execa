@@ -1,3 +1,5 @@
+import { inspect } from 'util'
+
 import test from 'ava'
 import execa from 'execa'
 
@@ -18,7 +20,7 @@ const DATA = [
 ]
 
 DATA.forEach(datum => {
-  test('Dummy test', async t => {
+  test(`[${inspect(datum)}] Dummy test`, async t => {
     const { exitCode, stdout, stderr } = await fireTask(datum)
     // eslint-disable-next-line no-restricted-globals, no-console
     console.log(exitCode)
