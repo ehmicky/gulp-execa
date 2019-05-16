@@ -1,6 +1,8 @@
 import test from 'ava'
 import execa from 'execa'
 
+const GULPFILE = `${__dirname}/helpers/test.gulpfile.js`
+
 const DATA = [
   { method: 'stream', command: 'echo test', opts: { verbose: true }, streamOpts: { result: 'save' }, buffer: false },
 ]
@@ -17,8 +19,6 @@ DATA.forEach(datum => {
     t.pass()
   })
 })
-
-const GULPFILE = `${__dirname}/helpers/test.gulpfile.js`
 
 const fireTask = async function({ method, command, opts, streamOpts, buffer }) {
   const input = JSON.stringify({ command, opts, streamOpts, buffer })
