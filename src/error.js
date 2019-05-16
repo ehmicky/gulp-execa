@@ -37,9 +37,6 @@ const PLUGIN_ERROR_OPTS = {
 
 // `plugin-error` repeats the error message by printing both `error.message`
 // and the first line of `error.stack`. We remove that last one.
-const getStack = function({ stack }) {
-  return stack
-    .split('\n')
-    .slice(1)
-    .join('\n')
+const getStack = function({ stack, message }) {
+  return stack.replace(message, '')
 }
