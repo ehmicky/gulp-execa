@@ -20,23 +20,11 @@ export const streamError = function(stream, error, opts) {
 // are kept. They are not printed though, as error message should be enough.
 const createError = function(error, opts) {
   const errorA = error instanceof Error ? error : new Error(error)
-  const stack = getStack(errorA)
-  return new PluginError({
-    ...PLUGIN_ERROR_OPTS,
-    ...opts,
-    error: errorA,
-    stack,
-  })
+  return new PluginError({ ...PLUGIN_ERROR_OPTS, ...opts, error: errorA })
 }
 
 const PLUGIN_ERROR_OPTS = {
   plugin: 'gulp-execa',
   showProperties: false,
   showStack: true,
-}
-
-// `plugin-error` repeats the error message by printing both `error.message`
-// and the first line of `error.stack`. We remove that last one.
-const getStack = function({ stack, message }) {
-  return stack.replace(message, '')
 }
