@@ -50,7 +50,7 @@ const fireTask = async function({ method, command, opts, streamOpts, buffer }) {
 
 // Normalize console messages for testing
 export const normalizeMessage = function(message) {
-  return REPLACEMENTS.reduce(replacePart, message)
+  return REPLACEMENTS.reduce(replacePart, message).trim()
 }
 
 const replacePart = function(message, [before, after]) {
@@ -68,5 +68,8 @@ const REPLACEMENTS = [
   [/\[\d{2}:\d{2}:\d{2}\]/gu, '[12:00:00]'],
   // Duration
   [/(\d+\.)?\d+ [μnm]s/gu, '100 ms'],
+  // Make snapshots less verbose
+  [/.*Working directory changed.*/gu, ''],
+  [/.*Using gulpfile.*/gu, ''],
 ]
 
