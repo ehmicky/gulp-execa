@@ -16,6 +16,8 @@ const METHODS = [
 const DATA = [
   { command: true },
   { command: ' ' },
+  { command: 'echo test' },
+  { command: 'echo test', opts: false },
   { command: 'echo test', opts: { verbose: true } },
 ]
 
