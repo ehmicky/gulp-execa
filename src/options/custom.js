@@ -1,3 +1,5 @@
+import { throwError } from '../error.js'
+
 // Validation that cannot be handled by `jest-validate`
 export const validateCustom = function({ opts }) {
   Object.entries(ENUM_OPTS).forEach(([attrName, allowed]) => {
@@ -20,7 +22,5 @@ const validateEnum = function({
     return
   }
 
-  throw new Error(
-    `option '${attrName}' '${value}' must be one of: ${allowed.join(', ')}`,
-  )
+  throwError(`Option '${attrName}' '${value}' must be one of: ${allowed.join(', ')}`)
 }

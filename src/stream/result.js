@@ -1,5 +1,6 @@
 import { isValidInput } from '../input.js'
 import { execCommand, streamCommand } from '../exec.js'
+import { streamError } from '../error.js'
 
 // Decides what to do with the child process result according to `opts.result`:
 //  - `save`: pushed to `file.execa`
@@ -36,7 +37,7 @@ const streamResult = function({ file, input, opts, opts: { from } }) {
   const { [from]: stream } = execaPromise
 
   // Make stream fail if the command fails
-  execaPromise.catch(error => stream.emit('error', error))
+  execaPromise.catch(error => streamError(stream, error))
 
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.contents = stream

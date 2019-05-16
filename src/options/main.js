@@ -2,6 +2,7 @@ import { validate } from 'jest-validate'
 import isCi from 'is-ci'
 
 import { isPlainObject, pickBy } from '../utils.js'
+import { throwError, handleError } from '../error.js'
 
 import { CHILD_PROCESS_OPTS, EXECA_OPTS } from './upstream.js'
 import { validateCustom } from './custom.js'
@@ -21,7 +22,8 @@ export const parseOpts = function({
     { ...EXAMPLE_OPTS, ...defaultOpts },
     (value, key) => forcedOpts[key] === undefined,
   )
-  validate(optsA, { exampleConfig })
+
+  kValidate(optsA, { exampleConfig })
 
   validateCustom({ opts: optsA })
 
@@ -30,9 +32,11 @@ export const parseOpts = function({
   return optsC
 }
 
+const kValidate = handleError(validate, { showStack: false })
+
 const validateOpts = function({ opts }) {
   if (!isPlainObject(opts)) {
-    throw new Error(`options must be a plain object: ${opts}`)
+    throwError(`Options must be a plain object: ${opts}`)
   }
 }
 
