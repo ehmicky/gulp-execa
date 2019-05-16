@@ -6,6 +6,8 @@ import { streamError } from '../error.js'
 //  - `save`: pushed to `file.execa`
 //  - `replace`: overwrite file's content
 export const setResult = function({ file, input, opts, resultOpt }) {
+  initSave({ file, resultOpt })
+
   // Returning `undefined` or invalid command skips it silently.
   if (!isValidInput({ input })) {
     return
@@ -24,6 +26,16 @@ export const setResult = function({ file, input, opts, resultOpt }) {
   }
 
   return bufferResult({ file, input, opts })
+}
+
+// Make sure `file.execa` is always set even if all inputs are invalid
+const initSave = function({ file, file: { execa }, resultOpt }) {
+  if (resultOpt !== 'save' || execa !== undefined) {
+    return
+  }
+
+  // eslint-disable-next-line no-param-reassign, fp/no-mutation
+  file.execa = []
 }
 
 const saveResult = async function({ file, file: { execa = [] }, input, opts }) {
