@@ -22,5 +22,7 @@ const validateEnum = function({
     return
   }
 
-  throwError(`Option '${attrName}' '${value}' must be one of: ${allowed.join(', ')}`)
+  throwError(
+    `Option '${attrName}' '${value}' must be one of: ${allowed.join(', ')}`,
+  )
 }

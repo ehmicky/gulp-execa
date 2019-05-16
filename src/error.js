@@ -20,9 +20,9 @@ export const streamError = function(stream, error, opts) {
 // are kept. They are not printed though, as error message should be enough.
 const createError = function(error, opts) {
   const errorA = error instanceof Error ? error : new Error(error)
-  return new PluginError(
-    'gulp-execa',
-    errorA,
-    { showProperties: false, showStack: true, ...opts }
-  )
+  return new PluginError('gulp-execa', errorA, {
+    showProperties: false,
+    showStack: true,
+    ...opts,
+  })
 }
