@@ -9,6 +9,11 @@ const DATA = [
   // { method: 'stream', command: true },
   // { method: 'stream', command: true, streamOpts: { buffer: false } },
   // { method: 'stream', command: true, streamOpts: { result: 'save' } },
+  // { method: 'exec', command: ' ' },
+  // { method: 'task', command: ' ' },
+  // { method: 'stream', command: ' ' },
+  // { method: 'stream', command: ' ', streamOpts: { buffer: false } },
+  // { method: 'stream', command: ' ', streamOpts: { result: 'save' } },
   { method: 'stream', command: 'echo test', opts: { verbose: true }, streamOpts: { result: 'save' }, buffer: false },
 ]
 
