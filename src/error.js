@@ -22,11 +22,12 @@ const createError = function(error, opts) {
   const errorA = error instanceof Error ? error : new Error(error)
   fixStack(errorA)
   return new PluginError('gulp-execa', errorA, {
-    showProperties: false,
-    showStack: true,
+    ...PLUGIN_ERROR_OPTS,
     ...opts,
   })
 }
+
+const PLUGIN_ERROR_OPTS = { showProperties: false, showStack: true }
 
 // `plugin-error` repeats the error message by printing both `error.message`
 // and the first line of `error.stack`. We remove that last one.
