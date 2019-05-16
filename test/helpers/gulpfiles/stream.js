@@ -11,9 +11,10 @@ import { getInput } from './input.js'
 
 const { command, opts, buffer } = getInput()
 
-export const main = () => src(__filename, { buffer })
-  .pipe(stream(() => command, opts))
-  .pipe(through.obj(execVinyl))
+export const main = () =>
+  src(__filename, { buffer })
+    .pipe(stream(() => command, opts))
+    .pipe(through.obj(execVinyl))
 
 const cExecVinyl = async function({ contents, execa }) {
   const string = await stringifyContents({ contents, execa })

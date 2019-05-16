@@ -49,8 +49,10 @@ const DATA = [
 
 METHODS.forEach(methodProps => {
   DATA.forEach(datum => {
+    test(`[${inspect(methodProps)}] [${inspect(
+      datum,
     // eslint-disable-next-line max-nested-callbacks
-    test(`[${inspect(methodProps)}] [${inspect(datum)}] Dummy test`, async t => {
+    )}] Dummy test`, async t => {
       const { exitCode, stdout, stderr } = await fireTask({
         ...methodProps,
         ...datum,
@@ -68,7 +70,10 @@ METHODS.forEach(methodProps => {
 
 const fireTask = async function({ method, command, opts, buffer }) {
   const input = JSON.stringify({ command, opts, buffer })
-  const { exitCode, stdout, stderr } = await execa(`gulp --gulpfile ${GULPFILES_DIR}/${method}.js main`, { reject: false, env: { INPUT: input } })
+  const { exitCode, stdout, stderr } = await execa(
+    `gulp --gulpfile ${GULPFILES_DIR}/${method}.js main`,
+    { reject: false, env: { INPUT: input } },
+  )
   const stdoutA = normalizeMessage(stdout)
   const stderrA = normalizeMessage(stderr)
   return { exitCode, stdout: stdoutA, stderr: stderrA }
@@ -98,4 +103,3 @@ const REPLACEMENTS = [
   [/.*Working directory changed.*/gu, ''],
   [/.*Using gulpfile.*/gu, ''],
 ]
-
