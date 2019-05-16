@@ -3,14 +3,14 @@ import { inspect } from 'util'
 import test from 'ava'
 import execa from 'execa'
 
-const GULPFILE = `${__dirname}/helpers/test.gulpfile.js`
+const GULPFILES_DIR = `${__dirname}/helpers/gulpfiles`
 
 const METHODS = [
   { method: 'exec' },
   { method: 'task' },
   { method: 'stream' },
   { method: 'stream', buffer: false },
-  { method: 'stream', streamOpts: { result: 'save' } },
+  { method: 'stream', opts: { result: 'save' } },
 ]
 
 const DATA = [
@@ -66,9 +66,9 @@ METHODS.forEach(methodProps => {
   })
 })
 
-const fireTask = async function({ method, command, opts, streamOpts, buffer }) {
-  const input = JSON.stringify({ command, opts, streamOpts, buffer })
-  const { exitCode, stdout, stderr } = await execa(`gulp --gulpfile ${GULPFILE} ${method}Func`, { reject: false, env: { INPUT: input } })
+const fireTask = async function({ method, command, opts, buffer }) {
+  const input = JSON.stringify({ command, opts, buffer })
+  const { exitCode, stdout, stderr } = await execa(`gulp --gulpfile ${GULPFILES_DIR}/${method}.js main`, { reject: false, env: { INPUT: input } })
   const stdoutA = normalizeMessage(stdout)
   const stderrA = normalizeMessage(stderr)
   return { exitCode, stdout: stdoutA, stderr: stderrA }

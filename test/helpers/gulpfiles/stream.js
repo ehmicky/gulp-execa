@@ -1,4 +1,3 @@
-import { env } from 'process'
 import { callbackify } from 'util'
 import { Buffer } from 'buffer'
 
@@ -6,16 +5,14 @@ import { src } from 'gulp'
 import through from 'through2-concurrent'
 import getStream from 'get-stream'
 
-import { exec, task, stream } from '../../src/main.js'
+import { stream } from '../../../src/main.js'
 
-const { command, opts, streamOpts, buffer = true } = JSON.parse(env.INPUT)
+import { getInput } from './input.js'
 
-export const execFunc = () => exec(command, opts)
+const { command, opts, buffer } = getInput()
 
-export const taskFunc = task(command, opts)
-
-export const streamFunc = () => src(__filename, { buffer })
-  .pipe(stream(() => command, { ...opts, ...streamOpts }))
+export const main = () => src(__filename, { buffer })
+  .pipe(stream(() => command, opts))
   .pipe(through.obj(execVinyl))
 
 const cExecVinyl = async function({ contents, execa }) {
