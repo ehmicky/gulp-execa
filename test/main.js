@@ -5,18 +5,18 @@ import execa from 'execa'
 
 const GULPFILE = `${__dirname}/helpers/test.gulpfile.js`
 
-const DATA = [
-  { command: true },
-  { command: ' ' },
-  { command: 'echo test', opts: { verbose: true } },
-]
-
 const METHODS = [
   { method: 'exec' },
   { method: 'task' },
   { method: 'stream' },
   { method: 'stream', buffer: false },
   { method: 'stream', streamOpts: { result: 'save' } },
+]
+
+const DATA = [
+  { command: true },
+  { command: ' ' },
+  { command: 'echo test', opts: { verbose: true } },
 ]
 
 METHODS.forEach(methodProps => {
