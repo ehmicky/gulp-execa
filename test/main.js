@@ -16,8 +16,19 @@ const METHODS = [
 const DATA = [
   { command: true },
   { command: ' ' },
-  { command: 'echo test' },
   { command: 'echo test', opts: false },
+  { command: 'echo test', opts: { cwd: false } },
+  { command: 'echo test', opts: { env: false } },
+  { command: 'echo test', opts: { argv0: false } },
+  { command: 'echo test', opts: { stdio: false } },
+  { command: 'echo test', opts: { detached: '' } },
+  { command: 'echo test', opts: { uid: false } },
+  { command: 'echo test', opts: { gid: false } },
+  { command: 'echo test', opts: { shell: 0 } },
+  { command: 'echo test', opts: { windowsVerbatimArguments: '' } },
+  { command: 'echo test', opts: { windowsHide: '' } },
+  { command: 'echo test', opts: { encoding: false } },
+  { command: 'echo test' },
   { command: 'echo test', opts: { verbose: true } },
 ]
 
