@@ -8,7 +8,7 @@ import getStream from 'get-stream'
 
 import { exec, task, stream } from '../../src/main.js'
 
-const { command, opts, streamOpts, buffer } = JSON.parse(env.INPUT)
+const { command, opts, streamOpts, buffer = true } = JSON.parse(env.INPUT)
 
 export const execFunc = () => exec(command, opts)
 
@@ -18,10 +18,10 @@ export const streamFunc = () => src(__filename, { buffer })
   .pipe(stream(() => command, { ...opts, ...streamOpts }))
   .pipe(through.obj(execVinyl))
 
-const cExecVinyl = async function({ path, contents, execa }) {
+const cExecVinyl = async function({ contents, execa }) {
   const string = await stringifyContents({ contents, execa })
   // eslint-disable-next-line no-restricted-globals, no-console
-  console.log(`${path}\n${string}`)
+  console.log(string)
 }
 
 const stringifyContents = function({ contents, execa }) {

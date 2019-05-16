@@ -4,6 +4,11 @@ import execa from 'execa'
 const GULPFILE = `${__dirname}/helpers/test.gulpfile.js`
 
 const DATA = [
+  // { method: 'exec', command: true },
+  // { method: 'task', command: true },
+  // { method: 'stream', command: true },
+  // { method: 'stream', command: true, streamOpts: { buffer: false } },
+  // { method: 'stream', command: true, streamOpts: { result: 'save' } },
   { method: 'stream', command: 'echo test', opts: { verbose: true }, streamOpts: { result: 'save' }, buffer: false },
 ]
 
@@ -40,6 +45,10 @@ const replacePart = function(message, [before, after]) {
 const REPLACEMENTS = [
   // File paths
   [/[^ (\n]+\/[^ )\n]+/gu, '/path'],
+  // Stack traces
+  [/ +at [^]+/gu, '    at STACK TRACE'],
+  // Gulp shows file content that triggered an error
+  [/[^]+Error: /gu, ''],
   // Timestamps
   [/\[\d{2}:\d{2}:\d{2}\]/gu, '[12:00:00]'],
   // Duration
