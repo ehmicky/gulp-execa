@@ -69,36 +69,14 @@ testEach(METHODS, [
     opts: { verbose: true, stdio: 'pipe', stdout: 'pipe', stderr: 'pipe' },
   },
 ], (suffix, methodProps, datum) => {
-  test(`Dummy test ${suffix}`, async t => {
-    const { exitCode, stdout, stderr } = await fireTask({
-      ...methodProps,
-      ...datum,
-      opts: { ...methodProps.opts, ...datum.opts },
-    })
-    // eslint-disable-next-line no-restricted-globals, no-console
-    console.log(exitCode)
-    // eslint-disable-next-line no-restricted-globals, no-console
-    console.log(stdout)
-    // eslint-disable-next-line no-restricted-globals, no-console
-    console.log(stderr)
-    t.pass()
-  })
+  test(`Dummy test ${suffix}`, t => snapshotTest({ t, methodProps, datum }))
 })
 
-test('should use the command as task name', async t => {
-  const { exitCode, stdout, stderr } = await fireTask({
-    method: 'task',
-    task: 'nested',
-    command: 'echo test',
-  })
-  // eslint-disable-next-line no-restricted-globals, no-console
-  console.log(exitCode)
-  // eslint-disable-next-line no-restricted-globals, no-console
-  console.log(stdout)
-  // eslint-disable-next-line no-restricted-globals, no-console
-  console.log(stderr)
-  t.pass()
-})
+test('should use the command as task name', t => snapshotTest({
+  t,
+  methodProps: { method: 'task' },
+  datum: { task: 'nested', command: 'echo test' },
+}))
 
 testEach(STREAM_METHODS, [
   { task: 'inputNotFunc', command: 'echo test' },
@@ -110,21 +88,23 @@ testEach(STREAM_METHODS, [
   { command: 'echo test', opts: { encoding: 'utf8' } },
   { command: 'echo test', opts: { stripFinalNewline: true } },
 ], (suffix, methodProps, datum) => {
-  test(`Dummy test ${suffix}`, async t => {
-    const { exitCode, stdout, stderr } = await fireTask({
-      ...methodProps,
-      ...datum,
-      opts: { ...methodProps.opts, ...datum.opts },
-    })
-    // eslint-disable-next-line no-restricted-globals, no-console
-    console.log(exitCode)
-    // eslint-disable-next-line no-restricted-globals, no-console
-    console.log(stdout)
-    // eslint-disable-next-line no-restricted-globals, no-console
-    console.log(stderr)
-    t.pass()
-  })
+  test(`Dummy test ${suffix}`, t => snapshotTest({ t, methodProps, datum }))
 })
+
+const snapshotTest = async function({ t, methodProps, datum }) {
+  const { exitCode, stdout, stderr } = await fireTask({
+    ...methodProps,
+    ...datum,
+    opts: { ...methodProps.opts, ...datum.opts },
+  })
+  // eslint-disable-next-line no-restricted-globals, no-console
+  console.log(exitCode)
+  // eslint-disable-next-line no-restricted-globals, no-console
+  console.log(stdout)
+  // eslint-disable-next-line no-restricted-globals, no-console
+  console.log(stderr)
+  t.pass()
+}
 
 const fireTask = async function({
   method,
