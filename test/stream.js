@@ -9,6 +9,7 @@ testEach(
   [
     { task: 'inputNotFunc' },
     { task: 'inputThrows' },
+    { task: 'inputThrowsAsync' },
     { task: 'inputAsync' },
     { task: 'inputFile', command: 'echo' },
     { task: 'inputUndefined' },

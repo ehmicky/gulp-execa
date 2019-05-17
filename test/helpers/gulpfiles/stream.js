@@ -52,8 +52,14 @@ export const inputNotFunc = () =>
 export const inputThrows = () =>
   src(DUMMY, { buffer }).pipe(
     stream(() => {
-      throw new Error('test')
+      throw new Error('error')
     }, opts),
+  )
+
+// `input` async exceptions should be propagated
+export const inputThrowsAsync = () =>
+  src(DUMMY, { buffer }).pipe(
+    stream(() => Promise.reject(new Error('error')), opts),
   )
 
 const cExecVinyl = async function(file) {
