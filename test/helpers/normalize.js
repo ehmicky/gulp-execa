@@ -22,7 +22,7 @@ const REPLACEMENTS = [
   // Timestamps
   [/\[\d{2}:\d{2}:\d{2}\]/gu, '[12:00:00]'],
   // Duration
-  [/(\d+\.)?\d+ [μnm]s/gu, '100 ms'],
+  [/(\d+\.)?\d+ [μnm]?s/gu, '100 ms'],
   // Make snapshots less verbose
   [/.*Working directory changed.*/gu, ''],
   [/.*Using gulpfile.*/gu, ''],
