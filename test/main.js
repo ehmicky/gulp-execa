@@ -1,7 +1,8 @@
-import { inspect } from 'util'
-
 import test from 'ava'
 import execa from 'execa'
+import stripAnsi from 'strip-ansi'
+
+import { testEach } from './helpers/test_each/main.js'
 
 const GULPFILES_DIR = `${__dirname}/helpers/gulpfiles`
 
@@ -17,7 +18,7 @@ const METHODS = [
   ...STREAM_METHODS,
 ]
 
-const DATA = [
+testEach(METHODS, [
   { command: true },
   { command: ' ' },
   { command: 'echo test', opts: false },
@@ -67,55 +68,20 @@ const DATA = [
     command: 'echo test',
     opts: { verbose: true, stdio: 'pipe', stdout: 'pipe', stderr: 'pipe' },
   },
-]
-
-const getSuffix = function(args) {
-  const suffix = args.map(serializeArg).join(' ')
-  return `| ${suffix}`
-}
-
-const serializeArg = function(arg) {
-  if (isPlainObject(arg) && typeof arg.suffix === 'string') {
-    return arg.suffix
-  }
-
-  if (typeof arg === 'string') {
-    return arg
-  }
-
-  return inspect(arg, INSPECT_OPTS)
-}
-
-const isPlainObject = function(value) {
-  return value && typeof value === 'object'
-}
-
-// Make suffix short and on a single line
-const INSPECT_OPTS = {
-  breakLength: Infinity,
-  depth: 1,
-  maxArrayLength: 3,
-  compact: true,
-}
-
-METHODS.forEach(methodProps => {
-  DATA.forEach(datum => {
-    const suffix = getSuffix([methodProps, datum])
-    // eslint-disable-next-line max-nested-callbacks
-    test(`Dummy test ${suffix}`, async t => {
-      const { exitCode, stdout, stderr } = await fireTask({
-        ...methodProps,
-        ...datum,
-        opts: { ...methodProps.opts, ...datum.opts },
-      })
-      // eslint-disable-next-line no-restricted-globals, no-console
-      console.log(exitCode)
-      // eslint-disable-next-line no-restricted-globals, no-console
-      console.log(stdout)
-      // eslint-disable-next-line no-restricted-globals, no-console
-      console.log(stderr)
-      t.pass()
+], (suffix, methodProps, datum) => {
+  test(`Dummy test ${suffix}`, async t => {
+    const { exitCode, stdout, stderr } = await fireTask({
+      ...methodProps,
+      ...datum,
+      opts: { ...methodProps.opts, ...datum.opts },
     })
+    // eslint-disable-next-line no-restricted-globals, no-console
+    console.log(exitCode)
+    // eslint-disable-next-line no-restricted-globals, no-console
+    console.log(stdout)
+    // eslint-disable-next-line no-restricted-globals, no-console
+    console.log(stderr)
+    t.pass()
   })
 })
 
@@ -134,7 +100,7 @@ test('should use the command as task name', async t => {
   t.pass()
 })
 
-const STREAM_DATA = [
+testEach(STREAM_METHODS, [
   { task: 'inputNotFunc', command: 'echo test' },
   { task: 'inputThrows' },
   { task: 'inputAsync', command: 'echo test' },
@@ -143,26 +109,20 @@ const STREAM_DATA = [
   { task: 'severalFiles', command: 'echo test' },
   { command: 'echo test', opts: { encoding: 'utf8' } },
   { command: 'echo test', opts: { stripFinalNewline: true } },
-]
-
-STREAM_METHODS.forEach(methodProps => {
-  STREAM_DATA.forEach(datum => {
-    const suffix = getSuffix([methodProps, datum])
-    // eslint-disable-next-line max-nested-callbacks
-    test(`Dummy test ${suffix}`, async t => {
-      const { exitCode, stdout, stderr } = await fireTask({
-        ...methodProps,
-        ...datum,
-        opts: { ...methodProps.opts, ...datum.opts },
-      })
-      // eslint-disable-next-line no-restricted-globals, no-console
-      console.log(exitCode)
-      // eslint-disable-next-line no-restricted-globals, no-console
-      console.log(stdout)
-      // eslint-disable-next-line no-restricted-globals, no-console
-      console.log(stderr)
-      t.pass()
+], (suffix, methodProps, datum) => {
+  test(`Dummy test ${suffix}`, async t => {
+    const { exitCode, stdout, stderr } = await fireTask({
+      ...methodProps,
+      ...datum,
+      opts: { ...methodProps.opts, ...datum.opts },
     })
+    // eslint-disable-next-line no-restricted-globals, no-console
+    console.log(exitCode)
+    // eslint-disable-next-line no-restricted-globals, no-console
+    console.log(stdout)
+    // eslint-disable-next-line no-restricted-globals, no-console
+    console.log(stderr)
+    t.pass()
   })
 })
 
@@ -184,7 +144,10 @@ const fireTask = async function({
 
 // Normalize console messages for testing
 export const normalizeMessage = function(message) {
-  return REPLACEMENTS.reduce(replacePart, message).trim()
+  const messageA = stripAnsi(message)
+  const messageB = REPLACEMENTS.reduce(replacePart, messageA)
+  const messageC = messageB.trim()
+  return messageC
 }
 
 const replacePart = function(message, [before, after]) {
