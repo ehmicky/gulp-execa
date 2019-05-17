@@ -102,14 +102,30 @@ METHODS.forEach(methodProps => {
   })
 })
 
+test('should use the command as task name', async t => {
+  const { exitCode, stdout, stderr } = await fireTask({
+    method: 'task',
+    task: 'nested',
+    command: 'echo test'
+  })
+  // eslint-disable-next-line no-restricted-globals, no-console
+  console.log(exitCode)
+  // eslint-disable-next-line no-restricted-globals, no-console
+  console.log(stdout)
+  // eslint-disable-next-line no-restricted-globals, no-console
+  console.log(stderr)
+  t.pass()
+})
+
 const fireTask = async function({
   method,
+  task = 'main',
   execaOpts: { env, ...execaOpts } = {},
   ...input
 }) {
   const inputA = JSON.stringify(input)
   const { exitCode, stdout, stderr } = await execa(
-    `gulp --gulpfile ${GULPFILES_DIR}/${method}.js main`,
+    `gulp --gulpfile ${GULPFILES_DIR}/${method}.js ${task}`,
     { reject: false, env: { INPUT: inputA, CI: '', ...env }, ...execaOpts },
   )
   const stdoutA = normalizeMessage(stdout)
