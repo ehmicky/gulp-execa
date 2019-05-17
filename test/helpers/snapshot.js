@@ -14,13 +14,7 @@ export const snapshotTest = async function({ t, methodProps = {}, data }) {
     ...data,
     opts,
   })
-  // eslint-disable-next-line no-restricted-globals, no-console
-  console.log(exitCode)
-  // eslint-disable-next-line no-restricted-globals, no-console
-  console.log(stdout)
-  // eslint-disable-next-line no-restricted-globals, no-console
-  console.log(stderr)
-  t.pass()
+  t.snapshot({ exitCode, stdout, stderr })
 }
 
 const getOpts = function({ methodProps, data }) {
