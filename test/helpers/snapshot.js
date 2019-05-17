@@ -8,10 +8,11 @@ const GULPFILES_DIR = `${__dirname}/gulpfiles`
 //   - `gulp --gulpfile GULPFILE TASK` is fired using `execa`
 //   - the exit code, stdout and stderr are snapshot
 export const snapshotTest = async function({ t, methodProps = {}, data }) {
+  const opts = getOpts({ methodProps, data })
   const { exitCode, stdout, stderr } = await fireTask({
     ...methodProps,
     ...data,
-    opts: { ...methodProps.opts, ...data.opts },
+    opts,
   })
   // eslint-disable-next-line no-restricted-globals, no-console
   console.log(exitCode)
@@ -20,6 +21,15 @@ export const snapshotTest = async function({ t, methodProps = {}, data }) {
   // eslint-disable-next-line no-restricted-globals, no-console
   console.log(stderr)
   t.pass()
+}
+
+const getOpts = function({ methodProps, data }) {
+  // Allows testing when `opts` is `undefined`
+  if (methodProps.opts === undefined && data.opts === undefined) {
+    return
+  }
+
+  return { ...methodProps.opts, ...data.opts }
 }
 
 const fireTask = async function({
