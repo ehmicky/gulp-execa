@@ -23,8 +23,12 @@ const getOpts = function({ methodProps, data }) {
     return
   }
 
-  // Allows testing for invalid `opts`
-  if (data.opts === false) {
+  return mergeOpts({ methodProps, data })
+}
+
+const mergeOpts = function({ methodProps, data }) {
+  // Allows testing for invalid `opts` and `opts: Object.create(null)`
+  if (data.opts === false || methodProps.opts === undefined) {
     return data.opts
   }
 
