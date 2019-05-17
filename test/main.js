@@ -5,12 +5,16 @@ import execa from 'execa'
 
 const GULPFILES_DIR = `${__dirname}/helpers/gulpfiles`
 
+const STREAM_METHODS = [
+  { suffix: 'stream-buffer', method: 'stream' },
+  { suffix: 'stream-stream', method: 'stream', buffer: false },
+  { suffix: 'stream-save', method: 'stream', opts: { result: 'save' } },
+]
+
 const METHODS = [
-  { method: 'exec' },
-  { method: 'task' },
-  { method: 'stream' },
-  { method: 'stream', buffer: false },
-  { method: 'stream', opts: { result: 'save' } },
+  { suffix: 'exec', method: 'exec' },
+  { suffix: 'task', method: 'task' },
+  ...STREAM_METHODS,
 ]
 
 const DATA = [
@@ -67,11 +71,23 @@ const DATA = [
 
 const getSuffix = function(args) {
   const suffix = args.map(serializeArg).join(' ')
-  return `(${suffix})`
+  return `| ${suffix}`
 }
 
 const serializeArg = function(arg) {
+  if (isPlainObject(arg) && typeof arg.suffix === 'string') {
+    return arg.suffix
+  }
+
+  if (typeof arg === 'string') {
+    return arg
+  }
+
   return inspect(arg, INSPECT_OPTS)
+}
+
+const isPlainObject = function(value) {
+  return value && typeof value === 'object'
 }
 
 // Make suffix short and on a single line
@@ -90,6 +106,7 @@ METHODS.forEach(methodProps => {
       const { exitCode, stdout, stderr } = await fireTask({
         ...methodProps,
         ...datum,
+        opts: { ...methodProps.opts, ...datum.opts },
       })
       // eslint-disable-next-line no-restricted-globals, no-console
       console.log(exitCode)
@@ -115,6 +132,38 @@ test('should use the command as task name', async t => {
   // eslint-disable-next-line no-restricted-globals, no-console
   console.log(stderr)
   t.pass()
+})
+
+const STREAM_DATA = [
+  { task: 'inputNotFunc', command: 'echo test' },
+  { task: 'inputThrows' },
+  { task: 'inputAsync', command: 'echo test' },
+  { task: 'inputFile', command: 'echo' },
+  { task: 'inputUndefined' },
+  { task: 'severalFiles', command: 'echo test' },
+  { command: 'echo test', opts: { encoding: 'utf8' } },
+  { command: 'echo test', opts: { stripFinalNewline: true } },
+]
+
+STREAM_METHODS.forEach(methodProps => {
+  STREAM_DATA.forEach(datum => {
+    const suffix = getSuffix([methodProps, datum])
+    // eslint-disable-next-line max-nested-callbacks
+    test(`Dummy test ${suffix}`, async t => {
+      const { exitCode, stdout, stderr } = await fireTask({
+        ...methodProps,
+        ...datum,
+        opts: { ...methodProps.opts, ...datum.opts },
+      })
+      // eslint-disable-next-line no-restricted-globals, no-console
+      console.log(exitCode)
+      // eslint-disable-next-line no-restricted-globals, no-console
+      console.log(stdout)
+      // eslint-disable-next-line no-restricted-globals, no-console
+      console.log(stderr)
+      t.pass()
+    })
+  })
 })
 
 const fireTask = async function({
