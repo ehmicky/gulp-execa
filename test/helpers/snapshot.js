@@ -1,8 +1,12 @@
 import execa from 'execa'
-import stripAnsi from 'strip-ansi'
+
+import { normalizeMessage } from './normalize.js'
 
 const GULPFILES_DIR = `${__dirname}/gulpfiles`
 
+// Almost all unit tests follow the same principle by calling this helper:
+//   - `gulp --gulpfile GULPFILE TASK` is fired using `execa`
+//   - the exit code, stdout and stderr are snapshot
 export const snapshotTest = async function({ t, methodProps, data }) {
   const { exitCode, stdout, stderr } = await fireTask({
     ...methodProps,
@@ -19,17 +23,22 @@ export const snapshotTest = async function({ t, methodProps, data }) {
 }
 
 const fireTask = async function({
+  // Test gulpfile to use
   method,
+  // Gulp task name
   task = 'main',
+  // Triggers `gulpExeca(command, opts)`
   command,
   opts,
+  // With `stream()`, use `gulp.src(..., { buffer })`
   buffer,
+  // See `stream()` gulpfile
   read,
-  execaOpts: { env, ...execaOpts } = {},
+  // `execa` options
+  execaOpts,
 }) {
-  const input = JSON.stringify({ command, opts, buffer, read })
-  const execaEnv = { INPUT: input, CI: '', ...env }
-  const execaOptsA = { reject: false, env: execaEnv, ...execaOpts }
+  const execaOptsA = getExecaOpts({ command, opts, buffer, read, execaOpts })
+
   const { exitCode, stdout, stderr } = await execa(
     `gulp --gulpfile ${GULPFILES_DIR}/${method}.js ${task}`,
     execaOptsA,
@@ -39,30 +48,19 @@ const fireTask = async function({
   return { exitCode, stdout: stdoutA, stderr: stderrA }
 }
 
-// Normalize console messages for testing
-export const normalizeMessage = function(message) {
-  const messageA = stripAnsi(message)
-  const messageB = REPLACEMENTS.reduce(replacePart, messageA)
-  const messageC = messageB.trim()
-  return messageC
-}
+const getExecaOpts = function({
+  command,
+  opts,
+  buffer,
+  read,
+  execaOpts: { env, ...execaOpts } = {},
+}) {
+  // Some information is passed to the gulpfile using the environment variable
+  // `INPUT`, which is a JSON object.
+  const input = JSON.stringify({ command, opts, buffer, read })
 
-const replacePart = function(message, [before, after]) {
-  return message.replace(before, after)
+  // The `verbose` option depends on the `CI` variable. We ensure tests are
+  // predictable regardless on whether they are run in CI.
+  const execaEnv = { INPUT: input, CI: '', ...env }
+  return { reject: false, env: execaEnv, ...execaOpts }
 }
-
-const REPLACEMENTS = [
-  // File paths
-  [/[^ (\n]+\/[^ )\n]+/gu, '/path'],
-  // Stack traces
-  [/ +at [^]+/gu, '    at STACK TRACE'],
-  // Gulp shows file content that triggered an error
-  [/[^]+Error:/gu, ''],
-  // Timestamps
-  [/\[\d{2}:\d{2}:\d{2}\]/gu, '[12:00:00]'],
-  // Duration
-  [/(\d+\.)?\d+ [μnm]s/gu, '100 ms'],
-  // Make snapshots less verbose
-  [/.*Working directory changed.*/gu, ''],
-  [/.*Using gulpfile.*/gu, ''],
-]
