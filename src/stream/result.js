@@ -2,7 +2,7 @@ import { Buffer } from 'buffer'
 
 import { isValidInput } from '../input.js'
 import { execCommand, streamCommand } from '../exec.js'
-import { streamError } from '../error.js'
+import { streamError, throwError } from '../error.js'
 
 // Decides what to do with the child process result according to `opts.result`:
 //  - `save`: pushed to `file.execa`
@@ -49,6 +49,12 @@ const saveResult = async function({ file, file: { execa = [] }, input, opts }) {
 const streamResult = function({ file, input, opts, opts: { from } }) {
   const execaPromise = streamCommand(input, opts)
   const { [from]: stream } = execaPromise
+
+  // When `child_process.spawn()` throws synchronously, e.g. on invalid
+  // option like `{uid: 0.5}`
+  if (stream === undefined) {
+    return execaPromise.catch(throwError)
+  }
 
   // Make stream fail if the command fails
   execaPromise.catch(error => streamError(stream, error))
