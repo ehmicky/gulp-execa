@@ -13,6 +13,8 @@ const replacePart = function(message, [before, after]) {
 }
 
 const REPLACEMENTS = [
+  // Windows
+  [/\r\n/gu, '\n'],
   // File paths
   [/[^ (\n]+\/[^ )\n]+/gu, '/path'],
   // Stack traces
