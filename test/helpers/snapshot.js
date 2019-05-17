@@ -29,6 +29,11 @@ const getOpts = function({ methodProps, data }) {
     return
   }
 
+  // Allows testing for invalid `opts`
+  if (data.opts === false) {
+    return data.opts
+  }
+
   return { ...methodProps.opts, ...data.opts }
 }
 
