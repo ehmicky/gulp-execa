@@ -123,7 +123,7 @@ test('should use the command as task name', async t => {
   const { exitCode, stdout, stderr } = await fireTask({
     method: 'task',
     task: 'nested',
-    command: 'echo test'
+    command: 'echo test',
   })
   // eslint-disable-next-line no-restricted-globals, no-console
   console.log(exitCode)

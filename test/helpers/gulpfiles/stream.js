@@ -40,12 +40,14 @@ export const severalFiles = () =>
     .pipe(through.obj(execVinyl))
 
 export const inputNotFunc = () =>
-  src(DUMMY, { buffer })
-    .pipe(stream(command, opts))
+  src(DUMMY, { buffer }).pipe(stream(command, opts))
 
 export const inputThrows = () =>
-  src(DUMMY, { buffer })
-    .pipe(stream(() => { throw new Error('test') }, opts))
+  src(DUMMY, { buffer }).pipe(
+    stream(() => {
+      throw new Error('test')
+    }, opts),
+  )
 
 const cExecVinyl = async function(file) {
   // When `file.contents` is a stream and an `error` event should be emitted,
