@@ -3,7 +3,6 @@ import test from 'ava'
 import { testEach } from './helpers/test_each/main.js'
 import { snapshotTest } from './helpers/snapshot.js'
 import { METHODS } from './helpers/methods.js'
-import { command } from './helpers/command.js'
 
 testEach(
   METHODS,
@@ -48,13 +47,13 @@ testEach(
   ],
   (suffix, methodProps, data) =>
     test(`Invalid options ${suffix}`, t =>
-      snapshotTest({ t, methodProps, data: { command, ...data } })),
+      snapshotTest({ t, methodProps, data })),
 )
 
 testEach(
   METHODS,
   [
-    { command, opts: { encoding: 'invalid' } },
+    { opts: { encoding: 'invalid' } },
     { command: 'invalid', read: false },
   ],
   (suffix, methodProps, data) =>

@@ -28,7 +28,7 @@ const fireTask = async function({
   // Gulp task name
   task = 'main',
   // Triggers `gulpExeca(command, opts)`
-  command,
+  command = 'echo test',
   opts,
   // With `stream()`, use `gulp.src(..., { buffer })`
   buffer,
