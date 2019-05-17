@@ -26,4 +26,6 @@ const REPLACEMENTS = [
   // Make snapshots less verbose
   [/.*Working directory changed.*/gu, ''],
   [/.*Using gulpfile.*/gu, ''],
+  // Node <12 prints errors differently
+  [/\[ERR_INVALID_ARG_TYPE\] /gu, ''],
 ]
