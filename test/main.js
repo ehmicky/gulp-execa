@@ -109,13 +109,18 @@ const snapshotTest = async function({ t, methodProps, data }) {
 const fireTask = async function({
   method,
   task = 'main',
+  command,
+  opts,
+  buffer,
+  read,
   execaOpts: { env, ...execaOpts } = {},
-  ...input
 }) {
-  const inputA = JSON.stringify(input)
+  const input = JSON.stringify({ command, opts, buffer, read })
+  const execaEnv = { INPUT: input, CI: '', ...env }
+  const execaOptsA = { reject: false, env: execaEnv, ...execaOpts }
   const { exitCode, stdout, stderr } = await execa(
     `gulp --gulpfile ${GULPFILES_DIR}/${method}.js ${task}`,
-    { reject: false, env: { INPUT: inputA, CI: '', ...env }, ...execaOpts },
+    execaOptsA,
   )
   const stdoutA = normalizeMessage(stdout)
   const stderrA = normalizeMessage(stderr)
