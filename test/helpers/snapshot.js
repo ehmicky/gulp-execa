@@ -74,6 +74,6 @@ const getExecaOpts = function({
 
   // The `verbose` option depends on the `CI` variable. We ensure tests are
   // predictable regardless on whether they are run in CI.
-  const execaEnv = { INPUT: input, CI: '', ...env }
+  const execaEnv = { INPUT: input, CI: '1', ...env }
   return { reject: false, env: execaEnv, ...execaOpts }
 }
