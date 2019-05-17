@@ -14,34 +14,41 @@ const { command, opts, buffer, read } = getInput()
 const DUMMY = `${__dirname}/dummy.txt`
 const DUMMY_TWO = `${__dirname}/dummy_two.txt`
 
+// Task used in most tests
 export const main = () =>
   src(DUMMY, { buffer })
     .pipe(stream(() => command, opts))
     .pipe(through.obj(execVinyl))
 
+// `input` should be an async function
 export const inputAsync = () =>
   src(DUMMY, { buffer })
     .pipe(stream(() => Promise.resolve(command), opts))
     .pipe(through.obj(execVinyl))
 
+// `input` should be fired with the Vinyl file
 export const inputFile = () =>
   src(DUMMY, { buffer })
     .pipe(stream(({ path }) => `${command} ${path}`, opts))
     .pipe(through.obj(execVinyl))
 
+// File should be skipped when returning a non-string
 export const inputUndefined = () =>
   src(DUMMY, { buffer })
     .pipe(stream(() => undefined, opts))
     .pipe(through.obj(execVinyl))
 
+// Should allow several files
 export const severalFiles = () =>
   src([DUMMY, DUMMY_TWO], { buffer })
     .pipe(stream(() => command, opts))
     .pipe(through.obj(execVinyl))
 
+// `input` should be a function
 export const inputNotFunc = () =>
   src(DUMMY, { buffer }).pipe(stream(command, opts))
 
+// `input` exceptions should be propagated
 export const inputThrows = () =>
   src(DUMMY, { buffer }).pipe(
     stream(() => {
@@ -57,12 +64,16 @@ const cExecVinyl = async function(file) {
     return file
   }
 
+  // Prints `file.contents` so that unit test can snapshot it
   const string = await stringifyContents(file)
   // eslint-disable-next-line no-restricted-globals, no-console
   console.log(string)
   return file
 }
 
+const execVinyl = callbackify(cExecVinyl)
+
+// Each method must be stringified differently
 const stringifyContents = function({ contents, execa }) {
   if (execa !== undefined) {
     return JSON.stringify(execa, null, 2)
@@ -74,5 +85,3 @@ const stringifyContents = function({ contents, execa }) {
 
   return getStream(contents)
 }
-
-const execVinyl = callbackify(cExecVinyl)
