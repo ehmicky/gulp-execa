@@ -1,5 +1,4 @@
 import { Buffer } from 'buffer'
-import { Stream, Readable } from 'stream'
 
 import { multipleValidOptions } from 'jest-validate'
 
@@ -18,13 +17,20 @@ export const CHILD_PROCESS_OPTS = {
   encoding: 'utf8',
 }
 
+// Hack to make `jest-validate` validate Streams but print them nicely
+const stream = {
+  toJSON() {
+    return 'Stream'
+  }
+}
+
 // Examples for the `execa` options
 export const EXECA_OPTS = {
   extendEnv: true,
   stripFinalNewline: true,
   preferLocal: true,
   localDir: '/home/user',
-  input: multipleValidOptions('input', Buffer.from('input'), new Readable()),
+  input: multipleValidOptions('input', Buffer.from(''), stream),
   reject: true,
   cleanup: true,
   timeout: 5000,
@@ -32,7 +38,7 @@ export const EXECA_OPTS = {
   maxBuffer: 1e7,
   // eslint-disable-next-line no-magic-numbers
   killSignal: multipleValidOptions('SIGTERM', 9),
-  stdin: multipleValidOptions('pipe', 0, new Stream()),
-  stdout: multipleValidOptions('pipe', 1, new Stream()),
-  stderr: multipleValidOptions('pipe', 2, new Stream()),
+  stdin: multipleValidOptions('pipe', 0, stream),
+  stdout: multipleValidOptions('pipe', 1, stream),
+  stderr: multipleValidOptions('pipe', 2, stream),
 }
