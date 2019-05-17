@@ -3,6 +3,7 @@ import test from 'ava'
 import { testEach } from './helpers/test_each/main.js'
 import { snapshotTest } from './helpers/snapshot.js'
 import { METHODS } from './helpers/methods.js'
+import { command } from './helpers/command.js'
 
 testEach(
   METHODS,
@@ -15,35 +16,35 @@ testEach(
 testEach(
   METHODS,
   [
-    { command: 'echo test', opts: false },
-    { command: 'echo test', opts: { cwd: false } },
-    { command: 'echo test', opts: { env: false } },
-    { command: 'echo test', opts: { argv0: false } },
-    { command: 'echo test', opts: { stdio: false } },
-    { command: 'echo test', opts: { detached: '' } },
-    { command: 'echo test', opts: { uid: false } },
-    { command: 'echo test', opts: { gid: false } },
-    { command: 'echo test', opts: { shell: 0 } },
-    { command: 'echo test', opts: { windowsVerbatimArguments: '' } },
-    { command: 'echo test', opts: { windowsHide: '' } },
-    { command: 'echo test', opts: { encoding: false } },
-    { command: 'echo test', opts: { extendEnv: '' } },
-    { command: 'echo test', opts: { stripFinalNewline: '' } },
-    { command: 'echo test', opts: { preferLocal: '' } },
-    { command: 'echo test', opts: { localDir: false } },
-    { command: 'echo test', opts: { input: false } },
-    { command: 'echo test', opts: { reject: '' } },
-    { command: 'echo test', opts: { cleanup: '' } },
-    { command: 'echo test', opts: { timeout: false } },
-    { command: 'echo test', opts: { buffer: '' } },
-    { command: 'echo test', opts: { maxBuffer: false } },
-    { command: 'echo test', opts: { killSignal: false } },
-    { command: 'echo test', opts: { stdin: false } },
-    { command: 'echo test', opts: { stdout: false } },
-    { command: 'echo test', opts: { stderr: false } },
-    { command: 'echo test', opts: { invalid: false } },
-    { command: 'echo test', opts: { result: 'invalid' } },
-    { command: 'echo test', opts: { from: 'invalid' } },
+    { command, opts: false },
+    { command, opts: { cwd: false } },
+    { command, opts: { env: false } },
+    { command, opts: { argv0: false } },
+    { command, opts: { stdio: false } },
+    { command, opts: { detached: '' } },
+    { command, opts: { uid: false } },
+    { command, opts: { gid: false } },
+    { command, opts: { shell: 0 } },
+    { command, opts: { windowsVerbatimArguments: '' } },
+    { command, opts: { windowsHide: '' } },
+    { command, opts: { encoding: false } },
+    { command, opts: { extendEnv: '' } },
+    { command, opts: { stripFinalNewline: '' } },
+    { command, opts: { preferLocal: '' } },
+    { command, opts: { localDir: false } },
+    { command, opts: { input: false } },
+    { command, opts: { reject: '' } },
+    { command, opts: { cleanup: '' } },
+    { command, opts: { timeout: false } },
+    { command, opts: { buffer: '' } },
+    { command, opts: { maxBuffer: false } },
+    { command, opts: { killSignal: false } },
+    { command, opts: { stdin: false } },
+    { command, opts: { stdout: false } },
+    { command, opts: { stderr: false } },
+    { command, opts: { invalid: false } },
+    { command, opts: { result: 'invalid' } },
+    { command, opts: { from: 'invalid' } },
   ],
   (suffix, methodProps, data) =>
     test(`Invalid options ${suffix}`, t =>
@@ -53,7 +54,7 @@ testEach(
 testEach(
   METHODS,
   [
-    { command: 'echo test', opts: { encoding: 'invalid' } },
+    { command, opts: { encoding: 'invalid' } },
     { command: 'invalid', read: false },
   ],
   (suffix, methodProps, data) =>

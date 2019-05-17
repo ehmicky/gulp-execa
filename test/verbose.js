@@ -3,24 +3,25 @@ import test from 'ava'
 import { testEach } from './helpers/test_each/main.js'
 import { snapshotTest } from './helpers/snapshot.js'
 import { METHODS } from './helpers/methods.js'
+import { command } from './helpers/command.js'
 
 testEach(
   METHODS,
   [
-    { command: 'echo test', execaOpts: { env: { CI: '1' } } },
-    { command: 'echo test', opts: { verbose: false } },
-    { command: 'echo test', opts: { verbose: true } },
-    { command: 'echo test', opts: { echo: false, verbose: false } },
-    { command: 'echo test', opts: { echo: false, verbose: true } },
-    { command: 'echo test', opts: { echo: true, verbose: false } },
-    { command: 'echo test', opts: { echo: true, verbose: true } },
+    { command, execaOpts: { env: { CI: '1' } } },
+    { command, opts: { verbose: false } },
+    { command, opts: { verbose: true } },
+    { command, opts: { echo: false, verbose: false } },
+    { command, opts: { echo: false, verbose: true } },
+    { command, opts: { echo: true, verbose: false } },
+    { command, opts: { echo: true, verbose: true } },
     {
-      command: 'echo test',
+      command,
       opts: { verbose: true, stdout: 'pipe', stderr: 'pipe' },
     },
-    { command: 'echo test', opts: { verbose: true, stdio: 'pipe' } },
+    { command, opts: { verbose: true, stdio: 'pipe' } },
     {
-      command: 'echo test',
+      command,
       opts: { verbose: true, stdio: 'pipe', stdout: 'pipe', stderr: 'pipe' },
     },
   ],
