@@ -43,16 +43,50 @@ const DATA = [
   { command: 'echo test', opts: { stdout: false } },
   { command: 'echo test', opts: { stderr: false } },
   { command: 'echo test', opts: { invalid: false } },
+  { command: 'echo test', opts: { result: 'invalid' } },
+  { command: 'echo test', opts: { from: 'invalid' } },
+  { command: 'echo test', opts: { encoding: 'invalid' } },
+  { command: 'invalid', read: false },
   { command: 'echo test' },
+  { command: 'echo test', execaOpts: { env: { CI: '1' } } },
+  { command: 'echo test', opts: { echo: true } },
   { command: 'echo test', opts: { verbose: true } },
+  { command: 'echo test', opts: { echo: false, verbose: true } },
+  { command: 'echo test', opts: { echo: true, verbose: false } },
+  { command: 'echo test', opts: { echo: true, verbose: true } },
+  {
+    command: 'echo test',
+    opts: { verbose: true, stdout: 'pipe', stderr: 'pipe' },
+  },
+  { command: 'echo test', opts: { verbose: true, stdio: 'pipe' } },
+  {
+    command: 'echo test',
+    opts: { verbose: true, stdio: 'pipe', stdout: 'pipe', stderr: 'pipe' },
+  },
 ]
+
+const getSuffix = function(args) {
+  const suffix = args.map(serializeArg).join(' ')
+  return `(${suffix})`
+}
+
+const serializeArg = function(arg) {
+  return inspect(arg, INSPECT_OPTS)
+}
+
+// Make suffix short and on a single line
+const INSPECT_OPTS = {
+  breakLength: Infinity,
+  depth: 1,
+  maxArrayLength: 3,
+  compact: true,
+}
 
 METHODS.forEach(methodProps => {
   DATA.forEach(datum => {
-    test(`[${inspect(methodProps)}] [${inspect(
-      datum,
-      // eslint-disable-next-line max-nested-callbacks
-    )}] Dummy test`, async t => {
+    const suffix = getSuffix([methodProps, datum])
+    // eslint-disable-next-line max-nested-callbacks
+    test(`Dummy test ${suffix}`, async t => {
       const { exitCode, stdout, stderr } = await fireTask({
         ...methodProps,
         ...datum,
@@ -68,11 +102,15 @@ METHODS.forEach(methodProps => {
   })
 })
 
-const fireTask = async function({ method, command, opts, buffer }) {
-  const input = JSON.stringify({ command, opts, buffer })
+const fireTask = async function({
+  method,
+  execaOpts: { env, ...execaOpts } = {},
+  ...input
+}) {
+  const inputA = JSON.stringify(input)
   const { exitCode, stdout, stderr } = await execa(
     `gulp --gulpfile ${GULPFILES_DIR}/${method}.js main`,
-    { reject: false, env: { INPUT: input } },
+    { reject: false, env: { INPUT: inputA, CI: '', ...env }, ...execaOpts },
   )
   const stdoutA = normalizeMessage(stdout)
   const stderrA = normalizeMessage(stderr)

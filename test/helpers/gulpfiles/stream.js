@@ -9,17 +9,25 @@ import { stream } from '../../../src/main.js'
 
 import { getInput } from './input.js'
 
-const { command, opts, buffer } = getInput()
+const { command, opts, buffer, read } = getInput()
 
 export const main = () =>
   src(__filename, { buffer })
     .pipe(stream(() => command, opts))
     .pipe(through.obj(execVinyl))
 
-const cExecVinyl = async function({ contents, execa }) {
-  const string = await stringifyContents({ contents, execa })
+const cExecVinyl = async function(file) {
+  // When `file.contents` is a stream and an `error` event should be emitted,
+  // we should not read the stream with `get-stream`. Otherwise Gulp will
+  // consider the stream finished and not error.
+  if (!read) {
+    return file
+  }
+
+  const string = await stringifyContents(file)
   // eslint-disable-next-line no-restricted-globals, no-console
   console.log(string)
+  return file
 }
 
 const stringifyContents = function({ contents, execa }) {
