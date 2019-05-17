@@ -14,7 +14,7 @@ testEach(
 
 testEach(
   METHODS,
-  [{ opts: { encoding: 'invalid' } }, { command: 'invalid', read: false }],
+  [{ opts: { uid: 0.5 } }, { command: 'invalid', read: false }],
   (suffix, methodProps, data) =>
     test(`Errored command ${suffix}`, t =>
       snapshotTest({ t, methodProps, data })),
