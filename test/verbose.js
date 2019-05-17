@@ -7,7 +7,6 @@ import { METHODS } from './helpers/methods.js'
 testEach(
   METHODS,
   [
-    { execaOpts: { env: { CI: '1' } } },
     { opts: { verbose: false } },
     { opts: { verbose: true } },
     { opts: { echo: false, verbose: false } },

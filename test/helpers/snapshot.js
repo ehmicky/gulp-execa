@@ -72,8 +72,6 @@ const getExecaOpts = function({
   // `INPUT`, which is a JSON object.
   const input = JSON.stringify({ command, opts, buffer, read })
 
-  // The `verbose` option depends on the `CI` variable. We ensure tests are
-  // predictable regardless on whether they are run in CI.
-  const execaEnv = { INPUT: input, CI: '', ...env }
+  const execaEnv = { INPUT: input, GULP_EXECA_TEST: 'true', ...env }
   return { reject: false, env: execaEnv, ...execaOpts }
 }
