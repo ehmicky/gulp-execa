@@ -27,5 +27,5 @@ const REPLACEMENTS = [
   [/.*Working directory changed.*/gu, ''],
   [/.*Using gulpfile.*/gu, ''],
   // Node <12 prints errors differently
-  [/\[ERR_INVALID_ARG_TYPE\] /gu, ''],
+  [/[^]*uid" (property )?must be[^]*/gu, 'invalid options.uid'],
 ]
