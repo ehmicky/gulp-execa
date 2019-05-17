@@ -1,5 +1,3 @@
-import { env } from 'process'
-
 import { validate } from 'jest-validate'
 import isCi from 'is-ci'
 
@@ -47,7 +45,7 @@ const validateOpts = function({ opts }) {
 }
 
 const DEFAULT_OPTS = {
-  verbose: isCi && env.GULP_EXECA_TEST !== 'true',
+  verbose: isCi,
 }
 
 const EXAMPLE_OPTS = {
