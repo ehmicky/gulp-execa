@@ -32,7 +32,7 @@ export const EXECA_OPTS = {
   maxBuffer: 1e7,
   // eslint-disable-next-line no-magic-numbers
   killSignal: multipleValidOptions('SIGTERM', 9),
-  stdin: multipleValidOptions('stdin', 0, new Stream()),
-  stdout: multipleValidOptions('stdout', 1, new Stream()),
-  stderr: multipleValidOptions('stderr', 2, new Stream()),
+  stdin: multipleValidOptions('pipe', 0, new Stream()),
+  stdout: multipleValidOptions('pipe', 1, new Stream()),
+  stderr: multipleValidOptions('pipe', 2, new Stream()),
 }
