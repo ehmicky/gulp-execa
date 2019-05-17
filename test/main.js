@@ -68,14 +68,14 @@ testEach(METHODS, [
     command: 'echo test',
     opts: { verbose: true, stdio: 'pipe', stdout: 'pipe', stderr: 'pipe' },
   },
-], (suffix, methodProps, datum) => {
-  test(`Dummy test ${suffix}`, t => snapshotTest({ t, methodProps, datum }))
+], (suffix, methodProps, data) => {
+  test(`Dummy test ${suffix}`, t => snapshotTest({ t, methodProps, data }))
 })
 
 test('should use the command as task name', t => snapshotTest({
   t,
   methodProps: { method: 'task' },
-  datum: { task: 'nested', command: 'echo test' },
+  data: { task: 'nested', command: 'echo test' },
 }))
 
 testEach(STREAM_METHODS, [
@@ -87,15 +87,15 @@ testEach(STREAM_METHODS, [
   { task: 'severalFiles', command: 'echo test' },
   { command: 'echo test', opts: { encoding: 'utf8' } },
   { command: 'echo test', opts: { stripFinalNewline: true } },
-], (suffix, methodProps, datum) => {
-  test(`Dummy test ${suffix}`, t => snapshotTest({ t, methodProps, datum }))
+], (suffix, methodProps, data) => {
+  test(`Dummy test ${suffix}`, t => snapshotTest({ t, methodProps, data }))
 })
 
-const snapshotTest = async function({ t, methodProps, datum }) {
+const snapshotTest = async function({ t, methodProps, data }) {
   const { exitCode, stdout, stderr } = await fireTask({
     ...methodProps,
-    ...datum,
-    opts: { ...methodProps.opts, ...datum.opts },
+    ...data,
+    opts: { ...methodProps.opts, ...data.opts },
   })
   // eslint-disable-next-line no-restricted-globals, no-console
   console.log(exitCode)
