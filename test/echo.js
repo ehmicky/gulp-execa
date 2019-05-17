@@ -7,10 +7,7 @@ import { command } from './helpers/command.js'
 
 testEach(
   METHODS,
-  [
-    { command, opts: { echo: false } },
-    { command, opts: { echo: true } },
-  ],
+  [{ command, opts: { echo: false } }, { command, opts: { echo: true } }],
   (suffix, methodProps, data) =>
     test(`'echo' option ${suffix}`, t =>
       snapshotTest({ t, methodProps, data })),
