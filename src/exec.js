@@ -31,6 +31,9 @@ export const streamCommand = function(input, opts) {
   try {
     return execa(input, opts)
   } catch (error) {
+    // At the moment, `execa` never throws synchronously.
+    // This is just a safety catch in case it has a bug.
+    // istanbul ignore next
     throwError(error)
   }
 }
