@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer'
+
 import { isValidInput } from '../input.js'
 import { execCommand, streamCommand } from '../exec.js'
 import { streamError } from '../error.js'
@@ -56,7 +58,10 @@ const streamResult = function({ file, input, opts, opts: { from } }) {
 }
 
 const bufferResult = async function({ file, input, opts, opts: { from } }) {
-  const { [from]: buffer } = await execCommand(input, opts)
+  const { [from]: output } = await execCommand(input, opts)
+  // Stream output can be either string or buffer depending on `opts.encoding`
+  // However `file.contents` cannot be a string.
+  const buffer = Buffer.isBuffer(output) ? output : Buffer.from(output)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.contents = buffer
 }
