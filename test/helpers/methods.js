@@ -18,8 +18,4 @@ export const STREAM_METHODS = [
   { suffix: 'stream-save', method: 'stream', opts: { result: 'save' } },
 ]
 
-export const METHODS = [
-  ...EXEC_METHODS,
-  ...TASK_METHODS,
-  ...STREAM_METHODS,
-]
+export const METHODS = [...EXEC_METHODS, ...TASK_METHODS, ...STREAM_METHODS]
