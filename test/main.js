@@ -2,18 +2,7 @@ import test from 'ava'
 
 import { testEach } from './helpers/test_each/main.js'
 import { snapshotTest } from './helpers/snapshot.js'
-
-const STREAM_METHODS = [
-  { suffix: 'stream-buffer', method: 'stream' },
-  { suffix: 'stream-stream', method: 'stream', buffer: false },
-  { suffix: 'stream-save', method: 'stream', opts: { result: 'save' } },
-]
-
-const METHODS = [
-  { suffix: 'exec', method: 'exec' },
-  { suffix: 'task', method: 'task' },
-  ...STREAM_METHODS,
-]
+import { METHODS, STREAM_METHODS } from './helpers/methods.js'
 
 testEach(METHODS, [
   { command: true },
