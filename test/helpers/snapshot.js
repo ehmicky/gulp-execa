@@ -7,7 +7,7 @@ const GULPFILES_DIR = `${__dirname}/gulpfiles`
 // Almost all unit tests follow the same principle by calling this helper:
 //   - `gulp --gulpfile GULPFILE TASK` is fired using `execa`
 //   - the exit code, stdout and stderr are snapshot
-export const snapshotTest = async function({ t, methodProps, data }) {
+export const snapshotTest = async function({ t, methodProps = {}, data }) {
   const { exitCode, stdout, stderr } = await fireTask({
     ...methodProps,
     ...data,
