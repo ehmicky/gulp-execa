@@ -8,6 +8,9 @@ import { CHILD_PROCESS_OPTS, EXECA_OPTS } from './upstream.js'
 import { validateCustom } from './custom.js'
 import { addVerbose } from './verbose.js'
 
+// eslint-disable-next-line no-shadow
+const { hasOwnProperty } = Object.prototype
+
 // Parse options
 export const parseOpts = function({
   opts = {},
@@ -20,7 +23,7 @@ export const parseOpts = function({
 
   const exampleConfig = pickBy(
     { ...EXAMPLE_OPTS, ...defaultOpts },
-    (value, key) => forcedOpts[key] === undefined,
+    (value, key) => !hasOwnProperty.call(forcedOpts, key),
   )
 
   kValidate(optsA, { exampleConfig })
