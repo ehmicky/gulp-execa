@@ -21,7 +21,7 @@ export const CHILD_PROCESS_OPTS = {
 const stream = {
   toJSON() {
     return 'Stream'
-  }
+  },
 }
 
 // Examples for the `execa` options
