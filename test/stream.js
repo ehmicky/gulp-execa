@@ -14,6 +14,7 @@ testEach(
     { task: 'inputFile', command: 'echo' },
     { task: 'inputUndefined' },
     { task: 'severalFiles' },
+    { task: 'severalTimes' },
     {},
     { opts: { encoding: 'utf8' } },
     { opts: { stripFinalNewline: true } },

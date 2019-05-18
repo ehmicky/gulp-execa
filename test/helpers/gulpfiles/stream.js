@@ -44,6 +44,13 @@ export const severalFiles = () =>
     .pipe(stream(() => command, opts))
     .pipe(through.obj(execVinyl))
 
+// Should allow doing several times
+export const severalTimes = () =>
+  src(DUMMY, { buffer })
+    .pipe(stream(() => command, opts))
+    .pipe(stream(() => command, opts))
+    .pipe(through.obj(execVinyl))
+
 // `input` should be a function
 export const inputNotFunc = () =>
   src(DUMMY, { buffer }).pipe(stream(command, opts))
