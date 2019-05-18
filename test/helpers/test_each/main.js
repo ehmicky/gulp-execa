@@ -9,7 +9,7 @@ export const testEach = function(...inputArgs) {
 
   const args = getArgs(iterables)
 
-  const suffixes = getSuffixes(iterables)
+  const suffixes = getSuffixes(args)
 
   const results = args.map((values, index) => func(suffixes[index], ...values))
 
