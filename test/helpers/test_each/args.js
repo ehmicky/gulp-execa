@@ -25,13 +25,15 @@ const getIndex = function(value, index) {
 
 // If an argument is a function, its return value will be used instead.
 // This can be used to generate random input for example (fuzzy testing).
-const invokeArgs = function(eachArgs) {
-  return eachArgs.map(invokeArg)
+// It will be fired with all the arguments of this iteration. This allows for
+// arguments to be computed based on the value of other arguments.
+const invokeArgs = function(args) {
+  return args.map(invokeArg)
 }
 
-const invokeArg = function(arg) {
+const invokeArg = function(arg, index, args) {
   if (typeof arg === 'function') {
-    return arg()
+    return arg(...args)
   }
 
   return arg
