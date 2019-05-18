@@ -40,7 +40,7 @@ const initSave = function({ file, file: { execa }, resultOpt }) {
   file.execa = []
 }
 
-const saveResult = async function({ file, file: { execa = [] }, input, opts }) {
+const saveResult = async function({ file, file: { execa }, input, opts }) {
   const execaResult = await execCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.execa = [...execa, execaResult]
