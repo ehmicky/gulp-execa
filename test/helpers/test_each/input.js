@@ -11,7 +11,9 @@ export const parseInput = function(inputArgs) {
 
 const validateIterable = function(iterable) {
   if (iterable[Symbol.iterator] === undefined && !isRepeat(iterable)) {
-    throw new TypeError(`Argument must be an iterable or a positive integer: ${iterable}`)
+    throw new TypeError(
+      `Argument must be an iterable or a positive integer: ${iterable}`,
+    )
   }
 }
 
