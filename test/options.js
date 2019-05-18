@@ -42,9 +42,6 @@ testEach(
       snapshotTest({ t, methodProps, data })),
 )
 
-testEach(
-  METHODS,
-  [{}, { opts: Object.create(null) }],
-  (suffix, methodProps, data) =>
-    test(`No options ${suffix}`, t => snapshotTest({ t, methodProps, data })),
+testEach(METHODS, [{}, { opts: {} }], (suffix, methodProps, data) =>
+  test(`No options ${suffix}`, t => snapshotTest({ t, methodProps, data })),
 )
