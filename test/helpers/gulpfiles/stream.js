@@ -29,7 +29,7 @@ export const inputAsync = () =>
 // `input` should be fired with the Vinyl file
 export const inputFile = () =>
   src(DUMMY, { buffer })
-    .pipe(stream(({ path }) => `${command} ${path}`, opts))
+    .pipe(stream(({ basename }) => `${command} ${basename}`, opts))
     .pipe(through.obj(execVinyl))
 
 // File should be skipped when returning a non-string
