@@ -1,10 +1,26 @@
 import { fastCartesian } from './fast_cartesian.js'
+import { isRepeat } from './input.js'
 
 // Retrieve arguments passed to the main function for each iteration
 export const getArgs = function(iterables) {
-  const args = fastCartesian(...iterables)
+  const iterablesA = iterables.map(handleRepeat)
+  const args = fastCartesian(...iterablesA)
   const argsA = args.map(invokeArgs)
   return argsA
+}
+
+// Using an integer is a shortcut for [0, 1, ...]
+// This can be used together with functions to do fuzz testing.
+const handleRepeat = function(iterable) {
+  if (!isRepeat(iterable)) {
+    return iterable
+  }
+
+  return Array.from({ length: iterable }, getIndex)
+}
+
+const getIndex = function(value, index) {
+  return index
 }
 
 // If an argument is a function, its return value will be used instead.
