@@ -9,10 +9,10 @@
 
 Command execution in Gulp.js.
 
-As opposed to
-[`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)
-or to other plugins, `gulp-execa` uses the popular
-[`execa`](https://github.com/sindresorhus/execa) library:
+As opposed to other plugins or
+[`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback),
+`gulp-execa` uses the popular [`execa`](https://github.com/sindresorhus/execa)
+library:
 
 - [Better Windows support](https://github.com/IndigoUnited/node-cross-spawn#why),
   including [shebangs](<https://en.wikipedia.org/wiki/Shebang_(Unix)>).
