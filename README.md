@@ -30,6 +30,8 @@ mode, unlike similar libraries:
 
 Example gulpfile:
 
+<!-- eslint-disable func-names -->
+
 ```js
 const { task, exec, stream } = require('gulp-execa')
 const { src, dest } = require('gulp')
