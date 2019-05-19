@@ -48,3 +48,9 @@ module.exports.sort = function() {
     .pipe(dest('sorted'))
 }
 ```
+
+# Install
+
+```
+npm install -D gulp-execa
+```
