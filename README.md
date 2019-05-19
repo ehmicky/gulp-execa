@@ -54,3 +54,19 @@ module.exports.sort = function() {
 ```
 npm install -D gulp-execa
 ```
+
+# Methods
+
+## task(command, [options])
+
+Returns a Gulp task that executes `command`.
+
+## exec(command, [options])
+
+Executes `command` and returns a promise.
+
+## stream(function, [options])
+
+Returns a stream that executes a `command` on each input file. `function` must
+take the [file](https://gulpjs.com/docs/en/api/vinyl#instance-properties) as
+argument and return a `command`.
