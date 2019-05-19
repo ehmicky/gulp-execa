@@ -11,7 +11,7 @@ Command execution in Gulp.js.
 
 As opposed to
 [`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)
-or other plugins, `gulp-execa` uses the popular
+or to other plugins, `gulp-execa` uses the popular
 [`execa`](https://github.com/sindresorhus/execa) library:
 
 - [Better Windows support](https://github.com/IndigoUnited/node-cross-spawn#why),
@@ -21,14 +21,14 @@ or other plugins, `gulp-execa` uses the popular
 - Descriptive errors and configurable verbosity.
 - Interleaved stdout/stderr.
 
-Commands can be executed either directly or inside a files stream. Unlike
-similar libraries, in streaming mode:
+Commands can be executed either directly or inside a files stream. In streaming
+mode, unlike similar libraries:
 
 - commands are run [in parallel](https://github.com/almost/through2-concurrent),
   not [serially](https://github.com/rvagg/through2).
 - output can be saved either in files or in variables.
 
-Example Gulpfile:
+Example gulpfile:
 
 ```js
 const { task, exec, stream } = require('gulp-execa')
