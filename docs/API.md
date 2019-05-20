@@ -146,6 +146,25 @@ _Type_: `string`<br> _Value_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_:
 
 Which output stream to use with [`result: 'replace'`](#result).
 
+```js
+const { src } = require('gulp')
+const { stream } = require('gulp-execa')
+const through = require('through2')
+
+module.exports.default = () =>
+  src('**/*')
+    // Prints the number of lines of each file, including `stderr`
+    .pipe(
+      stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),
+    )
+    .pipe(
+      through.obj((file, encoding, func) => {
+        console.log(file.contents.toString())
+        func(null, file)
+      }),
+    )
+```
+
 #### maxConcurrency
 
 _Type_: `integer`<br> _Default_: `100`

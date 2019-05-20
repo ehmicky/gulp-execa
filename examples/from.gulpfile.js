@@ -17,7 +17,9 @@ const through = require('through2')
 module.exports.default = () =>
   src('**/*')
     // Prints the number of lines of each file, including `stderr`
-    .pipe(stream(({ path }) => `wc -l ${path}`, { from: 'all' }))
+    .pipe(
+      stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),
+    )
     .pipe(
       through.obj((file, encoding, func) => {
         console.log(file.contents.toString())
