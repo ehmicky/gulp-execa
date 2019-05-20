@@ -120,8 +120,9 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 
 ### from
 
-_Type_: `string`<br> _Value_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_:
-`stdout`
+_Type_: `string`<br> _Value_: `'stdout'`, `'stderr'` or `'all'`
+
+_Default_: `'stdout'`
 
 Which output stream to use with [`result: 'replace'`](#result).
 
