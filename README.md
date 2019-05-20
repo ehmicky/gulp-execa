@@ -36,8 +36,8 @@ Example `gulpfile.js`:
 <!-- eslint-disable func-names -->
 
 ```js
-const { task, exec, stream } = require('gulp-execa')
 const { src, dest } = require('gulp')
+const { task, exec, stream } = require('gulp-execa')
 
 module.exports.audit = task('npm audit')
 
@@ -166,7 +166,8 @@ _Type_: `boolean`<br> _Default_: `true` when
 [in CI](https://github.com/watson/is-ci) and
 [`stream()`](#streamfunction-options) is not used. `false` otherwise.
 
-Whether both the `command` and its output should be printed on the console.
+Whether both the `command` and its output (`stdout`/`stderr`) should be printed
+on the console.
 <br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#verbose).
 
 ## result

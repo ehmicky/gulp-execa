@@ -19,10 +19,10 @@ Executes `command`. The return value is both a promise and a
 
 The promise will be resolved with the
 [command result](https://github.com/sindresorhus/execa#childprocessresult). If
-the command failed, the promise will be rejected with an
-[informative error](https://github.com/sindresorhus/execa#childprocessresult).
-If the [`reject: false`](#reject) option was used, the promise will be resolved
-with that error instead.
+the command failed, the promise will be rejected with a nice
+[error](https://github.com/sindresorhus/execa#childprocessresult). If the
+[`reject: false`](#reject) option was used, the promise will be resolved with
+that error instead.
 
 <!-- eslint-disable func-names -->
 
@@ -49,8 +49,8 @@ Returns a stream that executes a `command` on each input file.
 <!-- eslint-disable func-names -->
 
 ```js
-const { stream } = require('gulp-execa')
 const { src, dest } = require('gulp')
+const { stream } = require('gulp-execa')
 
 module.exports.sort = () =>
   src('**/*.txt')
@@ -93,7 +93,8 @@ _Type_: `boolean`<br> _Default_: `true` when
 [in CI](https://github.com/watson/is-ci) and
 [`stream()`](#streamfunction-options) is not used. `false` otherwise.
 
-Whether both the `command` and its output should be printed on the console.
+Whether both the `command` and its output (`stdout`/`stderr`) should be printed
+on the console.
 
 ```bash
 $ gulp audit
