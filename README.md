@@ -18,9 +18,14 @@ this uses [`execa`](https://github.com/sindresorhus/execa) which provides:
 - Faster and more secure commands, since [no shell is used by default](#command)
 - Execution of
   [locally installed binaries](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#preferlocal)
-- [Descriptive errors](https://github.com/sindresorhus/execa#childprocessresult)
-  and [configurable verbosity](#echo)
 - [Interleaved](https://github.com/sindresorhus/execa#all-1) `stdout`/`stderr`
+
+`gulp-execa` adds Gulp-specific features to
+[`execa`](https://github.com/sindresorhus/execa) including:
+
+- a [task shortcut syntax](#taskcommand-options)
+- configurable [verbosity](#echo)
+- [better errors](https://github.com/gulpjs/plugin-error)
 
 Commands can be executed either directly or inside a
 [files stream](https://gulpjs.com/docs/en/api/src). In
