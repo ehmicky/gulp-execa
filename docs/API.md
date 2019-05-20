@@ -76,8 +76,8 @@ _Type_: `object`
 
 #### echo
 
-_Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskfunction-options)
-and [`exec()`](#execfunction-options), `false` for
+_Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskcommand-options) and
+[`exec()`](#execcommand-options), `false` for
 [`stream()`](#streamfunction-options).
 
 Whether the `command` should be printed on the console.
@@ -92,8 +92,8 @@ $ gulp audit
 
 #### verbose
 
-_Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskfunction-options)
-and [`exec()`](#execfunction-options), `false` for
+_Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskcommand-options) and
+[`exec()`](#execcommand-options), `false` for
 [`stream()`](#streamfunction-options).
 
 Whether both the `command` and its output (`stdout`/`stderr`) should be printed
