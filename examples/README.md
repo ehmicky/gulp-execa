@@ -22,3 +22,4 @@ They can also be run directly
 
 - [`echo`](echo.gulpfile.js)
 - [`verbose`](verbose.gulpfile.js)
+- [`maxConcurrency`](max_concurrency.gulpfile.js)
