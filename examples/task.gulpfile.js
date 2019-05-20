@@ -12,4 +12,4 @@ require('./utils.js')
 
 const { task } = require('gulp-execa')
 
-module.exports.default = task('npm --version', { verbose: true })
+module.exports.default = task('npm --version')
