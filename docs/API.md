@@ -60,8 +60,8 @@ module.exports.sort = function() {
 ```
 
 Each file in the stream will spawn a separate process. This can consume lots of
-resources, so you should only use this method when there are no alternatives
-such as:
+resources so you should only use this method when there are no alternatives such
+as:
 
 - firing a command programmatically instead of spawning a child process
 - passing several files, a directory or a globbing pattern as arguments to the

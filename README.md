@@ -10,7 +10,7 @@
 Command execution in [Gulp.js](https://gulpjs.com).
 
 As opposed to
-[`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback),
+[`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)
 or to other plugins, `gulp-execa` uses
 [`execa`](https://github.com/sindresorhus/execa) providing:
 
@@ -77,13 +77,13 @@ take a [file](https://gulpjs.com/docs/en/api/vinyl#instance-properties) as
 argument and return a `command`.
 
 Each file in the stream will spawn a separate process. This can consume lots of
-resources, so you should only use this method when there are no alternatives.
+resources so you should only use this method when there are no alternatives.
 
 [Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#streamfunction-options).
 
 # Command
 
-By default, no shell interpreter (like Bash or `cmd.exe`) is used. This means
+By default no shell interpreter (like Bash or `cmd.exe`) is used. This means
 `command` must be just the program and its arguments. No escaping/quoting is
 needed, except for significant spaces (with a backslash).
 
@@ -179,21 +179,17 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 - `save`: [be pushed](https://github.com/sindresorhus/execa#childprocessresult)
   to the `file.execa` array property
 
-[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#result).
-
 ## from
 
 _Type_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_: `'stdout'`
 
 Which output stream to use with [`result: 'replace'`](#result).
-<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#from).
 
 ## maxConcurrency
 
 _Type_: `integer`<br> _Default_: `100`
 
 How many commands to run in parallel at once.
-<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#maxconcurrency).
 
 # See also
 
