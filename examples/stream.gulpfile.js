@@ -10,17 +10,10 @@
 // Ignore the following line: this is only needed for internal purposes.
 require('./utils.js')
 
-const { src } = require('gulp')
+const { src, dest } = require('gulp')
 const { stream } = require('gulp-execa')
-const through = require('through2')
 
 module.exports.default = () =>
   src('**/*')
-    // Prints the number of lines of each file
-    .pipe(stream(({ path }) => `wc -l ${path}`))
-    .pipe(
-      through.obj((file, encoding, func) => {
-        console.log(file.contents.toString())
-        func(null, file)
-      }),
-    )
+    .pipe(stream(({ path }) => `sort ${path}`))
+    .pipe(dest('sorted'))
