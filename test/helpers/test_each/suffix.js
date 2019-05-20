@@ -1,6 +1,10 @@
 import { serializeArg } from './serialize.js'
 
 // Retrieve unique suffixes for each iteration
+// To customize suffixes of a specific iterable, add `suffix` properties to it,
+// for example with `Array.map()`.
+// To customize suffixes of all iterables, generate it inside the iterated value
+// using all values.
 export const getSuffixes = function(args) {
   return args.map(getSuffix).map(fixDuplicate)
 }
