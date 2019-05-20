@@ -176,7 +176,7 @@ and [`exec()`](#execfunction-options), `false` for
 [`stream()`](#streamfunction-options).
 
 Whether both the `command` and its output (`stdout`/`stderr`) should be printed
-on the console.
+on the console instead of being returned in JavaScript.
 <br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#verbose).
 
 ## result
