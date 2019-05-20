@@ -1,6 +1,6 @@
 import { parseInput } from './input.js'
 import { getArgs } from './args.js'
-import { getSuffixes } from './suffix.js'
+import { getSuffixes } from './title.js'
 
 // Repeat a function with a combination of arguments.
 // Meant for test-driven development.
