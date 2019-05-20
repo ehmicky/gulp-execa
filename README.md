@@ -148,3 +148,32 @@ Which output stream to use with [`result: 'replace'`](#result).
 _Type_: `integer`<br> _Default_: `100`
 
 How many commands can be run in parallel at once.
+
+# Support
+
+If you found a bug or would like a new feature, _don't hesitate_ to
+[submit an issue on GitHub](../../issues).
+
+For other questions, feel free to
+[chat with us on Gitter](https://gitter.im/ehmicky/gulp-execa).
+
+Everyone is welcome regardless of personal background. We enforce a
+[Code of conduct](CODE_OF_CONDUCT.md) in order to promote a positive and
+inclusive environment.
+
+# Contributing
+
+This project was made with ❤️. The simplest way to give back is by starring and
+sharing it online.
+
+If the documentation is unclear or has a typo, please click on the page's `Edit`
+button (pencil icon) and suggest a correction.
+
+If you would like to help us fix a bug or add a new feature, please check our
+[guidelines](CONTRIBUTING.md). Pull requests are welcome!
+
+Thanks go to our wonderful contributors:
+
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- prettier-ignore -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
