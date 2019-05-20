@@ -88,12 +88,21 @@ can still opt-in to using them with the `shell` option.
 
 ```js
 const { series } = require('gulp')
+const { writeFileStream } = require('fs')
 
 // Wrong
 module.exports.check = task('npm audit && npm outdated')
 
 // Correct
 module.exports.check = series(task('npm audit'), task('npm outdated'))
+
+// Wrong
+module.exports.install = task('npm install > log.txt')
+
+// Correct
+module.exports.install = task('npm install', {
+  stdout: writeFileStream('log.txt'),
+})
 ```
 
 # Options
