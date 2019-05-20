@@ -101,6 +101,7 @@ can still opt-in to using them with the
 
 ```js
 const { writeFileStream } = require('fs')
+
 const { series } = require('gulp')
 
 // Wrong

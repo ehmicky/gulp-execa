@@ -11,8 +11,8 @@
 require('./utils.js')
 
 const { src } = require('gulp')
-const { stream } = require('gulp-execa')
 const through = require('through2')
+const { stream } = require('gulp-execa')
 
 module.exports.default = () =>
   src('*.js')
