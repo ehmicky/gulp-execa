@@ -189,12 +189,15 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 - `save`: [be pushed](https://github.com/sindresorhus/execa#childprocessresult)
   to the `file.execa` array property
 
+[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#result).
+
 ## from
 
 _Type_: `string`<br> _Value_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_:
 `'stdout'`
 
 Which output stream to use with [`result: 'replace'`](#result).
+<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#from).
 
 ## maxConcurrency
 
