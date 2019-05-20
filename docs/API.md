@@ -67,6 +67,9 @@ such as:
 - passing several files, a directory or a globbing pattern as arguments to the
   command
 
+The [`verbose`](#verbose), [`stdout`](#stdout), [`stderr`](#stderr) and
+[`stdio`](#stdio) options cannot be used with this method.
+
 # Options
 
 _Type_: `object`
@@ -77,13 +80,34 @@ _Type_: `boolean`<br> _Default_: same as [`verbose`](#verbose)
 
 Whether the `command` should be printed on the console.
 
+```bash
+$ gulp audit
+[13:09:39] Using gulpfile ~/code/gulpfile.js
+[13:09:39] Starting 'audit'...
+[13:09:39] [gulp-execa] npm audit
+[13:09:44] Finished 'audit' after 4.96 s
+```
+
 ### verbose
 
 _Type_: `boolean`<br> _Default_: `true` when run
-[in CI](https://github.com/watson/is-ci) and not with
+[in CI](https://github.com/watson/is-ci) but not with
 [`stream()`](#streamfunction-options). `false` otherwise.
 
 Whether the `command` and its output should be printed on the console.
+
+```bash
+$ gulp audit
+[13:09:39] Using gulpfile ~/code/gulpfile.js
+[13:09:39] Starting 'audit'...
+[13:09:39] [gulp-execa] npm audit
+
+                        == npm audit security report ===
+
+found 0 vulnerabilities
+ in 27282 scanned packages
+[13:09:44] Finished 'audit' after 4.96 s
+```
 
 ### result
 
@@ -92,7 +116,8 @@ _Type_: `'replace'` or `'save'`<br> _Default_: `'replace'`
 With [`stream()`](#streamfunction-options), whether the command result should:
 
 - `replace` the file's contents
-- `save`: be pushed to the file's array property `file.execa`
+- `save`: [be pushed](https://github.com/sindresorhus/execa#childprocessresult)
+  to the `file.execa` array property
 
 ### from
 
@@ -104,7 +129,7 @@ Which output stream to use with [`result: 'replace'`](#result).
 
 _Type_: `integer`<br> _Default_: `100`
 
-How many commands can be run in parallel at once.
+How many commands to run in parallel at once.
 
 ## Options from `execa`
 
@@ -115,39 +140,42 @@ used.
 
 _Type_: `boolean`<br> _Default_: `true`
 
-Kill the spawned process when the parent process exits unless either: - the
-spawned process is
-[`detached`](https://nodejs.org/api/child_process.html#child_process_options_detached) -
-the parent process is terminated abruptly, for example, with `SIGKILL` as
-opposed to `SIGTERM` or a normal exit
+Kill the spawned process when the parent process exits unless either:
+
+- the spawned process is
+  [`detached`](https://nodejs.org/api/child_process.html#child_process_options_detached)
+- the parent process is terminated abruptly, for example, with `SIGKILL` as
+  opposed to `SIGTERM` or a normal exit
 
 ### preferLocal
 
 _Type_: `boolean`<br> _Default_: `true`
 
 Prefer locally installed binaries when looking for a binary to execute.<br> If
-you `$ npm install foo`, you can then `execa('foo')`.
+you `npm install foo`, you can then `execa('foo')`.
 
 ### localDir
 
 _Type_: `string`<br> _Default_: `process.cwd()`
 
-Preferred path to find locally installed binaries in (use with `preferLocal`).
+Preferred path to find locally installed binaries in (use with
+[`preferLocal`](#preferLocal)).
 
 ### buffer
 
 _Type_: `boolean`<br> _Default_: `true`
 
 Buffer the output from the spawned process. When buffering is disabled you must
-consume the output of the `stdout` and `stderr` streams because the promise will
-not be resolved/rejected until they have completed.
+consume the output of the
+[`stdout`](https://github.com/sindresorhus/execa#stdout) and
+[`stderr`](https://github.com/sindresorhus/execa#stderr) streams because the
+promise will not be resolved/rejected until they have completed.
 
 ### input
 
 _Type_: `string | Buffer | stream.Readable`
 
-Write some input to the `stdin` of your binary.<br> Streams are not allowed when
-using the synchronous methods.
+Write some input to the `stdin` of your binary.
 
 ### stdin
 
@@ -189,11 +217,11 @@ the output.
 _Type_: `boolean`<br> _Default_: `true`
 
 Set to `false` if you don't want to extend the environment variables when
-providing the `env` property.
+providing the [`env` option](#env).
 
 ## Options from `child_process`
 
-All options of both
+All options from both
 [`child_process.spawn()`](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options)
 and
 [`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)
@@ -210,14 +238,14 @@ Current working directory of the child process.
 _Type_: `object`<br> _Default_: `process.env`
 
 Environment key-value pairs. Extends automatically from `process.env`. Set
-`extendEnv` to `false` if you don't want this.
+[`extendEnv`](#extendenv) to `false` if you don't want this.
 
 ### argv0
 
 _Type_: `string`
 
 Explicitly set the value of `argv[0]` sent to the child process. This will be
-set to `command` or `file` if not specified.
+set to the `command`'s main file if not specified.
 
 ### stdio
 
@@ -231,7 +259,7 @@ configuration.
 
 _Type_: `boolean`
 
-Prepare child to run independently of its parent process. Specific behavior
+Run child independently of its parent process. Specific behavior
 [depends on the platform](https://nodejs.org/api/child_process.html#child_process_options_detached).
 
 ### uid
@@ -256,9 +284,9 @@ should understand the `-c` switch on UNIX or `/d /s /c` on Windows.
 
 We recommend against using this option since it is:
 
-- not cross-platform, encouraging shell-specific syntax.
-- slower, because of the additional shell interpretation.
-- unsafe, potentially allowing command injection.
+- not cross-platform, encouraging shell-specific syntax
+- slower, because of the additional shell interpretation
+- unsafe, potentially allowing command injection
 
 ### encoding
 
@@ -266,15 +294,15 @@ _Type_: `string | null`<br> _Default_: `utf8`
 
 Specify the character encoding used to decode the `stdout` and `stderr` output.
 If set to `null`, then `stdout` and `stderr` will be a `Buffer` instead of a
-string.
+`string`.
 
 ### timeout
 
 _Type_: `number`<br> _Default_: `0`
 
 If timeout is greater than `0`, the parent will send the signal identified by
-the `killSignal` property (the default is `SIGTERM`) if the child runs longer
-than timeout milliseconds.
+the [`killSignal` option](#killsignal) if the child runs longer than `timeout`
+milliseconds.
 
 ### maxBuffer
 
@@ -293,8 +321,8 @@ Signal value to be used when the spawned process will be killed.
 _Type_: `boolean`<br> _Default_: `false`
 
 If `true`, no quoting or escaping of arguments is done on Windows. Ignored on
-other platforms. This is set to `true` automatically when the `shell` option is
-`true`.
+other platforms. This is set to `true` automatically when the
+[`shell` option](#shell) is `true`.
 
 ### windowsHide
 
