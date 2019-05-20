@@ -86,7 +86,7 @@ By default no shell interpreter (like Bash or `cmd.exe`) is used. This means
 `command` must be just the program and its arguments. No escaping/quoting is
 needed, except for significant spaces (with a backslash).
 
-Shell features such as globbing, variables and operators (like `&&`, `>`, `;`)
+Shell features such as globbing, variables and operators (like `&&` `>` `;`)
 should not be used. All of this can be done directly in Node.js instead.
 
 Shell interpreters are slower, less secure and less cross-platform. However, you
@@ -162,11 +162,11 @@ Whether the `command` should be printed on the console.
 
 ## verbose
 
-_Type_: `boolean`<br> _Default_: `true` when run
-[in CI](https://github.com/watson/is-ci) and not with
-[`stream()`](#streamfunction-options). `false` otherwise.
+_Type_: `boolean`<br> _Default_: `true` when
+[in CI](https://github.com/watson/is-ci) and
+[`stream()`](#streamfunction-options) is not used. `false` otherwise.
 
-Whether the `command` and its output should be printed on the console.
+Whether both the `command` and its output should be printed on the console.
 <br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#verbose).
 
 ## result
@@ -189,7 +189,8 @@ Which output stream to use with [`result: 'replace'`](#result).
 
 _Type_: `integer`<br> _Default_: `100`
 
-How many commands to run in parallel at once.
+With [`stream()`](#streamfunction-options), how many commands to run in parallel
+at once.
 
 # See also
 

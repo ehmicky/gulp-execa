@@ -89,11 +89,11 @@ $ gulp audit
 
 ### verbose
 
-_Type_: `boolean`<br> _Default_: `true` when run
-[in CI](https://github.com/watson/is-ci) but not with
-[`stream()`](#streamfunction-options). `false` otherwise.
+_Type_: `boolean`<br> _Default_: `true` when
+[in CI](https://github.com/watson/is-ci) and
+[`stream()`](#streamfunction-options) is not used. `false` otherwise.
 
-Whether the `command` and its output should be printed on the console.
+Whether both the `command` and its output should be printed on the console.
 
 ```bash
 $ gulp audit
@@ -128,7 +128,8 @@ Which output stream to use with [`result: 'replace'`](#result).
 
 _Type_: `integer`<br> _Default_: `100`
 
-How many commands to run in parallel at once.
+With [`stream()`](#streamfunction-options), how many commands to run in parallel
+at once.
 
 ## Options from `execa`
 
