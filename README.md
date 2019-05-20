@@ -9,10 +9,9 @@
 
 Command execution in [Gulp.js](https://gulpjs.com).
 
-As opposed to
-[`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)
-or to other plugins, `gulp-execa` uses
-[`execa`](https://github.com/sindresorhus/execa) providing:
+As opposed to similar plugins or to
+[`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback),
+`gulp-execa` uses [`execa`](https://github.com/sindresorhus/execa) providing:
 
 - [Better Windows support](https://github.com/IndigoUnited/node-cross-spawn#why),
   including [shebangs](<https://en.wikipedia.org/wiki/Shebang_(Unix)>)
@@ -25,7 +24,7 @@ or to other plugins, `gulp-execa` uses
 
 Commands can be executed either directly or inside a
 [files stream](https://gulpjs.com/docs/en/api/src). In
-[streaming mode](#streamfunction-options), unlike similar libraries:
+[streaming mode](#streamfunction-options), unlike other libraries:
 
 - commands are run [in parallel](https://github.com/almost/through2-concurrent),
   not [serially](https://github.com/rvagg/through2)
