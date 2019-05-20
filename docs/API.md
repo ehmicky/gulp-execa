@@ -1,6 +1,13 @@
-# Methods
+# API
 
-## task(command, [options])
+You can try all the examples below:
+
+- either directly [in your browser](https://repl.it/@ehmicky/gulp-execa).
+- or by executing the [`examples` files](../examples/README.md) in a terminal.
+
+## Methods
+
+### task(command, [options])
 
 Returns a Gulp task that executes `command`.
 
@@ -12,7 +19,7 @@ const { task } = require('gulp-execa')
 module.exports.audit = task('npm audit')
 ```
 
-## exec(command, [options])
+### exec(command, [options])
 
 Executes `command`. The return value is both a promise and a
 [`child_process` instance](https://github.com/sindresorhus/execa#execacommand-options).
@@ -34,7 +41,7 @@ module.exports.outdated = async function() {
 }
 ```
 
-## stream(function, [options])
+### stream(function, [options])
 
 Returns a stream that executes a `command` on each input file.
 
@@ -69,11 +76,11 @@ as:
 The [`verbose`](#verbose), [`stdout`](#stdout), [`stderr`](#stderr) and
 [`stdio`](#stdio) options cannot be used with this method.
 
-# Options
+## Options
 
 _Type_: `object`
 
-### echo
+#### echo
 
 _Type_: `boolean`<br> _Default_: same as [`verbose`](#verbose)
 
@@ -87,7 +94,7 @@ $ gulp audit
 [13:09:44] Finished 'audit' after 4.96 s
 ```
 
-### verbose
+#### verbose
 
 _Type_: `boolean`<br> _Default_: `true` when
 [in CI](https://github.com/watson/is-ci) and
@@ -109,7 +116,7 @@ found 0 vulnerabilities
 [13:09:44] Finished 'audit' after 4.96 s
 ```
 
-### result
+#### result
 
 _Type_: `string`<br> _Value_: `'replace'` or `'save'`<br> _Default_: `'replace'`
 
@@ -119,26 +126,26 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 - `save`: [be pushed](https://github.com/sindresorhus/execa#childprocessresult)
   to the `file.execa` array property
 
-### from
+#### from
 
 _Type_: `string`<br> _Value_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_:
 `'stdout'`
 
 Which output stream to use with [`result: 'replace'`](#result).
 
-### maxConcurrency
+#### maxConcurrency
 
 _Type_: `integer`<br> _Default_: `100`
 
 With [`stream()`](#streamfunction-options), how many commands to run in parallel
 at once.
 
-## Options from `execa`
+### Options from `execa`
 
 All [`execa` options](https://github.com/sindresorhus/execa#options) can also be
 used.
 
-### cleanup
+#### cleanup
 
 _Type_: `boolean`<br> _Default_: `true`
 
@@ -149,21 +156,21 @@ Kill the spawned process when the parent process exits unless either:
 - the parent process is terminated abruptly, for example, with `SIGKILL` as
   opposed to `SIGTERM` or a normal exit
 
-### preferLocal
+#### preferLocal
 
 _Type_: `boolean`<br> _Default_: `true`
 
 Prefer locally installed binaries when looking for a binary to execute.<br> If
 you `npm install foo`, you can then `execa('foo')`.
 
-### localDir
+#### localDir
 
 _Type_: `string`<br> _Default_: `process.cwd()`
 
 Preferred path to find locally installed binaries in (use with
 [`preferLocal`](#preferLocal)).
 
-### buffer
+#### buffer
 
 _Type_: `boolean`<br> _Default_: `true`
 
@@ -173,55 +180,55 @@ consume the output of the
 [`stderr`](https://github.com/sindresorhus/execa#stderr) streams because the
 promise will not be resolved/rejected until they have completed.
 
-### input
+#### input
 
 _Type_: `string | Buffer | stream.Readable`
 
 Write some input to the `stdin` of your binary.
 
-### stdin
+#### stdin
 
 _Type_: `string | number | Stream | undefined`<br> _Default_: `pipe`
 
 Same options as
 [`stdio`](https://nodejs.org/dist/latest-v6.x/docs/api/child_process.html#child_process_options_stdio).
 
-### stdout
+#### stdout
 
 _Type_: `string | number | Stream | undefined`<br> _Default_: `pipe`
 
 Same options as
 [`stdio`](https://nodejs.org/dist/latest-v6.x/docs/api/child_process.html#child_process_options_stdio).
 
-### stderr
+#### stderr
 
 _Type_: `string | number | Stream | undefined`<br> _Default_: `pipe`
 
 Same options as
 [`stdio`](https://nodejs.org/dist/latest-v6.x/docs/api/child_process.html#child_process_options_stdio).
 
-### reject
+#### reject
 
 _Type_: `boolean`<br> _Default_: `true`
 
 Setting this to `false` resolves the promise with the error instead of rejecting
 it.
 
-### stripFinalNewline
+#### stripFinalNewline
 
 _Type_: `boolean`<br> _Default_: `true`
 
 Strip the final [newline character](https://en.wikipedia.org/wiki/Newline) from
 the output.
 
-### extendEnv
+#### extendEnv
 
 _Type_: `boolean`<br> _Default_: `true`
 
 Set to `false` if you don't want to extend the environment variables when
 providing the [`env` option](#env).
 
-## Options from `child_process`
+### Options from `child_process`
 
 All options from both
 [`child_process.spawn()`](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options)
@@ -229,27 +236,27 @@ and
 [`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)
 are available.
 
-### cwd
+#### cwd
 
 _Type_: `string`<br> _Default_: `process.cwd()`
 
 Current working directory of the child process.
 
-### env
+#### env
 
 _Type_: `object`<br> _Default_: `process.env`
 
 Environment key-value pairs. Extends automatically from `process.env`. Set
 [`extendEnv`](#extendenv) to `false` if you don't want this.
 
-### argv0
+#### argv0
 
 _Type_: `string`
 
 Explicitly set the value of `argv[0]` sent to the child process. This will be
 set to the `command`'s main file if not specified.
 
-### stdio
+#### stdio
 
 _Type_: `string | string[]`<br> _Default_: `pipe`
 
@@ -257,26 +264,26 @@ Child's
 [stdio](https://nodejs.org/api/child_process.html#child_process_options_stdio)
 configuration.
 
-### detached
+#### detached
 
 _Type_: `boolean`
 
 Run child independently of its parent process. Specific behavior
 [depends on the platform](https://nodejs.org/api/child_process.html#child_process_options_detached).
 
-### uid
+#### uid
 
 _Type_: `number`
 
 Sets the user identity of the process.
 
-### gid
+#### gid
 
 _Type_: `number`
 
 Sets the group identity of the process.
 
-### shell
+#### shell
 
 _Type_: `boolean | string`<br> _Default_: `false`
 
@@ -290,7 +297,7 @@ We recommend against using this option since it is:
 - slower, because of the additional shell interpretation
 - unsafe, potentially allowing command injection
 
-### encoding
+#### encoding
 
 _Type_: `string | null`<br> _Default_: `utf8`
 
@@ -298,7 +305,7 @@ Specify the character encoding used to decode the `stdout` and `stderr` output.
 If set to `null`, then `stdout` and `stderr` will be a `Buffer` instead of a
 `string`.
 
-### timeout
+#### timeout
 
 _Type_: `number`<br> _Default_: `0`
 
@@ -306,19 +313,19 @@ If timeout is greater than `0`, the parent will send the signal identified by
 the [`killSignal` option](#killsignal) if the child runs longer than `timeout`
 milliseconds.
 
-### maxBuffer
+#### maxBuffer
 
 _Type_: `number`<br> _Default_: `10000000` (`10MB`)
 
 Largest amount of data in bytes allowed on `stdout` or `stderr`.
 
-### killSignal
+#### killSignal
 
 _Type_: `string | number`<br> _Default_: `SIGTERM`
 
 Signal value to be used when the spawned process will be killed.
 
-### windowsVerbatimArguments
+#### windowsVerbatimArguments
 
 _Type_: `boolean`<br> _Default_: `false`
 
@@ -326,7 +333,7 @@ If `true`, no quoting or escaping of arguments is done on Windows. Ignored on
 other platforms. This is set to `true` automatically when the
 [`shell` option](#shell) is `true`.
 
-### windowsHide
+#### windowsHide
 
 _Type_: `boolean`<br> _Default_: `true`
 
