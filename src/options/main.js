@@ -1,5 +1,4 @@
 import { validate } from 'jest-validate'
-import isCi from 'is-ci'
 
 import { isPlainObject, pickBy } from '../utils.js'
 import { throwError, handleError } from '../error.js'
@@ -45,7 +44,7 @@ const validateOpts = function({ opts }) {
 }
 
 const DEFAULT_OPTS = {
-  verbose: isCi,
+  verbose: true,
 }
 
 const EXAMPLE_OPTS = {

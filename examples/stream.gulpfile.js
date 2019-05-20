@@ -14,5 +14,4 @@ const { src } = require('gulp')
 const { stream } = require('gulp-execa')
 
 module.exports.default = () =>
-  src('**/*')
-    .pipe(stream(({ path }) => `echo ${path}`, { echo: true }))
+  src('**/*').pipe(stream(({ path }) => `echo ${path}`, { echo: true }))

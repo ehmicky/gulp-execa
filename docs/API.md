@@ -76,7 +76,9 @@ _Type_: `object`
 
 #### echo
 
-_Type_: `boolean`<br> _Default_: same as [`verbose`](#verbose)
+_Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskfunction-options)
+and [`exec()`](#execfunction-options), `false` for
+[`stream()`](#streamfunction-options).
 
 Whether the `command` should be printed on the console.
 
@@ -90,9 +92,9 @@ $ gulp audit
 
 #### verbose
 
-_Type_: `boolean`<br> _Default_: `true` when
-[in CI](https://github.com/watson/is-ci) and
-[`stream()`](#streamfunction-options) is not used. `false` otherwise.
+_Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskfunction-options)
+and [`exec()`](#execfunction-options), `false` for
+[`stream()`](#streamfunction-options).
 
 Whether both the `command` and its output (`stdout`/`stderr`) should be printed
 on the console.
