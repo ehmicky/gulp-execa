@@ -17,3 +17,8 @@ They can also be run directly
 - [`task(command, [options])`](task.gulpfile.js)
 - [`exec(command, [options])`](exec.gulpfile.js)
 - [`stream(command, [options])`](stream.gulpfile.js)
+
+## Options
+
+- [`echo`](echo.gulpfile.js)
+- [`verbose`](verbose.gulpfile.js)
