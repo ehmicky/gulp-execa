@@ -11,7 +11,7 @@ Command execution in [Gulp.js](https://gulpjs.com).
 
 As opposed to similar plugins or to
 [`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback),
-`gulp-execa` uses [`execa`](https://github.com/sindresorhus/execa) providing:
+this uses [`execa`](https://github.com/sindresorhus/execa) which provides:
 
 - [Better Windows support](https://github.com/IndigoUnited/node-cross-spawn#why),
   including [shebangs](<https://en.wikipedia.org/wiki/Shebang_(Unix)>)
