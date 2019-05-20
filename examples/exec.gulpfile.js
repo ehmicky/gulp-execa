@@ -1,7 +1,7 @@
-// Demo of the `task()` method.
+// Demo of the `exec()` method.
 // This file can be directly run:
 //   - first install `gulp-execa` and `gulp`
-//   - then `bash node_modules/gulp-execa/examples/task.sh`
+//   - then `bash node_modules/gulp-execa/examples/exec.sh`
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/gulp-execa
 
@@ -10,6 +10,8 @@
 // Ignore the following line: this is only needed for internal purposes.
 require('./utils.js')
 
-const { task } = require('gulp-execa')
+const { exec } = require('gulp-execa')
 
-module.exports.default = task('npm --version', { verbose: true })
+module.exports.default = async function defaultTask() {
+  await exec('npm --version', { verbose: true })
+}
