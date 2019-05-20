@@ -57,6 +57,8 @@ module.exports.sort = () =>
 npm install -D gulp-execa
 ```
 
+This plugin requires Gulp 4.
+
 # Methods
 
 ## task(command, [options])
