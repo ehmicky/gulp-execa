@@ -45,11 +45,10 @@ module.exports.outdated = async function() {
   await exec('npm outdated')
 }
 
-module.exports.sort = function() {
-  return src('**/*.txt')
+module.exports.sort = () =>
+  src('**/*.txt')
     .pipe(stream(({ path }) => `sort ${path}`))
     .pipe(dest('sorted'))
-}
 ```
 
 # Install
@@ -95,8 +94,9 @@ can still opt-in to using them with the
 [`shell` option](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#shell).
 
 ```js
-const { series } = require('gulp')
 const { writeFileStream } = require('fs')
+
+const { series } = require('gulp')
 
 // Wrong
 module.exports.check = task('npm audit && npm outdated')

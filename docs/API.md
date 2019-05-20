@@ -52,11 +52,10 @@ Returns a stream that executes a `command` on each input file.
 const { stream } = require('gulp-execa')
 const { src, dest } = require('gulp')
 
-module.exports.sort = function() {
-  return src('**/*.txt')
+module.exports.sort = () =>
+  src('**/*.txt')
     .pipe(stream(({ path }) => `sort ${path}`))
     .pipe(dest('sorted'))
-}
 ```
 
 Each file in the stream will spawn a separate process. This can consume lots of
