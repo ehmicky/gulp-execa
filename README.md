@@ -171,7 +171,7 @@ Whether both the `command` and its output should be printed on the console.
 
 ## result
 
-_Type_: `'replace'` or `'save'`<br> _Default_: `'replace'`
+_Type_: `string`<br> _Value_: `'replace'` or `'save'`<br> _Default_: `'replace'`
 
 With [`stream()`](#streamfunction-options), whether the command result should:
 
@@ -181,7 +181,7 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 
 ## from
 
-_Type_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_: `'stdout'`
+_Type_: `string`<br> _Value_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_:
 
 Which output stream to use with [`result: 'replace'`](#result).
 
