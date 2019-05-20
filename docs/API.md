@@ -54,7 +54,7 @@ const { src, dest } = require('gulp')
 const { stream } = require('gulp-execa')
 
 module.exports.sort = () =>
-  src('**/*.txt')
+  src('*.txt')
     .pipe(stream(({ path }) => `sort ${path}`))
     .pipe(dest('sorted'))
 ```
@@ -128,7 +128,7 @@ const { stream } = require('gulp-execa')
 const through = require('through2')
 
 module.exports.default = () =>
-  src('**/*')
+  src('*.js')
     // Prints the number of lines of each file
     .pipe(stream(({ path }) => `wc -l ${path}`, { result: 'save' }))
     .pipe(
@@ -152,7 +152,7 @@ const { stream } = require('gulp-execa')
 const through = require('through2')
 
 module.exports.default = () =>
-  src('**/*')
+  src('*.js')
     // Prints the number of lines of each file, including `stderr`
     .pipe(
       stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),

@@ -14,7 +14,7 @@ const { src } = require('gulp')
 const { stream } = require('gulp-execa')
 
 module.exports.default = () =>
-  src('**/*').pipe(
+  src('*.js').pipe(
     // Only one command will be fired at once
     stream(({ path }) => `echo ${path}`, { echo: true, maxConcurrency: 1 }),
   )

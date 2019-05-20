@@ -14,6 +14,6 @@ const { src, dest } = require('gulp')
 const { stream } = require('gulp-execa')
 
 module.exports.default = () =>
-  src('**/*')
+  src('*.js')
     .pipe(stream(({ path }) => `sort ${path}`))
     .pipe(dest('sorted'))

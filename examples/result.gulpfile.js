@@ -15,7 +15,7 @@ const { stream } = require('gulp-execa')
 const through = require('through2')
 
 module.exports.default = () =>
-  src('**/*')
+  src('*.js')
     // Prints the number of lines of each file
     .pipe(stream(({ path }) => `wc -l ${path}`, { result: 'save' }))
     .pipe(

@@ -44,7 +44,7 @@ module.exports.outdated = async () => {
 }
 
 module.exports.sort = () =>
-  src('**/*.txt')
+  src('*.txt')
     .pipe(stream(({ path }) => `sort ${path}`))
     .pipe(dest('sorted'))
 ```
