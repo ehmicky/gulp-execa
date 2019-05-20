@@ -92,3 +92,20 @@ module.exports.check = task('npm audit && npm outdated')
 // Correct
 module.exports.check = series(task('npm audit'), task('npm outdated'))
 ```
+
+# Options
+
+`options` is an optional object with the following properties.
+
+### echo
+
+_Type_: `boolean`<br> _Default_: same as [`verbose`](#version)
+
+Whether the `command` should be printed on the console.
+
+### verbose
+
+_Type_: `boolean`<br> _Default_: `true`
+[in CI](https://github.com/watson/is-ci), `false` otherwise.
+
+Whether the `command` and its output should be printed on the console.
