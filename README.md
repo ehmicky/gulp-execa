@@ -95,17 +95,53 @@ module.exports.check = series(task('npm audit'), task('npm outdated'))
 
 # Options
 
-`options` is an optional object with the following properties.
+`options` is an optional object.
 
-### echo
+All options of both
+[`child_process.spawn()`](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options)
+and
+[`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)
+are available: `cwd`, `env`, `argv0`, `stdio`, `detached`, `uid`, `gid`,
+`shell`, `encoding`, `timeout`, `maxBuffer`, `killSignal`,
+`windowsVerbatimArguments`, `windowsHide`,
+
+All [`execa` options](https://github.com/sindresorhus/execa#options) can also be
+used: `cleanup`, `preferLocal`, `localDir`, `buffer`, `input`, `stdin`,
+`stdout`, `stderr`, `reject`, `stripFinalNewline`, `extendEnv`.
+
+The following options are also available:
+
+## echo
 
 _Type_: `boolean`<br> _Default_: same as [`verbose`](#verbose)
 
 Whether the `command` should be printed on the console.
 
-### verbose
+## verbose
 
-_Type_: `boolean`<br> _Default_: `true`
-[in CI](https://github.com/watson/is-ci), `false` otherwise.
+_Type_: `boolean`<br> _Default_: `true` when run
+[in CI](https://github.com/watson/is-ci) and not with
+[`stream()`](#streamfunction-options). `false` otherwise.
 
 Whether the `command` and its output should be printed on the console.
+
+## result
+
+_Type_: `'replace'` or `'save'`<br> _Default_: `'replace'`
+
+With [`stream()`](#streamfunction-options), whether the command result should:
+
+- `replace` the file's contents
+- `save`: be pushed to the file's array property `file.execa`
+
+## from
+
+_Type_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_: `'stdout'`
+
+Which output stream to use with [`result: 'replace'`](#result).
+
+## maxConcurrency
+
+_Type_: `integer`<br> _Default_: `100`
+
+How many commands can be run in parallel at once.
