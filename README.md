@@ -151,7 +151,7 @@ used:
 [`stripFinalNewline`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stripfinalnewline),
 [`extendEnv`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#extendenv).
 
-The following options are also available:
+The following options are also available.
 
 ## echo
 
