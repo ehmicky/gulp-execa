@@ -7,7 +7,7 @@
 [![Twitter](https://img.shields.io/badge/%E2%80%8B-twitter-4cc61e.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ehmicky)
 [![Medium](https://img.shields.io/badge/%E2%80%8B-medium-4cc61e.svg?logo=medium)](https://medium.com/@ehmicky)
 
-Command execution in Gulp.js.
+Command execution in [Gulp.js](https://gulpjs.com).
 
 As opposed to
 [`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback),
@@ -17,16 +17,19 @@ or to other plugins, `gulp-execa` uses
 - [Better Windows support](https://github.com/IndigoUnited/node-cross-spawn#why),
   including [shebangs](<https://en.wikipedia.org/wiki/Shebang_(Unix)>)
 - Faster and more secure commands, since [no shell is used by default](#command)
-- Execution of locally installed binaries
-- Descriptive errors and configurable verbosity
-- Interleaved `stdout`/`stderr`
+- Execution of
+  [locally installed binaries](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#preferlocal)
+- [Descriptive errors](https://github.com/sindresorhus/execa#childprocessresult)
+  and [configurable verbosity](#echo)
+- [Interleaved](https://github.com/sindresorhus/execa#all-1) `stdout`/`stderr`
 
-Commands can be executed either directly or inside a files stream. In streaming
-mode, unlike similar libraries:
+Commands can be executed either directly or inside a
+[files stream](https://gulpjs.com/docs/en/api/src). In
+[streaming mode](#streamfunction-options), unlike similar libraries:
 
 - commands are run [in parallel](https://github.com/almost/through2-concurrent),
   not [serially](https://github.com/rvagg/through2)
-- output can be saved either in files or in variables
+- output can be saved [either in files or in variables](#result)
 
 Example `gulpfile.js`:
 
@@ -59,11 +62,13 @@ npm install -D gulp-execa
 
 ## task(command, [options])
 
-Returns a Gulp task that executes `command`.
+Returns a Gulp task that executes
+`command`.<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#taskcommand-options).
 
 ## exec(command, [options])
 
-Returns a promise executing `command`.
+Executes `command`. The return value is both a promise and a
+[`child_process` instance](https://github.com/sindresorhus/execa#execacommand-options).<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#execcommand-options).
 
 ## stream(function, [options])
 
@@ -73,6 +78,8 @@ argument and return a `command`.
 
 Each file in the stream will spawn a separate process. This can consume lots of
 resources, so you should only use this method when there are no alternatives.
+
+[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#streamfunction-options).
 
 # Command
 
@@ -84,7 +91,8 @@ Shell features such as globbing, variables and operators (like `&&`, `>`, `;`)
 should not be used. All of this can be done directly in Node.js instead.
 
 Shell interpreters are slower, less secure and less cross-platform. However, you
-can still opt-in to using them with the `shell` option.
+can still opt-in to using them with the
+[`shell` option](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#shell).
 
 ```js
 const { series } = require('gulp')
@@ -113,13 +121,35 @@ All options from both
 [`child_process.spawn()`](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options)
 and
 [`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)
-are available: `cwd`, `env`, `argv0`, `stdio`, `detached`, `uid`, `gid`,
-`shell`, `encoding`, `timeout`, `maxBuffer`, `killSignal`,
-`windowsVerbatimArguments`, `windowsHide`,
+are available:
+[`cwd`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#cwd),
+[`env`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#env),
+[`argv0`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#argv0),
+[`stdio`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stdio),
+[`detached`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#detached),
+[`uid`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#uid),
+[`gid`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#gid),
+[`shell`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#shell),
+[`encoding`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#encoding),
+[`timeout`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#timeout),
+[`maxBuffer`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#maxbuffer),
+[`killSignal`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#killsignal),
+[`windowsVerbatimArguments`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#windowsverbatimarguments),
+[`windowsHide`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#windowshide).
 
 All [`execa` options](https://github.com/sindresorhus/execa#options) can also be
-used: `cleanup`, `preferLocal`, `localDir`, `buffer`, `input`, `stdin`,
-`stdout`, `stderr`, `reject`, `stripFinalNewline`, `extendEnv`.
+used:
+[`cleanup`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#cleanup),
+[`preferLocal`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#preferlocal),
+[`localDir`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#localdir),
+[`buffer`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#buffer),
+[`input`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#input),
+[`stdin`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stdin),
+[`stdout`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stdout),
+[`stderr`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stderr),
+[`reject`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#reject),
+[`stripFinalNewline`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stripfinalnewline),
+[`extendEnv`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#extendenv).
 
 The following options are also available:
 
@@ -128,6 +158,7 @@ The following options are also available:
 _Type_: `boolean`<br> _Default_: same as [`verbose`](#verbose)
 
 Whether the `command` should be printed on the console.
+<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#echo).
 
 ## verbose
 
@@ -136,6 +167,7 @@ _Type_: `boolean`<br> _Default_: `true` when run
 [`stream()`](#streamfunction-options). `false` otherwise.
 
 Whether the `command` and its output should be printed on the console.
+<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#verbose).
 
 ## result
 
@@ -147,17 +179,21 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 - `save`: [be pushed](https://github.com/sindresorhus/execa#childprocessresult)
   to the `file.execa` array property
 
+[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#result).
+
 ## from
 
 _Type_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_: `'stdout'`
 
 Which output stream to use with [`result: 'replace'`](#result).
+<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#from).
 
 ## maxConcurrency
 
 _Type_: `integer`<br> _Default_: `100`
 
 How many commands to run in parallel at once.
+<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#maxconcurrency).
 
 # See also
 
