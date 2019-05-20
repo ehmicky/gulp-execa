@@ -4,24 +4,28 @@ import { isPlainObject } from './utils.js'
 
 // Serialize an argument so it can be used as a suffix
 export const serializeArg = function(arg) {
-  // `{ suffix }` can be used to override the default suffix
-  if (isPlainObject(arg) && typeof arg.suffix === 'string') {
+  if (hasSuffix(arg)) {
     return arg.suffix
   }
 
-  return serializeValue(arg)
+  if (typeof arg === 'string') {
+    return arg
+  }
+
+  if (typeof arg === 'function') {
+    return serializeFunction(arg)
+  }
+
+  return inspect(arg, INSPECT_OPTS)
 }
 
-const serializeValue = function(value) {
-  if (typeof value === 'string') {
-    return value
-  }
-
-  if (typeof value === 'function') {
-    return serializeFunction(value)
-  }
-
-  return inspect(value, INSPECT_OPTS)
+// `{ suffix }` can be used to override the default suffix
+const hasSuffix = function(arg) {
+  return (
+    isPlainObject(arg) &&
+    typeof arg.suffix === 'string' &&
+    arg.suffix.trim() !== ''
+  )
 }
 
 const serializeFunction = function(func) {
