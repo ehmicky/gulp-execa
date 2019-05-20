@@ -8,5 +8,6 @@ testEach(
   METHODS,
   [{ opts: { echo: false } }, { opts: { echo: true } }],
   (title, methodProps, data) =>
-    test(`'echo' option ${title}`, t => snapshotTest({ t, methodProps, data })),
+    test(`'echo' option | ${title}`, t =>
+      snapshotTest({ t, methodProps, data })),
 )

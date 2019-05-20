@@ -10,8 +10,7 @@ export const getTitles = function(args) {
 }
 
 const getTitle = function(args) {
-  const title = args.map(getName).join(' ')
-  return `| ${title}`
+  return args.map(getName).join(' ')
 }
 
 const getName = function(arg) {
