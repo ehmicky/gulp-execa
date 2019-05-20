@@ -12,6 +12,6 @@ require('./utils.js')
 
 const { exec } = require('gulp-execa')
 
-module.exports.default = async function defaultTask() {
+module.exports.default = async () => {
   await exec('npm --version', { verbose: true })
 }

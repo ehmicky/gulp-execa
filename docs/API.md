@@ -11,8 +11,6 @@ You can try all the examples below:
 
 Returns a Gulp task that executes `command`.
 
-<!-- eslint-disable func-names -->
-
 ```js
 const { task } = require('gulp-execa')
 
@@ -31,12 +29,10 @@ the command failed, the promise will be rejected with a nice
 [`reject: false`](#reject) option was used, the promise will be resolved with
 that error instead.
 
-<!-- eslint-disable func-names -->
-
 ```js
 const { exec } = require('gulp-execa')
 
-module.exports.outdated = async function() {
+module.exports.outdated = async () => {
   await exec('npm outdated')
 }
 ```
@@ -52,8 +48,6 @@ Returns a stream that executes a `command` on each input file.
   [other properties](https://gulpjs.com/docs/en/api/vinyl#instance-properties)
   are available as well.
 - return either a `command` or `undefined`.
-
-<!-- eslint-disable func-names -->
 
 ```js
 const { src, dest } = require('gulp')

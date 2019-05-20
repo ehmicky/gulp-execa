@@ -33,15 +33,13 @@ Commands can be executed either directly or inside a
 
 Example `gulpfile.js`:
 
-<!-- eslint-disable func-names -->
-
 ```js
 const { src, dest } = require('gulp')
 const { task, exec, stream } = require('gulp-execa')
 
 module.exports.audit = task('npm audit')
 
-module.exports.outdated = async function() {
+module.exports.outdated = async () => {
   await exec('npm outdated')
 }
 

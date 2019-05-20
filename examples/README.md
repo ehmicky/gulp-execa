@@ -15,3 +15,5 @@ They can also be run directly
 ## Methods
 
 - [`task(command, [options])`](task.gulpfile.js)
+- [`exec(command, [options])`](exec.gulpfile.js)
+- [`stream(command, [options])`](stream.gulpfile.js)
