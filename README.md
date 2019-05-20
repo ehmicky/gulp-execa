@@ -71,6 +71,9 @@ Returns a stream that executes a `command` on each input file. `function` must
 take a [file](https://gulpjs.com/docs/en/api/vinyl#instance-properties) as
 argument and return a `command`.
 
+Each file in the stream will spawn a separate process. This can consume lots of
+resources, so you should only use this method when there are no alternatives.
+
 # Command
 
 By default, no shell interpreter (like Bash or `cmd.exe`) is used. This means
