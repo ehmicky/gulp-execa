@@ -2,10 +2,10 @@ import { inspect } from 'util'
 
 import { isPlainObject } from './utils.js'
 
-// Serialize an argument so it can be used as a suffix
+// Serialize an argument so it can be used in the title
 export const serializeArg = function(arg) {
-  if (hasSuffix(arg)) {
-    return arg.suffix
+  if (hasName(arg)) {
+    return arg.name
   }
 
   if (typeof arg === 'string') {
@@ -19,12 +19,10 @@ export const serializeArg = function(arg) {
   return inspect(arg, INSPECT_OPTS)
 }
 
-// `{ suffix }` can be used to override the default suffix
-const hasSuffix = function(arg) {
+// `{ name }` can be used to override the serialization logic
+const hasName = function(arg) {
   return (
-    isPlainObject(arg) &&
-    typeof arg.suffix === 'string' &&
-    arg.suffix.trim() !== ''
+    isPlainObject(arg) && typeof arg.name === 'string' && arg.name.trim() !== ''
   )
 }
 
@@ -36,7 +34,7 @@ const serializeFunction = function(func) {
   return func.name
 }
 
-// Make suffix short and on a single line
+// Make title short and on a single line
 const INSPECT_OPTS = {
   breakLength: Infinity,
   depth: 1,

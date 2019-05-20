@@ -37,11 +37,11 @@ testEach(
     { opts: { result: 'invalid' } },
     { opts: { from: 'invalid' } },
   ],
-  (suffix, methodProps, data) =>
-    test(`Invalid options ${suffix}`, t =>
+  (title, methodProps, data) =>
+    test(`Invalid options ${title}`, t =>
       snapshotTest({ t, methodProps, data })),
 )
 
-testEach(METHODS, [{}, { opts: {} }], (suffix, methodProps, data) =>
-  test(`No options ${suffix}`, t => snapshotTest({ t, methodProps, data })),
+testEach(METHODS, [{}, { opts: {} }], (title, methodProps, data) =>
+  test(`No options ${title}`, t => snapshotTest({ t, methodProps, data })),
 )

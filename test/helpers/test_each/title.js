@@ -1,49 +1,47 @@
 import { serializeArg } from './serialize.js'
 
-// Retrieve unique suffixes for each iteration
-// To customize suffixes of a specific iterable, add `suffix` properties to it,
+// Retrieve unique test titles for each iteration.
+// To customize names inside a specific iterable, add `name` properties to it,
 // for example with `Array.map()`.
-// To customize suffixes of all iterables, generate it inside the iterated value
-// using all values.
-export const getSuffixes = function(args) {
-  return args.map(getSuffix).map(fixDuplicate)
+// To customize whole titles, generate them inside the iterated function using
+// all values.
+export const getTitles = function(args) {
+  return args.map(getTitle).map(fixDuplicate)
 }
 
-const getSuffix = function(args) {
-  const suffix = args.map(getPart).join(' ')
-  return `| ${suffix}`
+const getTitle = function(args) {
+  const title = args.map(getName).join(' ')
+  return `| ${title}`
 }
 
-const getPart = function(arg) {
-  const part = serializeArg(arg)
-  const partA = part.trim()
-  const partB = truncatePart(partA)
-  return partB
+const getName = function(arg) {
+  const name = serializeArg(arg)
+  const nameA = name.trim()
+  const nameB = truncateName(nameA)
+  return nameB
 }
 
-// Make suffix parts short by truncating them
-const truncatePart = function(part) {
-  if (part.length <= MAX_PART_LENGTH) {
-    return part
+// Make names short by truncating them
+const truncateName = function(name) {
+  if (name.length <= MAX_NAME_LENGTH) {
+    return name
   }
 
-  const partA = part.slice(0, MAX_PART_LENGTH)
-  return `${partA}...`
+  const nameA = name.slice(0, MAX_NAME_LENGTH)
+  return `${nameA}...`
 }
 
-const MAX_PART_LENGTH = 60
+const MAX_NAME_LENGTH = 60
 
-// Ensure suffix parts are unique by appending the index when we find duplicates
-const fixDuplicate = function(suffix, index, suffixes) {
-  if (!isDuplicate(suffix, index, suffixes)) {
-    return suffix
+// Ensure titles are unique by appending the index when we find duplicates
+const fixDuplicate = function(title, index, titles) {
+  if (!isDuplicate(title, index, titles)) {
+    return title
   }
 
-  return `${suffix} (${index})`
+  return `${title} (${index})`
 }
 
-const isDuplicate = function(suffix, index, suffixes) {
-  return suffixes.some(
-    (suffixA, indexA) => suffixA === suffix && index !== indexA,
-  )
+const isDuplicate = function(title, index, titles) {
+  return titles.some((titleA, indexA) => titleA === title && index !== indexA)
 }
