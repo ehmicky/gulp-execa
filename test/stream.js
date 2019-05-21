@@ -16,6 +16,7 @@ testEach(
     { task: 'severalFiles' },
     { task: 'severalTimes' },
     {},
+    { command: { command: 'echo test', stripFinalNewline: true } },
     { opts: { encoding: 'utf8' } },
     { opts: { stripFinalNewline: true } },
   ],

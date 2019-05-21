@@ -4,6 +4,7 @@ import through from 'through2-concurrent'
 
 import { parseOpts } from '../options/main.js'
 import { throwError, handleError } from '../error.js'
+import { isPlainObject } from '../utils.js'
 
 import { getDefaultOpts, forcedOpts } from './options.js'
 import { setResult } from './result.js'
@@ -35,11 +36,28 @@ const handleGetInput = function({ getInput }) {
 }
 
 const cExecVinyl = async function({ getInput, opts, resultOpt }, file) {
-  const input = await getInput(file)
+  const { input, opts: optsA } = await getFileInput({ getInput, file, opts })
 
-  await setResult({ file, input, opts, resultOpt })
+  await setResult({ file, input, opts: optsA, resultOpt })
 
   return file
 }
 
 const execVinyl = callbackify(cExecVinyl)
+
+// `getInput()` can either return the command as string, or the
+// command + its options as object.
+const getFileInput = async function({ getInput, file, opts }) {
+  const result = await getInput(file)
+
+  if (isPlainObject(result)) {
+    const { command, ...fileOpts } = result
+    return { input: command, opts: { ...opts, ...fileOpts } }
+  }
+
+  if (typeof result === 'string') {
+    return { input: result, opts }
+  }
+
+  return { opts }
+}

@@ -47,7 +47,10 @@ Returns a stream that executes a `command` on each input file.
   as argument. The most useful property is `file.path` but
   [other properties](https://gulpjs.com/docs/en/api/vinyl#instance-properties)
   are available as well.
-- return either a `command` or `undefined`.
+- return either:
+  - a `command` string
+  - an `options` object with a `command` property
+  - `undefined`
 
 ```js
 const { src, dest } = require('gulp')
