@@ -1,10 +1,10 @@
 import { serializeParam } from './serialize.js'
 
 // Retrieve unique test names for each iteration.
-// To customize names inside a specific iterable, add `name` properties to it,
+// To customize a specific iterable's names, add `name` properties to it,
 // for example with `Array.map()`.
-// To customize whole names, generate them inside the iterated function using
-// all values.
+// To customize whole names, generate them using the iterated function
+// arguments.
 export const addNames = function({ index, indexes, params }) {
   const names = params.map(getArgName)
   const name = names.join(' ')
