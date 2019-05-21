@@ -3,7 +3,7 @@ import { inspect } from 'util'
 import { isPlainObject } from './utils.js'
 
 // Serialize an argument so it can be used in the names
-export const serializeArg = function(arg) {
+export const serializeParam = function(arg) {
   if (hasName(arg)) {
     return arg.name
   }
