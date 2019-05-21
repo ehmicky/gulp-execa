@@ -6,26 +6,26 @@ import { serializeParam } from './serialize.js'
 // To customize whole names, generate them using the iterated function
 // arguments.
 export const addNames = function({ index, indexes, params }) {
-  const names = params.map(getArgName)
+  const names = params.map(getName)
   const name = names.join(' ')
   return { name, names, index, indexes, params }
 }
 
-const getArgName = function(param) {
-  const argName = serializeParam(param)
-  const argNameA = argName.trim()
-  const argNameB = truncateName(argNameA)
-  return argNameB
+const getName = function(param) {
+  const name = serializeParam(param)
+  const nameA = name.trim()
+  const nameB = truncateName(nameA)
+  return nameB
 }
 
 // Make names short by truncating them
-const truncateName = function(argName) {
-  if (argName.length <= MAX_NAME_LENGTH) {
-    return argName
+const truncateName = function(name) {
+  if (name.length <= MAX_NAME_LENGTH) {
+    return name
   }
 
-  const argNameA = argName.slice(0, MAX_NAME_LENGTH)
-  return `${argNameA}...`
+  const nameA = name.slice(0, MAX_NAME_LENGTH)
+  return `${nameA}...`
 }
 
 const MAX_NAME_LENGTH = 60

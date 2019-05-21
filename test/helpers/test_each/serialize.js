@@ -3,26 +3,28 @@ import { inspect } from 'util'
 import { isPlainObject } from './utils.js'
 
 // Serialize an argument so it can be used in the names
-export const serializeParam = function(arg) {
-  if (hasName(arg)) {
-    return arg.name
+export const serializeParam = function(param) {
+  if (hasName(param)) {
+    return param.name
   }
 
-  if (typeof arg === 'string') {
-    return arg
+  if (typeof param === 'string') {
+    return param
   }
 
-  if (typeof arg === 'function') {
-    return serializeFunction(arg)
+  if (typeof param === 'function') {
+    return serializeFunction(param)
   }
 
-  return inspect(arg, INSPECT_OPTS)
+  return inspect(param, INSPECT_OPTS)
 }
 
 // `{ name }` can be used to override the serialization logic
-const hasName = function(arg) {
+const hasName = function(param) {
   return (
-    isPlainObject(arg) && typeof arg.name === 'string' && arg.name.trim() !== ''
+    isPlainObject(param) &&
+    typeof param.name === 'string' &&
+    param.name.trim() !== ''
   )
 }
 
