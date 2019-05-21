@@ -35,7 +35,7 @@ const unpackParam = function({ param }) {
   return param
 }
 
-// If an argument is a function, its return value will be used instead.
+// If a parameter is a function, its return value will be used instead.
 // This can be used to generate random input for example (fuzzy testing).
 // It will be fired with all the arguments of this iteration. This allows for
 // arguments to be computed based on the value of other arguments.
