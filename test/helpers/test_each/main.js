@@ -11,7 +11,10 @@ export const testEach = function(...inputArgs) {
 
   const names = getNames(args)
 
-  const results = args.map((values, index) => func(names[index], ...values))
+  const results = args.map((values, index) => {
+    const name = names[index]
+    return func({ name }, ...values)
+  })
 
   // Can use `Promise.all(results)` if `func` is async
   return { args, results }

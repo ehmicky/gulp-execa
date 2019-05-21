@@ -2,7 +2,7 @@ import { inspect } from 'util'
 
 import { isPlainObject } from './utils.js'
 
-// Serialize an argument so it can be used in the title
+// Serialize an argument so it can be used in the names
 export const serializeArg = function(arg) {
   if (hasName(arg)) {
     return arg.name
@@ -34,7 +34,7 @@ const serializeFunction = function(func) {
   return func.name
 }
 
-// Make title short and on a single line
+// Make names short and on a single line
 const INSPECT_OPTS = {
   breakLength: Infinity,
   depth: 1,
