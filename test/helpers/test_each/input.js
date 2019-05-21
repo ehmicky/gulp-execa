@@ -1,3 +1,5 @@
+import { isRepeat } from './repeat.js'
+
 // Parse and validate main input
 export const parseInput = function(inputArgs) {
   const iterables = inputArgs.slice(0, -1)
@@ -15,10 +17,6 @@ const validateIterable = function(iterable) {
       `Argument must be an iterable or a positive integer: ${iterable}`,
     )
   }
-}
-
-export const isRepeat = function(iterable) {
-  return Number.isInteger(iterable) && iterable >= 0
 }
 
 const validateFunc = function(func) {
