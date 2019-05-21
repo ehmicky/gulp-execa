@@ -5,7 +5,7 @@ import { serializeArg } from './serialize.js'
 // for example with `Array.map()`.
 // To customize whole titles, generate them inside the iterated function using
 // all values.
-export const getTitles = function(args) {
+export const getNames = function(args) {
   return args.map(getTitle).map(fixDuplicate)
 }
 

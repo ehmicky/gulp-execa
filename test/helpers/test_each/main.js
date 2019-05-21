@@ -1,6 +1,6 @@
 import { parseInput } from './input.js'
 import { getArgs } from './args.js'
-import { getTitles } from './title.js'
+import { getNames } from './name.js'
 
 // Repeat a function with a combination of arguments.
 // Meant for test-driven development.
@@ -9,9 +9,9 @@ export const testEach = function(...inputArgs) {
 
   const args = getArgs(iterables)
 
-  const titles = getTitles(args)
+  const names = getNames(args)
 
-  const results = args.map((values, index) => func(titles[index], ...values))
+  const results = args.map((values, index) => func(names[index], ...values))
 
   // Can use `Promise.all(results)` if `func` is async
   return { args, results }
