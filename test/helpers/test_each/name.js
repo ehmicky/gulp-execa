@@ -1,46 +1,48 @@
 import { serializeArg } from './serialize.js'
 
-// Retrieve unique test titles for each iteration.
+// Retrieve unique test names for each iteration.
 // To customize names inside a specific iterable, add `name` properties to it,
 // for example with `Array.map()`.
-// To customize whole titles, generate them inside the iterated function using
+// To customize whole names, generate them inside the iterated function using
 // all values.
 export const getNames = function(args) {
-  return args.map(getTitle).map(fixDuplicate)
+  return args.map(getName).map(fixDuplicate)
 }
 
-const getTitle = function(args) {
-  return args.map(getName).join(' ')
+const getName = function(args) {
+  const argNames = args.map(getArgName)
+  const name = argNames.join(' ')
+  return name
 }
 
-const getName = function(arg) {
-  const name = serializeArg(arg)
-  const nameA = name.trim()
-  const nameB = truncateName(nameA)
-  return nameB
+const getArgName = function(arg) {
+  const argName = serializeArg(arg)
+  const argNameA = argName.trim()
+  const argNameB = truncateName(argNameA)
+  return argNameB
 }
 
 // Make names short by truncating them
-const truncateName = function(name) {
-  if (name.length <= MAX_NAME_LENGTH) {
-    return name
+const truncateName = function(argName) {
+  if (argName.length <= MAX_NAME_LENGTH) {
+    return argName
   }
 
-  const nameA = name.slice(0, MAX_NAME_LENGTH)
-  return `${nameA}...`
+  const argNameA = argName.slice(0, MAX_NAME_LENGTH)
+  return `${argNameA}...`
 }
 
 const MAX_NAME_LENGTH = 60
 
-// Ensure titles are unique by appending the index when we find duplicates
-const fixDuplicate = function(title, index, titles) {
-  if (!isDuplicate(title, index, titles)) {
-    return title
+// Ensure names are unique by appending the index when we find duplicates
+const fixDuplicate = function(name, index, names) {
+  if (!isDuplicate(name, index, names)) {
+    return name
   }
 
-  return `${title} (${index})`
+  return `${name} (${index})`
 }
 
-const isDuplicate = function(title, index, titles) {
-  return titles.some((titleA, indexA) => titleA === title && index !== indexA)
+const isDuplicate = function(name, index, names) {
+  return names.some((nameA, indexA) => nameA === name && index !== indexA)
 }
