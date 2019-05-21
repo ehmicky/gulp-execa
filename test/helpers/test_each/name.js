@@ -13,9 +13,8 @@ export const addNames = function({ index, indexes, params }) {
 
 const getName = function(param) {
   const name = serializeParam(param)
-  const nameA = name.trim()
-  const nameB = truncateName(nameA)
-  return nameB
+  const nameA = truncateName(name)
+  return nameA
 }
 
 // Make names short by truncating them
