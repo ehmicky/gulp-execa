@@ -16,6 +16,11 @@ export const testEach = function(...inputArgs) {
   const loopsA = loops.map(addNames)
   const loopsB = loopsA.map(fixDuplicate)
 
+  // The `name`, `names`, etc. are passed as first argument so that:
+  //  - user can put `params` in an array (if needs be) using variadic syntax
+  //    `...params`
+  //  - user can omit `params` if only the information in the first argument
+  //    is needed
   // Return the value so that:
   //  - can use `Promise.all(results)` if `func` is async
   //  - user can retrieve `params`, `indexes`, etc. by returning them
