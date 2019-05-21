@@ -16,16 +16,18 @@ export const testEach = function(...inputArgs) {
   const loopsA = loops.map(addNames)
   const loopsB = loopsA.map(fixDuplicate)
 
-  // The `name`, `names`, etc. are passed as first argument so that:
-  //  - user can put `params` in an array (if needs be) using variadic syntax
-  //    `...params`
-  //  - user can omit `params` if only the information in the first argument
-  //    is needed
-  // Return the value so that:
-  //  - can use `Promise.all(results)` if `func` is async
-  //  - user can retrieve `params`, `indexes`, etc. by returning them
-  const results = loopsB.map(({ name, names, index, indexes, params }) =>
-    func({ name, names, index, indexes }, ...params),
-  )
+  const results = loopsB.map(loop => fireFunc(loop, func))
   return results
+}
+
+// The `name`, `names`, etc. are passed as first argument so that:
+//  - user can put `params` in an array (if needs be) using variadic syntax
+//    `...params`
+//  - user can omit `params` if only the information in the first argument
+//    is needed
+// The return value of `func` is returned so that:
+//  - `Promise.all(results)` can be use used if `func` is async
+//  - user can retrieve `params`, `indexes`, etc. by returning them in `func`
+const fireFunc = function({ name, names, index, indexes, params }, func) {
+  return func({ name, names, index, indexes }, ...params)
 }
