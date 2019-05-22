@@ -23,8 +23,11 @@ const truncateName = function(name) {
     return name
   }
 
-  const nameA = name.slice(0, MAX_NAME_LENGTH)
-  return `${nameA}...`
+  const start = name.slice(0, TRUNCATE_START_LENGTH)
+  const end = name.slice(name.length - TRUNCATE_END_LENGTH)
+  return `${start}...${end}`
 }
 
 const MAX_NAME_LENGTH = 60
+const TRUNCATE_START_LENGTH = Math.ceil((MAX_NAME_LENGTH - 3) / 2)
+const TRUNCATE_END_LENGTH = Math.floor((MAX_NAME_LENGTH - 3) / 2)
