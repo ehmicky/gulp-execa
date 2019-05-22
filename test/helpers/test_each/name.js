@@ -1,10 +1,9 @@
-import { serializeParam } from './serialize.js'
+import prettyFormat, { plugins } from 'pretty-format'
+
+import { isPlainObject } from './utils.js'
 
 // Retrieve unique test names for each loop.
-// To customize a specific iterable's names, add `name` properties to it,
-// for example with `Array.map()`.
-// To customize whole names, generate them using the iterated function
-// parameters.
+// To customize names, generate them using the iterated function parameters.
 export const addNames = function({ index, indexes, params }) {
   const names = params.map(getName)
   const name = names.join(' ')
@@ -12,9 +11,47 @@ export const addNames = function({ index, indexes, params }) {
 }
 
 const getName = function(param) {
-  const name = serializeParam(param)
+  if (hasName(param)) {
+    return param.name
+  }
+
+  const name = serialize(param)
+
   const nameA = truncateName(name)
   return nameA
+}
+
+// `{ name }` can be used to override the serialization logic
+const hasName = function(param) {
+  return (
+    isPlainObject(param) &&
+    typeof param.name === 'string' &&
+    param.name.trim() !== ''
+  )
+}
+
+// We use `pretty-format` because it:
+//  - handles most JavaScript types
+//  - works in browsers
+//  - is fast
+//  - has human-friendly output
+//  - can minify output
+//  - handles circular references
+//  - can serialize DOM
+const serialize = function(param) {
+  return prettyFormat(param, PRETTY_FORMAT_OPTS)
+}
+
+const PRETTY_FORMAT_OPTS = {
+  min: true,
+  maxDepth: 2,
+  plugins: [
+    plugins.DOMElement,
+    plugins.DOMCollection,
+    plugins.ReactElement,
+    plugins.Immutable,
+    plugins.ConvertAnsi,
+  ],
 }
 
 // Make names short by truncating them
