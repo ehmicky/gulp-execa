@@ -53,7 +53,7 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "core-js": "^3.1.2",
-    "execa": "sindresorhus/execa#c8a53da6748885423f73812580afd59699b36e31",
+    "execa": "sindresorhus/execa#dd63573b7e75259fc7c37af378698b872a7e44f7",
     "fancy-log": "^1.3.3",
     "jest-validate": "^24.8.0",
     "keep-func-props": "^1.3.2",
