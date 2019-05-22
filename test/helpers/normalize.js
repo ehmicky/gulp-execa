@@ -30,4 +30,5 @@ const REPLACEMENTS = [
   [/.*Using gulpfile.*/gu, ''],
   // Node <12 prints errors differently
   [/[^]*uid" (property )?must be[^]*/gu, 'invalid options.uid'],
+  [/\]$/u, ''],
 ]
