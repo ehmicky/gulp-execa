@@ -1,3 +1,9 @@
+# 0.5.3
+
+## Bug fixes
+
+Fix bug when escaping multiple spaces with backslashes in the command.
+
 # 0.5.2
 
 ## Bug fixes
