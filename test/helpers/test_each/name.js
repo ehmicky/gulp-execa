@@ -65,6 +65,6 @@ const truncateName = function(name) {
   return `${start}...${end}`
 }
 
-const MAX_NAME_LENGTH = 80
+const MAX_NAME_LENGTH = 120
 const TRUNCATE_START_LENGTH = Math.ceil((MAX_NAME_LENGTH - 3) / 2)
 const TRUNCATE_END_LENGTH = Math.floor((MAX_NAME_LENGTH - 3) / 2)
