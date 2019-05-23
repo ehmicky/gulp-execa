@@ -1,6 +1,6 @@
 import test from 'ava'
+import testEach from 'test-each'
 
-import { testEach } from './helpers/test_each/main.js'
 import { snapshotTest } from './helpers/snapshot.js'
 import { TASK_METHODS } from './helpers/methods.js'
 
