@@ -17,8 +17,11 @@ const REPLACEMENTS = [
   [/\r\n/gu, '\n'],
   // File paths
   [/[^ (\n]+\/[^ )\n]+/gu, '/path'],
+  // Issues with how Node.js prints uncaught exceptions
+  [/^([ \t]+)at [^\r\n]+\{[^]+/gmu, ''],
   // Stack traces
-  [/ +at [^]+/gu, '    at STACK TRACE'],
+  [/^([ \t]+)at [^\r\n]+$/gmu, '$1at STACK TRACE'],
+  [/(([ \t]+)at STACK TRACE(\r?\n)?)+/gu, '$2at STACK TRACE$3'],
   // Gulp shows file content that triggered an error
   [/[^]+Error:/gu, ''],
   // Timestamps
