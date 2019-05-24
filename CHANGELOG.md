@@ -1,3 +1,9 @@
+# 0.5.5
+
+## Internal
+
+Upgrade to latest `execa`
+
 # 0.5.4
 
 ## Bug fixes
