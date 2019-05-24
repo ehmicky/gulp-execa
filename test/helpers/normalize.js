@@ -17,6 +17,8 @@ const REPLACEMENTS = [
   [/\r\n/gu, '\n'],
   // File paths
   [/[^ (\n]+\/[^ )\n]+/gu, '/path'],
+  // Node <12 prints errors differently
+  [/Emitted 'error' event at.*\n/gu, ''],
   // execa errors have additional properties.
   // Those are printed by `util.inspect()`. However they contain `stack` and
   // `domainEmitter`, so we remove them.
