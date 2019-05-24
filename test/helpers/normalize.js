@@ -17,7 +17,9 @@ const REPLACEMENTS = [
   [/\r\n/gu, '\n'],
   // File paths
   [/[^ (\n]+\/[^ )\n]+/gu, '/path'],
-  // Issues with how Node.js prints uncaught exceptions
+  // execa errors have additional properties.
+  // Those are printed by `util.inspect()`. However they contain `stack` and
+  // `domainEmitter`, so we remove them.
   [/^([ \t]+)at [^\r\n]+\{[^]+/gmu, ''],
   // Stack traces
   [/^([ \t]+)at [^\r\n]+$/gmu, '$1at STACK TRACE'],
