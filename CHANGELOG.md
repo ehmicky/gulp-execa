@@ -1,3 +1,9 @@
+# 0.5.4
+
+## Bug fixes
+
+Fix a bug where the wrong dependency version was installed.
+
 # 0.5.3
 
 ## Bug fixes
