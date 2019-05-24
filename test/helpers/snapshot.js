@@ -52,7 +52,7 @@ const fireTask = async function({
 }) {
   const execaOptsA = getExecaOpts({ command, opts, buffer, read, execaOpts })
 
-  const { exitCode, stdout, stderr } = await execa(
+  const { exitCode, stdout, stderr } = await execa.command(
     `gulp --gulpfile ${GULPFILES_DIR}/${method}.js ${task}`,
     execaOptsA,
   )
