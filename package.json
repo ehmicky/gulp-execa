@@ -65,7 +65,7 @@
     "ava": "^1.4.1",
     "get-stream": "^5.1.0",
     "gulp": "^4.0.2",
-    "gulp-shared-tasks": "^0.27.76",
+    "gulp-shared-tasks": "^0.27.77",
     "husky": "^2.3.0",
     "strip-ansi": "^5.2.0",
     "test-each": "^0.1.0"
