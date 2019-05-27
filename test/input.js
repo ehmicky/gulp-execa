@@ -7,15 +7,15 @@ import { METHODS } from './helpers/methods.js'
 testEach(
   METHODS,
   [{ command: true }, { command: ' ' }],
-  ({ name }, methodProps, data) =>
-    test(`Invalid command | ${name}`, t =>
+  ({ title }, methodProps, data) =>
+    test(`Invalid command | ${title}`, t =>
       snapshotTest({ t, methodProps, data })),
 )
 
 testEach(
   METHODS,
   [{ opts: { uid: 0.5 } }, { command: 'invalid', read: false }],
-  ({ name }, methodProps, data) =>
-    test(`Errored command | ${name}`, t =>
+  ({ title }, methodProps, data) =>
+    test(`Errored command | ${title}`, t =>
       snapshotTest({ t, methodProps, data })),
 )

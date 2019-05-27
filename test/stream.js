@@ -20,6 +20,6 @@ testEach(
     { opts: { encoding: 'utf8' } },
     { opts: { stripFinalNewline: true } },
   ],
-  ({ name }, methodProps, data) =>
-    test(`stream() | ${name}`, t => snapshotTest({ t, methodProps, data })),
+  ({ title }, methodProps, data) =>
+    test(`stream() | ${title}`, t => snapshotTest({ t, methodProps, data })),
 )

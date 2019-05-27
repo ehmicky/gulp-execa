@@ -7,7 +7,7 @@ import { METHODS } from './helpers/methods.js'
 testEach(
   METHODS,
   [{ opts: { echo: false } }, { opts: { echo: true } }],
-  ({ name }, methodProps, data) =>
-    test(`'echo' option | ${name}`, t =>
+  ({ title }, methodProps, data) =>
+    test(`'echo' option | ${title}`, t =>
       snapshotTest({ t, methodProps, data })),
 )

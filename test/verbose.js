@@ -17,7 +17,7 @@ testEach(
     { opts: { verbose: true, stdio: 'pipe' } },
     { opts: { verbose: true, stdio: 'pipe', stdout: 'pipe', stderr: 'pipe' } },
   ],
-  ({ name }, methodProps, data) =>
-    test(`'verbose' option | ${name}`, t =>
+  ({ title }, methodProps, data) =>
+    test(`'verbose' option | ${title}`, t =>
       snapshotTest({ t, methodProps, data })),
 )
