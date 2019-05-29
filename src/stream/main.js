@@ -3,7 +3,7 @@ import { callbackify } from 'util'
 import through from 'through2-concurrent'
 
 import { parseOpts } from '../options/main.js'
-import { throwError, handleError } from '../error.js'
+import { throwError } from '../error.js'
 import { isPlainObject } from '../utils.js'
 
 import { getDefaultOpts, forcedOpts } from './options.js'
@@ -12,7 +12,7 @@ import { setResult } from './result.js'
 // Creates a stream that fires child processes on each file:
 //   gulp.src(...).pipe(stream(({ path }) => `command ${path}`))
 export const stream = function(getInput, opts) {
-  const eGetInput = handleGetInput({ getInput })
+  validateGetInput(getInput)
 
   const defaultOpts = getDefaultOpts({ opts })
   const { maxConcurrency, result: resultOpt, ...optsA } = parseOpts({
@@ -23,16 +23,14 @@ export const stream = function(getInput, opts) {
 
   return through.obj(
     { maxConcurrency },
-    execVinyl.bind(null, { getInput: eGetInput, opts: optsA, resultOpt }),
+    execVinyl.bind(null, { getInput, opts: optsA, resultOpt }),
   )
 }
 
-const handleGetInput = function({ getInput }) {
+const validateGetInput = function(getInput) {
   if (typeof getInput !== 'function') {
     throwError(`Option 'getInput' must be a function: ${getInput}`)
   }
-
-  return handleError(getInput)
 }
 
 const cExecVinyl = async function({ getInput, opts, resultOpt }, file) {
@@ -48,7 +46,7 @@ const execVinyl = callbackify(cExecVinyl)
 // `getInput()` can either return the command as string, or the
 // command + its options as object.
 const getFileInput = async function({ getInput, file, opts }) {
-  const result = await getInput(file)
+  const result = await getInputResult({ getInput, file })
 
   if (isPlainObject(result)) {
     const { command, ...fileOpts } = result
@@ -60,4 +58,12 @@ const getFileInput = async function({ getInput, file, opts }) {
   }
 
   return { opts }
+}
+
+const getInputResult = function({ getInput, file }) {
+  try {
+    return getInput(file)
+  } catch (error) {
+    throwError(error)
+  }
 }
