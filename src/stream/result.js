@@ -11,7 +11,7 @@ export const setResult = function({ file, input, opts, resultOpt }) {
   initSave({ file, resultOpt })
 
   // Returning `undefined` or invalid command skips it silently.
-  if (!isValidInput({ input })) {
+  if (!isValidInput(input)) {
     return
   }
 

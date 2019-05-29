@@ -7,7 +7,7 @@ import { execCommand } from './exec.js'
 
 // Create a Gulp task that fires a child process (command + arguments)
 const eTask = function(input, opts) {
-  validateInput({ input })
+  validateInput(input)
   const optsA = parseOpts({ opts })
 
   const gulpTask = execCommand.bind(null, input, optsA)

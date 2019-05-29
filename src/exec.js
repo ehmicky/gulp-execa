@@ -7,7 +7,7 @@ import { throwError } from './error.js'
 
 // Execute a child process (command + arguments)
 export const exec = function(input, opts) {
-  validateInput({ input })
+  validateInput(input)
   const optsA = parseOpts({ opts })
 
   return execCommand(input, optsA)
