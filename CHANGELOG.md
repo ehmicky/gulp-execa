@@ -1,3 +1,9 @@
+# 0.6.0
+
+## Dependencies
+
+Remove dependency `keep-func-props`
+
 # 0.5.5
 
 ## Internal
