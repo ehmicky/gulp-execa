@@ -1,3 +1,9 @@
+# 0.6.1
+
+## Bug fixes
+
+Fix option `env` triggering process warnings
+
 # 0.6.0
 
 ## Dependencies
