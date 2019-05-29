@@ -42,6 +42,14 @@ testEach(
       snapshotTest({ t, methodProps, data })),
 )
 
+testEach(
+  METHODS,
+  [{ opts: { env: {} } }, { opts: { env: { test: true } } }],
+  ({ title }, methodProps, data) =>
+    test(`Valid options | ${title}`, t =>
+      snapshotTest({ t, methodProps, data })),
+)
+
 testEach(METHODS, [{}, { opts: {} }], ({ title }, methodProps, data) =>
   test(`No options | ${title}`, t => snapshotTest({ t, methodProps, data })),
 )
