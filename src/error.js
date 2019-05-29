@@ -1,12 +1,5 @@
 import PluginError from 'plugin-error'
 
-import { addErrorHandler } from './utils.js'
-
-// Wrap a function with an error handler
-export const handleError = function(func, opts) {
-  return addErrorHandler(func, error => throwError(error, opts))
-}
-
 export const throwError = function(error, opts) {
   throw createError(error, opts)
 }

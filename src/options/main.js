@@ -1,7 +1,7 @@
 import { validate } from 'jest-validate'
 
 import { isPlainObject, pickBy } from '../utils.js'
-import { throwError, handleError } from '../error.js'
+import { throwError } from '../error.js'
 
 import { CHILD_PROCESS_OPTS, EXECA_OPTS } from './upstream.js'
 import { validateCustom } from './custom.js'
@@ -17,31 +17,37 @@ export const parseOpts = function({
   defaultOpts = {},
   forcedOpts = {},
 }) {
-  validateOpts({ opts })
+  validateBasic(opts)
 
   const optsA = pickBy(opts, value => value !== undefined)
 
-  const exampleConfig = pickBy(
-    { ...EXAMPLE_OPTS, ...defaultOpts },
-    (value, key) => !hasOwnProperty.call(forcedOpts, key),
-  )
-
-  kValidate(optsA, { exampleConfig })
-
-  validateCustom({ opts: optsA })
+  validateOpts({ opts: optsA, defaultOpts, forcedOpts })
 
   const optsB = { ...DEFAULT_OPTS, ...defaultOpts, ...optsA, ...forcedOpts }
   const optsC = addVerbose({ opts: optsB })
   return optsC
 }
 
-// `jest-validate` `error.stack` just repeats `error.message`
-const kValidate = handleError(validate, { showStack: false })
-
-const validateOpts = function({ opts }) {
+const validateBasic = function(opts) {
   if (!isPlainObject(opts)) {
     throwError(`Options must be a plain object: ${opts}`)
   }
+}
+
+const validateOpts = function({ opts, defaultOpts, forcedOpts }) {
+  const exampleConfig = pickBy(
+    { ...EXAMPLE_OPTS, ...defaultOpts },
+    (value, key) => !hasOwnProperty.call(forcedOpts, key),
+  )
+
+  try {
+    validate(opts, { exampleConfig })
+  } catch (error) {
+    // `jest-validate` `error.stack` just repeats `error.message`
+    throwError(error, { showStack: false })
+  }
+
+  validateCustom({ opts })
 }
 
 const DEFAULT_OPTS = {
