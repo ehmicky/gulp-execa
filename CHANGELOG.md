@@ -1,3 +1,9 @@
+# 0.7.0
+
+## Features
+
+Improve error messages
+
 # 0.6.1
 
 ## Bug fixes
