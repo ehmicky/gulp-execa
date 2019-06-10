@@ -61,7 +61,7 @@
     "through2-concurrent": "^2.0.0"
   },
   "devDependencies": {
-    "ava": "^2.0.0",
+    "ava": "^2.1.0",
     "get-stream": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-shared-tasks": "^0.29.12",
