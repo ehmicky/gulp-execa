@@ -15,7 +15,7 @@
       "pre-push": "gulp check --full"
     }
   },
-  "description": "Command execution in Gulp.js",
+  "description": "Gulp.js command execution for humans",
   "keywords": [
     "gulp",
     "execa",
