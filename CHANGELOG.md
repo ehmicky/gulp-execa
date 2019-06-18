@@ -1,3 +1,15 @@
+# 0.8.0
+
+## Features
+
+- [`error.stdout`](https://github.com/sindresorhus/execa#stdout), [`error.stderr`](https://github.com/sindresorhus/execa#stderr) and [`error.all`](https://github.com/sindresorhus/execa#all) now contain the data that was sent before the child process exit.
+- If [`childProcess.kill()`](https://github.com/sindresorhus/execa#killsignal-options) does not terminate a child process after 5 seconds, force it by sending `SIGKILL`. This can be configured using the [`forceKillAftrerTimeout` option](https://github.com/sindresorhus/execa#optionsforcekillaftertimeout).
+- Increase [`maxBuffer`](https://github.com/sindresorhus/execa#maxbuffer) option default value from `10 MB` to `100 MB`
+
+## Bug fixes
+
+- Ensure errors always have the same shape.
+
 # 0.7.1
 
 ## Bug fixes
