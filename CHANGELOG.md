@@ -2,7 +2,7 @@
 
 ## Bug fixes
 
-- Fix `npm install gulp-execa` somtimes failing (#2)
+- Fix `npm install gulp-execa` sometimes failing (#2)
 
 # 0.7.0
 
