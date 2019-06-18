@@ -35,7 +35,7 @@ export const EXECA_OPTS = {
   cleanup: true,
   timeout: 5000,
   buffer: true,
-  maxBuffer: 1e7,
+  maxBuffer: 1e8,
   // eslint-disable-next-line no-magic-numbers
   killSignal: multipleValidOptions('SIGTERM', 9),
   stdin: multipleValidOptions('pipe', 0, stream),
