@@ -1,48 +1,54 @@
+# 0.7.1
+
+## Bug fixes
+
+- Fix `npm install gulp-execa` somtimes failing (#2)
+
 # 0.7.0
 
 ## Features
 
-Improve error messages
+- Improve error messages
 
 # 0.6.1
 
 ## Bug fixes
 
-Fix option `env` triggering process warnings
+- Fix option `env` triggering process warnings
 
 # 0.6.0
 
 ## Dependencies
 
-Remove dependency `keep-func-props`
+- Remove dependency `keep-func-props`
 
 # 0.5.5
 
 ## Internal
 
-Upgrade to latest `execa`
+- Upgrade to latest `execa`
 
 # 0.5.4
 
 ## Bug fixes
 
-Fix a bug where the wrong dependency version was installed.
+- Fix a bug where the wrong dependency version was installed.
 
 # 0.5.3
 
 ## Bug fixes
 
-Fix bug when escaping multiple spaces with backslashes in the command.
+- Fix bug when escaping multiple spaces with backslashes in the command.
 
 # 0.5.2
 
 ## Bug fixes
 
-Fix error messages for `task()` on Node `>=12.3.0`
+- Fix error messages for `task()` on Node `>=12.3.0`
 
 # 0.5.0
 
 ## Features
 
-The `function` passed to `stream()` can now return an object, allowing
+- The `function` passed to `stream()` can now return an object, allowing
 file-specific options.
