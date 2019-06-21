@@ -20,6 +20,15 @@
         "ideas",
         "doc"
       ]
+    },
+    {
+      "login": "BarryThePenguin",
+      "name": "Jonathan Haines",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1351912?v=4",
+      "profile": "https://twitter.com/BarryThePenguin",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7
