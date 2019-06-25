@@ -18,6 +18,7 @@ const REPLACEMENTS = [
   // Different exit codes across OS
   [/exit code 1 \(Unknown system error -1\)/gu, 'ENOENT'],
   [/exit code 2 \(ENOENT\)/gu, 'ENOENT'],
+  [/spawn ava ENOENT\n/gu, ''],
   // File paths
   [/[^ (\n]+\/[^ )\n]+/gu, '/path'],
   // Node <12 prints errors differently
