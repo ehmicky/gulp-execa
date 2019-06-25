@@ -53,3 +53,17 @@ testEach(
 testEach(METHODS, [{}, { opts: {} }], ({ title }, methodProps, data) =>
   test(`No options | ${title}`, t => snapshotTest({ t, methodProps, data })),
 )
+
+testEach(
+  METHODS,
+  [
+    { command: 'ava --version', opts: { env: { PATH: '' } } },
+    {
+      command: 'ava --version',
+      opts: { env: { PATH: '' }, preferLocal: false },
+    },
+  ],
+  ({ title }, methodProps, data) =>
+    test(`Default options | ${title}`, t =>
+      snapshotTest({ t, methodProps, data })),
+)

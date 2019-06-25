@@ -52,6 +52,7 @@ const validateOpts = function({ opts, defaultOpts, forcedOpts }) {
 
 const DEFAULT_OPTS = {
   verbose: true,
+  preferLocal: true,
 }
 
 const EXAMPLE_OPTS = {
