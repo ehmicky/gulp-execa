@@ -15,6 +15,9 @@ const replacePart = function(message, [before, after]) {
 const REPLACEMENTS = [
   // Windows
   [/\r\n/gu, '\n'],
+  // Different exit codes across OS
+  [/exit code 1 \(Unknown system error -1\)/gu, 'ENOENT'],
+  [/exit code 2 \(ENOENT\)/gu, 'ENOENT'],
   // File paths
   [/[^ (\n]+\/[^ )\n]+/gu, '/path'],
   // Node <12 prints errors differently
