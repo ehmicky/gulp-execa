@@ -57,9 +57,9 @@ testEach(METHODS, [{}, { opts: {} }], ({ title }, methodProps, data) =>
 testEach(
   METHODS,
   [
-    { command: 'ava --version', opts: { env: { PATH: '' } } },
+    { command: 'gulp --version', opts: { env: { PATH: '' } } },
     {
-      command: 'ava --version',
+      command: 'gulp --version',
       opts: { env: { PATH: '' }, preferLocal: false },
     },
   ],
