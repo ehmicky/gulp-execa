@@ -1,10 +1,10 @@
 import test from 'ava'
-import testEach from 'test-each'
+import { each } from 'test-each'
 
 import { snapshotTest } from './helpers/snapshot.js'
 import { METHODS } from './helpers/methods.js'
 
-testEach(
+each(
   METHODS,
   [{ command: true }, { command: ' ' }],
   ({ title }, methodProps, data) =>
@@ -12,7 +12,7 @@ testEach(
       snapshotTest({ t, methodProps, data })),
 )
 
-testEach(
+each(
   METHODS,
   [{ opts: { uid: 0.5 } }, { command: 'invalid', read: false }],
   ({ title }, methodProps, data) =>

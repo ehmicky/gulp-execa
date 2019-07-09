@@ -1,10 +1,10 @@
 import test from 'ava'
-import testEach from 'test-each'
+import { each } from 'test-each'
 
 import { snapshotTest } from './helpers/snapshot.js'
 import { METHODS } from './helpers/methods.js'
 
-testEach(
+each(
   METHODS,
   [
     { opts: false },
@@ -42,7 +42,7 @@ testEach(
       snapshotTest({ t, methodProps, data })),
 )
 
-testEach(
+each(
   METHODS,
   [{ opts: { env: {} } }, { opts: { env: { test: true } } }],
   ({ title }, methodProps, data) =>
@@ -50,11 +50,11 @@ testEach(
       snapshotTest({ t, methodProps, data })),
 )
 
-testEach(METHODS, [{}, { opts: {} }], ({ title }, methodProps, data) =>
+each(METHODS, [{}, { opts: {} }], ({ title }, methodProps, data) =>
   test(`No options | ${title}`, t => snapshotTest({ t, methodProps, data })),
 )
 
-testEach(
+each(
   METHODS,
   [
     { command: 'gulp --version', opts: { env: { PATH: '' } } },
