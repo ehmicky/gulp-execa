@@ -35,7 +35,9 @@ Commands can be executed either directly or inside a
   not [serially](https://github.com/rvagg/through2)
 - output can be saved [either in files or in variables](#result)
 
-Example `gulpfile.js`:
+# Example
+
+`gulpfile.js`:
 
 ```js
 const { src, dest } = require('gulp')
