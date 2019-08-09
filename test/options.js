@@ -56,13 +56,7 @@ each(METHODS, [{}, { opts: {} }], ({ title }, methodProps, data) =>
 
 each(
   METHODS,
-  [
-    { command: 'gulp --version', opts: { env: { PATH: '' } } },
-    {
-      command: 'gulp --version',
-      opts: { env: { PATH: '' }, preferLocal: false },
-    },
-  ],
+  [{ command: 'gulp --version', opts: { env: { PATH: '' } } }],
   ({ title }, methodProps, data) =>
     test(`Default options | ${title}`, t =>
       snapshotTest({ t, methodProps, data })),
