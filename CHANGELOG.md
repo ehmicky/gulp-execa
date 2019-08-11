@@ -1,3 +1,10 @@
+# 0.8.1
+
+## Bug fixes
+
+- Fix errors being thrown when the `detached` or `cleanup` options are used
+  (https://github.com/sindresorhus/execa/pull/360)
+
 # 0.8.0
 
 ## Features
