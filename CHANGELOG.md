@@ -1,9 +1,28 @@
-# 0.8.1
+# 1.0.1
 
 ## Bug fixes
 
 - Fix errors being thrown when the `detached` or `cleanup` options are used
   (https://github.com/sindresorhus/execa/pull/360)
+
+# 1.0.0
+
+## Features
+
+- Upgrade to latest execa release
+  [2.0.0](https://medium.com/@ehmicky/execa-v2-20ffafeedfdf)
+
+# 0.9.1
+
+## Internal
+
+- Fix some tests
+
+# 0.9.0
+
+## Internal
+
+- Only internal changes and documentation updates
 
 # 0.8.0
 
