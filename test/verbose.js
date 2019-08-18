@@ -18,7 +18,7 @@ each(
     { opts: { verbose: true, stdio: 'pipe', stdout: 'pipe', stderr: 'pipe' } },
   ],
   ({ title }, methodProps, data) =>
-    test(`'verbose' option | ${title}`, t => {
-      snapshotTest({ t, methodProps, data })
+    test(`'verbose' option | ${title}`, async t => {
+      await snapshotTest({ t, methodProps, data })
     }),
 )
