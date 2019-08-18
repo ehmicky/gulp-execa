@@ -38,26 +38,31 @@ each(
     { opts: { from: 'invalid' } },
   ],
   ({ title }, methodProps, data) =>
-    test(`Invalid options | ${title}`, t =>
-      snapshotTest({ t, methodProps, data })),
+    test(`Invalid options | ${title}`, t => {
+      snapshotTest({ t, methodProps, data })
+    }),
 )
 
 each(
   METHODS,
   [{ opts: { env: {} } }, { opts: { env: { test: true } } }],
   ({ title }, methodProps, data) =>
-    test(`Valid options | ${title}`, t =>
-      snapshotTest({ t, methodProps, data })),
+    test(`Valid options | ${title}`, t => {
+      snapshotTest({ t, methodProps, data })
+    }),
 )
 
 each(METHODS, [{}, { opts: {} }], ({ title }, methodProps, data) =>
-  test(`No options | ${title}`, t => snapshotTest({ t, methodProps, data })),
+  test(`No options | ${title}`, t => {
+    snapshotTest({ t, methodProps, data })
+  }),
 )
 
 each(
   METHODS,
   [{ command: 'gulp --version', opts: { env: { PATH: '' } } }],
   ({ title }, methodProps, data) =>
-    test(`Default options | ${title}`, t =>
-      snapshotTest({ t, methodProps, data })),
+    test(`Default options | ${title}`, t => {
+      snapshotTest({ t, methodProps, data })
+    }),
 )

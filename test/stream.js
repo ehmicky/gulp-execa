@@ -21,5 +21,7 @@ each(
     { opts: { stripFinalNewline: true } },
   ],
   ({ title }, methodProps, data) =>
-    test(`stream() | ${title}`, t => snapshotTest({ t, methodProps, data })),
+    test(`stream() | ${title}`, t => {
+      snapshotTest({ t, methodProps, data })
+    }),
 )
