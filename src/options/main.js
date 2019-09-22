@@ -1,7 +1,7 @@
 import { validate } from 'jest-validate'
 import isPlainObj from 'is-plain-obj'
+import filterObj from 'filter-obj'
 
-import { pickBy } from '../utils.js'
 import { throwError } from '../error.js'
 
 import { CHILD_PROCESS_OPTS, EXECA_OPTS } from './upstream.js'
@@ -20,7 +20,7 @@ export const parseOpts = function({
 }) {
   validateBasic(opts)
 
-  const optsA = pickBy(opts, value => value !== undefined)
+  const optsA = filterObj(opts, isDefined)
 
   validateOpts({ opts: optsA, defaultOpts, forcedOpts })
 
@@ -35,10 +35,14 @@ const validateBasic = function(opts) {
   }
 }
 
+const isDefined = function(key, value) {
+  return value !== undefined
+}
+
 const validateOpts = function({ opts, defaultOpts, forcedOpts }) {
-  const exampleConfig = pickBy(
+  const exampleConfig = filterObj(
     { ...EXAMPLE_OPTS, ...defaultOpts },
-    (value, key) => !hasOwnProperty.call(forcedOpts, key),
+    key => !hasOwnProperty.call(forcedOpts, key),
   )
 
   try {
