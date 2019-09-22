@@ -1,6 +1,7 @@
 import { validate } from 'jest-validate'
+import isPlainObj from 'is-plain-obj'
 
-import { isPlainObject, pickBy } from '../utils.js'
+import { pickBy } from '../utils.js'
 import { throwError } from '../error.js'
 
 import { CHILD_PROCESS_OPTS, EXECA_OPTS } from './upstream.js'
@@ -29,7 +30,7 @@ export const parseOpts = function({
 }
 
 const validateBasic = function(opts) {
-  if (!isPlainObject(opts)) {
+  if (!isPlainObj(opts)) {
     throwError(`Options must be a plain object: ${opts}`)
   }
 }

@@ -1,10 +1,10 @@
 import { callbackify } from 'util'
 
 import through from 'through2-concurrent'
+import isPlainObj from 'is-plain-obj'
 
 import { parseOpts } from '../options/main.js'
 import { throwError } from '../error.js'
-import { isPlainObject } from '../utils.js'
 
 import { getDefaultOpts, forcedOpts } from './options.js'
 import { setResult } from './result.js'
@@ -48,7 +48,7 @@ const execVinyl = callbackify(cExecVinyl)
 const getFileInput = async function({ getInput, file, opts }) {
   const result = await getInputResult({ getInput, file })
 
-  if (isPlainObject(result)) {
+  if (isPlainObj(result)) {
     const { command, ...fileOpts } = result
     return { input: command, opts: { ...opts, ...fileOpts } }
   }
