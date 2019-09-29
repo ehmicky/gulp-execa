@@ -55,7 +55,7 @@
     "core-js": "^3.2.1",
     "execa": "^2.0.5",
     "fancy-log": "^1.3.3",
-    "filter-obj": "^2.0.0",
+    "filter-obj": "^2.0.1",
     "is-plain-obj": "^2.0.0",
     "jest-validate": "^24.9.0",
     "plugin-error": "^1.0.1",
