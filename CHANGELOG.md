@@ -1,3 +1,9 @@
+# 1.0.2
+
+## Dependencies
+
+- [Upgrade `execa`](https://github.com/sindresorhus/execa/releases/tag/v3.0.0)
+
 # 1.0.1
 
 ## Bug fixes
