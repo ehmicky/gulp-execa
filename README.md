@@ -11,17 +11,17 @@
 
 As opposed to similar plugins or to
 [`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback),
-this uses [`execa`](https://github.com/sindresorhus/execa) which provides:
+this uses [Execa](https://github.com/sindresorhus/execa) which provides:
 
 - [Better Windows support](https://github.com/IndigoUnited/node-cross-spawn#why),
   including [shebangs](<https://en.wikipedia.org/wiki/Shebang_(Unix)>)
 - Faster and more secure commands, since [no shell is used by default](#command)
 - Execution of
-  [locally installed binaries](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#preferlocal)
+  [locally installed binaries](https://github.com/sindresorhus/execa#preferlocal)
 - [Interleaved](https://github.com/sindresorhus/execa#all-1) `stdout`/`stderr`
 
 `gulp-execa` adds Gulp-specific features to
-[`execa`](https://github.com/sindresorhus/execa) including:
+[Execa](https://github.com/sindresorhus/execa) including:
 
 - a [task shortcut syntax](#taskcommand-options)
 - configurable [verbosity](#echo)
@@ -74,24 +74,73 @@ This plugin requires Gulp 4.
 
 ## task(command, [options])
 
-Returns a Gulp task that executes
-`command`.<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#taskcommand-options).
+Returns a Gulp task that executes `command`.
+
+```js
+const { task } = require('gulp-execa')
+
+module.exports.audit = task('npm audit')
+```
 
 ## exec(command, [options])
 
 Executes `command`. The return value is both a promise and a
-[`child_process` instance](https://github.com/sindresorhus/execa#execacommand-options).<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#execcommand-options).
+[`child_process` instance](https://github.com/sindresorhus/execa#execacommand-options).
+
+The promise will be resolved with the
+[command result](https://github.com/sindresorhus/execa#childprocessresult). If
+the command failed, the promise will be rejected with a nice
+[error](https://github.com/sindresorhus/execa#childprocessresult). If the
+[`reject: false`](https://github.com/sindresorhus/execa#reject) option was used,
+the promise will be resolved with that error instead.
+
+```js
+const { exec } = require('gulp-execa')
+
+module.exports.outdated = async () => {
+  await exec('npm outdated')
+}
+```
 
 ## stream(function, [options])
 
-Returns a stream that executes a `command` on each input file. `function` must
-take a [file](https://gulpjs.com/docs/en/api/vinyl#instance-properties) as
-argument and return a `command`.
+Returns a stream that executes a `command` on each input file.
+
+`function` must:
+
+- take a [Vinyl file](https://gulpjs.com/docs/en/api/vinyl#instance-properties)
+  as argument. The most useful property is `file.path` but
+  [other properties](https://gulpjs.com/docs/en/api/vinyl#instance-properties)
+  are available as well.
+- return either:
+  - a `command` string
+  - an `options` object with a `command` property
+  - `undefined`
+
+```js
+const { src, dest } = require('gulp')
+const { stream } = require('gulp-execa')
+
+module.exports.sort = () =>
+  src('*.txt')
+    .pipe(stream(({ path }) => `sort ${path}`))
+    .pipe(dest('sorted'))
+```
 
 Each file in the stream will spawn a separate process. This can consume lots of
-resources so you should only use this method when there are no alternatives.
+resources so you should only use this method when there are no alternatives such
+as:
 
-[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#streamfunction-options).
+- firing a command programmatically instead of spawning a child process
+- passing several files, a directory or a globbing pattern as arguments to the
+  command
+
+The [`verbose`](#verbose),
+[`stdout`](https://github.com/sindresorhus/execa#stdout-1),
+[`stderr`](https://github.com/sindresorhus/execa#stderr-1),
+[`all`](https://github.com/sindresorhus/execa#all-2) and
+[`stdio`](https://github.com/sindresorhus/execa#stdio) options cannot be used
+with this method.
 
 # Command
 
@@ -104,7 +153,7 @@ should not be used. All of this can be done directly in Node.js instead.
 
 Shell interpreters are slower, less secure and less cross-platform. However, you
 can still opt-in to using them with the
-[`shell` option](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#shell).
+[`shell` option](https://github.com/sindresorhus/execa#shell).
 
 ```js
 const { writeFileStream } = require('fs')
@@ -130,39 +179,8 @@ module.exports.install = task('npm install', {
 
 `options` is an optional object.
 
-All options from both
-[`child_process.spawn()`](https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options)
-and
-[`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)
-are available:
-[`cwd`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#cwd),
-[`env`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#env),
-[`argv0`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#argv0),
-[`stdio`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stdio),
-[`detached`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#detached),
-[`uid`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#uid),
-[`gid`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#gid),
-[`shell`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#shell),
-[`encoding`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#encoding),
-[`timeout`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#timeout),
-[`maxBuffer`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#maxbuffer),
-[`killSignal`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#killsignal),
-[`windowsVerbatimArguments`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#windowsverbatimarguments),
-[`windowsHide`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#windowshide).
-
-All [`execa` options](https://github.com/sindresorhus/execa#options) can also be
-used:
-[`cleanup`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#cleanup),
-[`preferLocal`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#preferlocal),
-[`localDir`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#localdir),
-[`buffer`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#buffer),
-[`input`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#input),
-[`stdin`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stdin),
-[`stdout`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stdout),
-[`stderr`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stderr),
-[`reject`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#reject),
-[`stripFinalNewline`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#stripfinalnewline),
-[`extendEnv`](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#extendenv).
+[All Execa options](https://github.com/sindresorhus/execa#options) can be used.
+Please refer to its documentation for a list of possible options.
 
 The following options are available as well.
 
@@ -173,7 +191,14 @@ _Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskcommand-options) and
 [`stream()`](#streamfunction-options).
 
 Whether the `command` should be printed on the console.
-<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#echo).
+
+```bash
+$ gulp audit
+[13:09:39] Using gulpfile ~/code/gulpfile.js
+[13:09:39] Starting 'audit'...
+[13:09:39] [gulp-execa] npm audit
+[13:09:44] Finished 'audit' after 4.96 s
+```
 
 ## verbose
 
@@ -183,7 +208,19 @@ _Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskcommand-options) and
 
 Whether both the `command` and its output (`stdout`/`stderr`) should be printed
 on the console instead of being returned in JavaScript.
-<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#verbose).
+
+```bash
+$ gulp audit
+[13:09:39] Using gulpfile ~/code/gulpfile.js
+[13:09:39] Starting 'audit'...
+[13:09:39] [gulp-execa] npm audit
+
+                        == npm audit security report ===
+
+found 0 vulnerabilities
+ in 27282 scanned packages
+[13:09:44] Finished 'audit' after 4.96 s
+```
 
 ## result
 
@@ -195,7 +232,22 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 - `save`: [be pushed](https://github.com/sindresorhus/execa#childprocessresult)
   to the `file.execa` array property
 
-[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#result).
+```js
+const { src } = require('gulp')
+const { stream } = require('gulp-execa')
+const through = require('through2')
+
+module.exports.default = () =>
+  src('*.js')
+    // Prints the number of lines of each file
+    .pipe(stream(({ path }) => `wc -l ${path}`, { result: 'save' }))
+    .pipe(
+      through.obj((file, encoding, func) => {
+        console.log(file.execa[0].stdout)
+        func(null, file)
+      }),
+    )
+```
 
 ## from
 
@@ -203,7 +255,25 @@ _Type_: `string`<br> _Value_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_:
 `'stdout'`
 
 Which output stream to use with [`result: 'replace'`](#result).
-<br>[Full documentation](https://github.com/ehmicky/gulp-execa/blob/master/docs/API.md#from).
+
+```js
+const { src } = require('gulp')
+const { stream } = require('gulp-execa')
+const through = require('through2')
+
+module.exports.default = () =>
+  src('*.js')
+    // Prints the number of lines of each file, including `stderr`
+    .pipe(
+      stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),
+    )
+    .pipe(
+      through.obj((file, encoding, func) => {
+        console.log(file.contents.toString())
+        func(null, file)
+      }),
+    )
+```
 
 ## maxConcurrency
 
@@ -214,7 +284,7 @@ at once.
 
 # See also
 
-- [`execa`](https://github.com/sindresorhus/execa)
+- [Execa](https://github.com/sindresorhus/execa)
 
 # Support
 
