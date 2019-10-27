@@ -1,3 +1,13 @@
+# 1.0.3
+
+## Bug fixes
+
+- Default the [`all` option](https://github.com/sindresorhus/execa#all-2) to
+  `true` when [`from: 'all'`](https://github.com/ehmicky/gulp-execa#from) is
+  used.
+- Allow passing the
+  [`execPath` Execa option](https://github.com/sindresorhus/execa#execpath)
+
 # 1.0.2
 
 ## Dependencies
