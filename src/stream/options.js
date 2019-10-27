@@ -1,4 +1,6 @@
-export const getDefaultOpts = function({ opts: { result = 'replace' } = {} }) {
+export const getDefaultOpts = function({
+  opts: { result = 'replace', from } = {},
+}) {
   return {
     // This is too verbose if done on each iteration, even on CI
     verbose: false,
@@ -9,6 +11,8 @@ export const getDefaultOpts = function({ opts: { result = 'replace' } = {} }) {
     result: 'replace',
     // With `result: 'replace'` which stream to use: `stdout`, `stderr` or `all`
     from: 'stdout',
+    // `from: 'all`` requires the `all` option
+    all: from === 'all',
     ...resultDefaultOpts[result],
   }
 }

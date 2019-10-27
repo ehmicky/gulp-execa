@@ -33,6 +33,8 @@ export const EXECA_OPTS = {
   input: multipleValidOptions('input', Buffer.from(''), stream),
   reject: true,
   cleanup: true,
+  all: true,
+  execPath: '/usr/bin/noed',
   timeout: 5000,
   buffer: true,
   maxBuffer: 1e8,

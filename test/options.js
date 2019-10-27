@@ -26,6 +26,8 @@ each(
     { opts: { input: false } },
     { opts: { reject: '' } },
     { opts: { cleanup: '' } },
+    { opts: { all: '' } },
+    { opts: { execPath: false } },
     { opts: { timeout: false } },
     { opts: { buffer: '' } },
     { opts: { maxBuffer: false } },
