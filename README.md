@@ -186,9 +186,9 @@ The following options are available as well.
 
 ## echo
 
-_Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskcommand-options) and
-[`exec()`](#execcommand-options), `false` for
-[`stream()`](#streamfunction-options).
+_Type_: `boolean`\
+_Default_: `true` for [`task()`](#taskcommand-options) and [`exec()`](#execcommand-options),
+`false` for [`stream()`](#streamfunction-options).
 
 Whether the `command` should be printed on the console.
 
@@ -202,9 +202,9 @@ $ gulp audit
 
 ## verbose
 
-_Type_: `boolean`<br> _Default_: `true` for [`task()`](#taskcommand-options) and
-[`exec()`](#execcommand-options), `false` for
-[`stream()`](#streamfunction-options).
+_Type_: `boolean`\
+_Default_: `true` for [`task()`](#taskcommand-options) and [`exec()`](#execcommand-options),
+`false` for [`stream()`](#streamfunction-options).
 
 Whether both the `command` and its output (`stdout`/`stderr`) should be printed
 on the console instead of being returned in JavaScript.
@@ -224,7 +224,9 @@ found 0 vulnerabilities
 
 ## result
 
-_Type_: `string`<br> _Value_: `'replace'` or `'save'`<br> _Default_: `'replace'`
+_Type_: `string`\
+_Value_: `'replace'` or `'save'`\
+_Default_: `'replace'`
 
 With [`stream()`](#streamfunction-options), whether the command result should:
 
@@ -251,8 +253,9 @@ module.exports.default = () =>
 
 ## from
 
-_Type_: `string`<br> _Value_: `'stdout'`, `'stderr'` or `'all'`<br> _Default_:
-`'stdout'`
+_Type_: `string`\
+_Value_: `'stdout'`, `'stderr'` or `'all'`\
+_Default_: `'stdout'`
 
 Which output stream to use with [`result: 'replace'`](#result).
 
@@ -277,7 +280,8 @@ module.exports.default = () =>
 
 ## maxConcurrency
 
-_Type_: `integer`<br> _Default_: `100`
+_Type_: `integer`\
+_Default_: `100`
 
 With [`stream()`](#streamfunction-options), how many commands to run in parallel
 at once.
