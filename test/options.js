@@ -12,6 +12,7 @@ each(
     { opts: { env: false } },
     { opts: { argv0: false } },
     { opts: { stdio: false } },
+    { opts: { serialization: false } },
     { opts: { detached: '' } },
     { opts: { uid: false } },
     { opts: { gid: false } },

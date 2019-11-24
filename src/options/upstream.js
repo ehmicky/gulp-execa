@@ -8,6 +8,7 @@ export const CHILD_PROCESS_OPTS = {
   env: { HOME: '/home/user' },
   argv0: 'command',
   stdio: multipleValidOptions('pipe', ['pipe', 'pipe', 'pipe']),
+  serialization: 'json',
   detached: false,
   uid: 0,
   gid: 0,
