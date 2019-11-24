@@ -1,3 +1,11 @@
+# 1.1.0
+
+## Features
+
+- Add
+  [`serialization` option](https://github.com/sindresorhus/execa/blob/master/readme.md#serialization).
+  That option was added to `child_process` methods in Node.js `13.2.0`.
+
 # 1.0.3
 
 ## Bug fixes
