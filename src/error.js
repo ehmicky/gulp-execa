@@ -9,6 +9,14 @@ export const throwError = function(error, opts) {
 // are kept. They are not printed though, as error message should be enough.
 export const createError = function(error, opts) {
   const errorA = error instanceof Error ? error : new Error(error)
+
+  if (errorA.shortMessage !== undefined) {
+    // eslint-disable-next-line fp/no-mutation
+    errorA.message = errorA.shortMessage
+    // eslint-disable-next-line fp/no-delete
+    delete errorA.shortMessage
+  }
+
   return new PluginError({ ...PLUGIN_ERROR_OPTS, ...opts, error: errorA })
 }
 
