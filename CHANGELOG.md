@@ -1,3 +1,20 @@
+# 2.0.0
+
+## Breaking changes
+
+- Minimal supported Node.js version is now `10.17.0`
+- Add `stderr` and `stdout` to
+  [`error.message`](https://github.com/sindresorhus/execa#message). A new
+  property
+  [`error.shortMessage`](https://github.com/sindresorhus/execa#shortmessage) is
+  now available to retrieve the error message without `stderr` nor `stdout`
+  (#397)
+
+## Features
+
+- Upgrade to
+  [Execa `4.0.0`](https://github.com/sindresorhus/execa/releases/tag/v4.0.0)
+
 # 1.1.0
 
 ## Features
