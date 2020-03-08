@@ -40,6 +40,8 @@ const isDefined = function(key, value) {
 }
 
 const validateOpts = function({ opts, defaultOpts, forcedOpts }) {
+  validateCustom({ opts })
+
   const exampleConfig = filterObj(
     { ...EXAMPLE_OPTS, ...defaultOpts },
     key => !hasOwnProperty.call(forcedOpts, key),
@@ -51,8 +53,6 @@ const validateOpts = function({ opts, defaultOpts, forcedOpts }) {
     // `jest-validate` `error.stack` just repeats `error.message`
     throwError(error, { showStack: false })
   }
-
-  validateCustom({ opts })
 }
 
 const DEFAULT_OPTS = {
