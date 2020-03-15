@@ -47,9 +47,9 @@ each(
 )
 
 each(
-  METHODS,
   [{ opts: { env: {} } }, { opts: { env: { test: true } } }],
-  ({ title }, methodProps, data) =>
+  METHODS,
+  ({ title }, data, methodProps) =>
     test(`Valid options | ${title}`, async (t) => {
       await snapshotTest({ t, methodProps, data })
     }),
