@@ -1,5 +1,5 @@
 // Translate `verbose` option into `stdout|stderr|echo` options
-export const addVerbose = function({
+export const addVerbose = function ({
   opts: { verbose, ...opts },
   opts: { stdio },
 }) {

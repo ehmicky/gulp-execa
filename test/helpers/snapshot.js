@@ -7,7 +7,7 @@ const GULPFILES_DIR = `${__dirname}/gulpfiles`
 // Almost all unit tests follow the same principle by calling this helper:
 //   - `gulp --gulpfile GULPFILE TASK` is fired using `execa`
 //   - the exit code, stdout and stderr are snapshot
-export const snapshotTest = async function({ t, methodProps = {}, data }) {
+export const snapshotTest = async function ({ t, methodProps = {}, data }) {
   const opts = getOpts({ methodProps, data })
   const { exitCode, stdout, stderr } = await fireTask({
     ...methodProps,
@@ -17,7 +17,7 @@ export const snapshotTest = async function({ t, methodProps = {}, data }) {
   t.snapshot({ exitCode, stdout, stderr })
 }
 
-const getOpts = function({ methodProps, data }) {
+const getOpts = function ({ methodProps, data }) {
   // Allows testing when `opts` is `undefined`
   if (methodProps.opts === undefined && data.opts === undefined) {
     return
@@ -26,7 +26,7 @@ const getOpts = function({ methodProps, data }) {
   return mergeOpts({ methodProps, data })
 }
 
-const mergeOpts = function({ methodProps, data }) {
+const mergeOpts = function ({ methodProps, data }) {
   // Allows testing for invalid `opts` and `opts: Object.create(null)`
   if (data.opts === false || methodProps.opts === undefined) {
     return data.opts
@@ -35,7 +35,7 @@ const mergeOpts = function({ methodProps, data }) {
   return { ...methodProps.opts, ...data.opts }
 }
 
-const fireTask = async function({
+const fireTask = async function ({
   // Test gulpfile to use
   method,
   // Gulp task name
@@ -61,7 +61,7 @@ const fireTask = async function({
   return { exitCode, stdout: stdoutA, stderr: stderrA }
 }
 
-const getExecaOpts = function({
+const getExecaOpts = function ({
   command,
   opts,
   buffer,

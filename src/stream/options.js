@@ -1,4 +1,4 @@
-export const getDefaultOpts = function({
+export const getDefaultOpts = function ({
   opts: { result = 'replace', from } = {},
 }) {
   return {

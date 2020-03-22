@@ -69,7 +69,7 @@ export const inputThrowsAsync = () =>
     stream(() => Promise.reject(new Error('error')), opts),
   )
 
-const cExecVinyl = async function(file) {
+const cExecVinyl = async function (file) {
   // When `file.contents` is a stream and an `error` event should be emitted,
   // we should not read the stream with `get-stream`. Otherwise Gulp will
   // consider the stream finished and not error.
@@ -87,7 +87,7 @@ const cExecVinyl = async function(file) {
 const execVinyl = callbackify(cExecVinyl)
 
 // Each method must be stringified differently
-const stringifyContents = function({ contents, execa }) {
+const stringifyContents = function ({ contents, execa }) {
   if (execa !== undefined) {
     return JSON.stringify(execa, null, 2)
   }

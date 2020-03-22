@@ -6,7 +6,7 @@ import { printEcho } from './echo.js'
 import { throwError } from './error.js'
 
 // Execute a child process (command + arguments)
-export const exec = function(input, opts) {
+export const exec = function (input, opts) {
   validateInput(input)
   const optsA = parseOpts({ opts })
 
@@ -14,7 +14,7 @@ export const exec = function(input, opts) {
 }
 
 // Fire the command with `execa.command()` in promise mode
-export const execCommand = async function(input, opts) {
+export const execCommand = async function (input, opts) {
   printEcho({ input, opts })
 
   try {
@@ -25,7 +25,7 @@ export const execCommand = async function(input, opts) {
 }
 
 // Fire the command with `execa.command()` in stream mode
-export const streamCommand = function(input, opts) {
+export const streamCommand = function (input, opts) {
   printEcho({ input, opts })
 
   try {

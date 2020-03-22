@@ -21,7 +21,7 @@ each(
     { opts: { stripFinalNewline: true } },
   ],
   ({ title }, methodProps, data) =>
-    test(`stream() | ${title}`, async t => {
+    test(`stream() | ${title}`, async (t) => {
       await snapshotTest({ t, methodProps, data })
     }),
 )

@@ -13,7 +13,7 @@ import { addVerbose } from './verbose.js'
 const { hasOwnProperty } = Object.prototype
 
 // Parse options
-export const parseOpts = function({
+export const parseOpts = function ({
   opts = {},
   defaultOpts = {},
   forcedOpts = {},
@@ -29,22 +29,22 @@ export const parseOpts = function({
   return optsC
 }
 
-const validateBasic = function(opts) {
+const validateBasic = function (opts) {
   if (!isPlainObj(opts)) {
     throwError(`Options must be a plain object: ${opts}`)
   }
 }
 
-const isDefined = function(key, value) {
+const isDefined = function (key, value) {
   return value !== undefined
 }
 
-const validateOpts = function({ opts, defaultOpts, forcedOpts }) {
+const validateOpts = function ({ opts, defaultOpts, forcedOpts }) {
   validateCustom({ opts })
 
   const exampleConfig = filterObj(
     { ...EXAMPLE_OPTS, ...defaultOpts },
-    key => !hasOwnProperty.call(forcedOpts, key),
+    (key) => !hasOwnProperty.call(forcedOpts, key),
   )
 
   try {

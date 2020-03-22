@@ -8,7 +8,7 @@ each(
   METHODS,
   [{ opts: { echo: false } }, { opts: { echo: true } }],
   ({ title }, methodProps, data) =>
-    test(`'echo' option | ${title}`, async t => {
+    test(`'echo' option | ${title}`, async (t) => {
       await snapshotTest({ t, methodProps, data })
     }),
 )
