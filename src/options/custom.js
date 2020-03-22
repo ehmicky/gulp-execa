@@ -8,8 +8,8 @@ export const validateCustom = function ({ opts }) {
 }
 
 const ENUM_OPTS = {
-  result: ['save', 'replace'],
-  from: ['stdout', 'stderr', 'all'],
+  result: new Set(['save', 'replace']),
+  from: new Set(['stdout', 'stderr', 'all']),
 }
 
 // Validate an enum option
@@ -18,11 +18,13 @@ const validateEnum = function ({
   allowed,
   opts: { [attrName]: value },
 }) {
-  if (value === undefined || allowed.includes(value)) {
+  if (value === undefined || allowed.has(value)) {
     return
   }
 
   throwError(
-    `Option '${attrName}' '${value}' must be one of: ${allowed.join(', ')}`,
+    `Option '${attrName}' '${value}' must be one of: ${[...allowed].join(
+      ', ',
+    )}`,
   )
 }
