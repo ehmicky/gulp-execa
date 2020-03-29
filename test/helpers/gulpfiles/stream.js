@@ -1,9 +1,9 @@
-import { callbackify } from 'util'
 import { Buffer } from 'buffer'
+import { callbackify } from 'util'
 
+import getStream from 'get-stream'
 import { src } from 'gulp'
 import through from 'through2-concurrent'
-import getStream from 'get-stream'
 
 import { stream } from '../../../src/main.js'
 

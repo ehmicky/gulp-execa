@@ -1,8 +1,8 @@
 import renameFn from 'rename-fn'
 
+import { execCommand } from './exec.js'
 import { validateInput } from './input.js'
 import { parseOpts } from './options/main.js'
-import { execCommand } from './exec.js'
 
 // Create a Gulp task that fires a child process (command + arguments)
 export const task = function (input, opts) {

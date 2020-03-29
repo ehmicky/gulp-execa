@@ -1,11 +1,11 @@
-import { validate } from 'jest-validate'
-import isPlainObj from 'is-plain-obj'
 import filterObj from 'filter-obj'
+import isPlainObj from 'is-plain-obj'
+import { validate } from 'jest-validate'
 
 import { throwError } from '../error.js'
 
-import { CHILD_PROCESS_OPTS, EXECA_OPTS } from './upstream.js'
 import { validateCustom } from './custom.js'
+import { CHILD_PROCESS_OPTS, EXECA_OPTS } from './upstream.js'
 import { addVerbose } from './verbose.js'
 
 // Makes it work with `Object.create(null)`

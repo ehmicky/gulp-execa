@@ -1,8 +1,8 @@
 import { Buffer } from 'buffer'
 
-import { isValidInput } from '../input.js'
-import { execCommand, streamCommand } from '../exec.js'
 import { createError, throwError } from '../error.js'
+import { execCommand, streamCommand } from '../exec.js'
+import { isValidInput } from '../input.js'
 
 // Decides what to do with the child process result according to `opts.result`:
 //  - `save`: pushed to `file.execa`

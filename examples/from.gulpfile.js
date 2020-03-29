@@ -4,6 +4,7 @@
 //   - then `bash node_modules/gulp-execa/examples/from.sh`
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/gulp-execa
+/* jscpd:ignore-start */
 
 'use strict'
 
@@ -11,8 +12,8 @@
 require('./utils.js')
 
 const { src } = require('gulp')
-const through = require('through2')
 const { stream } = require('gulp-execa')
+const through = require('through2')
 
 module.exports.default = () =>
   src('*.js')
@@ -26,3 +27,4 @@ module.exports.default = () =>
         func(null, file)
       }),
     )
+/* jscpd:ignore-end */

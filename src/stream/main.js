@@ -1,10 +1,10 @@
 import { callbackify } from 'util'
 
-import through from 'through2-concurrent'
 import isPlainObj from 'is-plain-obj'
+import through from 'through2-concurrent'
 
-import { parseOpts } from '../options/main.js'
 import { throwError } from '../error.js'
+import { parseOpts } from '../options/main.js'
 
 import { getDefaultOpts, forcedOpts } from './options.js'
 import { setResult } from './result.js'

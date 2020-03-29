@@ -1,9 +1,9 @@
 import execa from 'execa'
 
-import { validateInput } from './input.js'
-import { parseOpts } from './options/main.js'
 import { printEcho } from './echo.js'
 import { throwError } from './error.js'
+import { validateInput } from './input.js'
+import { parseOpts } from './options/main.js'
 
 // Execute a child process (command + arguments)
 export const exec = function (input, opts) {
