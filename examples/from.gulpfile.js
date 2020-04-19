@@ -24,6 +24,7 @@ module.exports.default = () =>
     .pipe(
       through.obj((file, encoding, func) => {
         console.log(file.contents.toString())
+        // eslint-disable-next-line unicorn/no-null
         func(null, file)
       }),
     )
