@@ -10,7 +10,7 @@ export const task = function (input, opts) {
     validateInput(input)
     const optsA = parseOpts({ opts })
 
-    const gulpTask = execCommand.bind(null, input, optsA)
+    const gulpTask = execCommand.bind(undefined, input, optsA)
 
     // Log the command and arguments as the task name.
     // This does not work when this is the top-level task.

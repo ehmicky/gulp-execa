@@ -23,7 +23,7 @@ export const stream = function (getInput, opts) {
 
   return through.obj(
     { maxConcurrency },
-    execVinyl.bind(null, { getInput, opts: optsA, resultOpt }),
+    execVinyl.bind(undefined, { getInput, opts: optsA, resultOpt }),
   )
 }
 

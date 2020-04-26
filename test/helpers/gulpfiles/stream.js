@@ -89,7 +89,7 @@ const execVinyl = callbackify(cExecVinyl)
 // Each method must be stringified differently
 const stringifyContents = function ({ contents, execa }) {
   if (execa !== undefined) {
-    return JSON.stringify(execa, null, 2)
+    return JSON.stringify(execa, undefined, 2)
   }
 
   if (Buffer.isBuffer(contents)) {
