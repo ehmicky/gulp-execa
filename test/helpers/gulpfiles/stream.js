@@ -35,7 +35,7 @@ export const inputFile = () =>
 // File should be skipped when returning a non-string
 export const inputUndefined = () =>
   src(DUMMY, { buffer })
-    .pipe(stream(() => undefined, opts))
+    .pipe(stream(() => {}, opts))
     .pipe(through.obj(execVinyl))
 
 // Should allow several files
