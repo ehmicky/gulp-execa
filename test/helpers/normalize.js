@@ -36,10 +36,15 @@ const REPLACEMENTS = [
   [/(([ \t]+)at STACK TRACE(\r?\n)?)+/gu, '$2at STACK TRACE$3'],
   // Gulp shows file content that triggered an error
   [/[^]+Error:/gu, ''],
+  // Gulp warning
+  [/.*DEP0097.*/gu, ''],
+  [/.*node --trace-deprecation.*/gu, ''],
   // Timestamps
   [/\[\d{2}:\d{2}:\d{2}\]/gu, '[12:00:00]'],
   // Duration
   [/(\d+\.)?\d+ (([μnm]?s)|(min))/gu, '100 ms'],
+  // Versions
+  [/\d+\.\d+\.\d+/gu, '1.0.0'],
   // Make snapshots less verbose
   [/.*Working directory changed.*/gu, ''],
   [/.*Using gulpfile.*/gu, ''],
