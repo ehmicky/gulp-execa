@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/ehmicky/design/master/gulp-execa/gulp-execa.svg?sanitize=true" width="500"/>
+<img src="https://raw.githubusercontent.com/ehmicky/design/main/gulp-execa/gulp-execa.svg?sanitize=true" width="500"/>
 
 [![Codecov](https://img.shields.io/codecov/c/github/ehmicky/gulp-execa.svg?label=tested&logo=codecov)](https://codecov.io/gh/ehmicky/gulp-execa)
 [![Build](https://github.com/ehmicky/gulp-execa/workflows/Build/badge.svg)](https://github.com/ehmicky/gulp-execa/actions)
