@@ -48,7 +48,7 @@ const validateOpts = function ({ opts, defaultOpts, forcedOpts }) {
   )
 
   try {
-    validate(opts, { exampleConfig, recursiveBlacklist: ['env'] })
+    validate(opts, { exampleConfig, recursiveDenylist: ['env'] })
   } catch (error) {
     // `jest-validate` `error.stack` just repeats `error.message`
     throwError(error, { showStack: false })
