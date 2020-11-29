@@ -15,7 +15,7 @@ each(
 
 each(
   METHODS,
-  [{ opts: { uid: 0.5 } }, { command: 'invalid', read: false }],
+  [{ opts: { uid: 0.5 } }, { command: 'node --invalid', read: false }],
   ({ title }, methodProps, data) =>
     test(`Errored command | ${title}`, async (t) => {
       await snapshotTest({ t, methodProps, data })
