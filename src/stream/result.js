@@ -57,7 +57,10 @@ const streamResult = function ({ file, input, opts, opts: { from } }) {
   }
 
   // Make stream fail if the command fails
-  execaPromise.catch((error) => stream.emit('error', createError(error)))
+  // eslint-disable-next-line promise/prefer-await-to-callbacks
+  execaPromise.catch((error) => {
+    stream.emit('error', createError(error))
+  })
 
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.contents = stream
