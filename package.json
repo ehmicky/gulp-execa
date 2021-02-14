@@ -64,6 +64,7 @@
   "devDependencies": {
     "@ehmicky/dev-tasks": "^0.31.83",
     "get-stream": "^6.0.0",
+    "gulp": "^4.0.2",
     "strip-ansi": "^6.0.0",
     "test-each": "^2.0.1"
   },
