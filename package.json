@@ -62,7 +62,7 @@
     "through2-concurrent": "^2.0.0"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^0.31.79",
+    "@ehmicky/dev-tasks": "^0.31.81",
     "get-stream": "^6.0.0",
     "husky": "^4.3.8",
     "strip-ansi": "^6.0.0",
