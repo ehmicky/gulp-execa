@@ -15,7 +15,11 @@ export const stream = function (getInput, opts) {
   validateGetInput(getInput)
 
   const defaultOpts = getDefaultOpts({ opts })
-  const { maxConcurrency, result: resultOpt, ...optsA } = parseOpts({
+  const {
+    maxConcurrency,
+    result: resultOpt,
+    ...optsA
+  } = parseOpts({
     opts,
     defaultOpts,
     forcedOpts,
