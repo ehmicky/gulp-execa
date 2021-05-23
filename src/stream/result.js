@@ -53,11 +53,12 @@ const streamResult = function ({ file, input, opts, opts: { from } }) {
   // When `child_process.spawn()` throws synchronously, e.g. on invalid
   // option like `{uid: 0.5}`
   if (stream === undefined) {
+    // eslint-disable-next-line promise/prefer-await-to-then
     return execaPromise.catch(throwError)
   }
 
   // Make stream fail if the command fails
-  // eslint-disable-next-line promise/prefer-await-to-callbacks
+  // eslint-disable-next-line promise/prefer-await-to-then, promise/prefer-await-to-callbacks
   execaPromise.catch((error) => {
     stream.emit('error', createError(error))
   })
