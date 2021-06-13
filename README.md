@@ -38,20 +38,23 @@ Commands can be executed either directly or inside a
 
 `gulpfile.js`:
 
+<!-- eslint-disable node/no-extraneous-import -->
+
 ```js
-const { src, dest } = require('gulp')
-const { task, exec, stream } = require('gulp-execa')
+import gulp from 'gulp'
+import { task, exec, stream } from 'gulp-execa'
 
-module.exports.audit = task('npm audit')
+export const audit = task('npm audit')
 
-module.exports.outdated = async () => {
+export const outdated = async () => {
   await exec('npm outdated')
 }
 
-module.exports.sort = () =>
-  src('*.txt')
+export const sort = () =>
+  gulp
+    .src('*.txt')
     .pipe(stream(({ path }) => `sort ${path}`))
-    .pipe(dest('sorted'))
+    .pipe(gulp.dest('sorted'))
 ```
 
 # Demo
@@ -75,10 +78,12 @@ This plugin requires Gulp 4.
 
 Returns a Gulp task that executes `command`.
 
-```js
-const { task } = require('gulp-execa')
+<!-- eslint-disable node/no-extraneous-import -->
 
-module.exports.audit = task('npm audit')
+```js
+import { task } from 'gulp-execa'
+
+export const audit = task('npm audit')
 ```
 
 ## exec(command, [options])
@@ -93,10 +98,12 @@ the command failed, the promise will be rejected with a nice
 [`reject: false`](https://github.com/sindresorhus/execa#reject) option was used,
 the promise will be resolved with that error instead.
 
-```js
-const { exec } = require('gulp-execa')
+<!-- eslint-disable node/no-extraneous-import -->
 
-module.exports.outdated = async () => {
+```js
+import { exec } from 'gulp-execa'
+
+export const outdated = async () => {
   await exec('npm outdated')
 }
 ```
@@ -116,14 +123,17 @@ Returns a stream that executes a `command` on each input file.
   - an `options` object with a `command` property
   - `undefined`
 
-```js
-const { src, dest } = require('gulp')
-const { stream } = require('gulp-execa')
+<!-- eslint-disable node/no-extraneous-import -->
 
-module.exports.sort = () =>
-  src('*.txt')
+```js
+import gulp from 'gulp'
+import { stream } from 'gulp-execa'
+
+export const sort = () =>
+  gulp
+    .src('*.txt')
     .pipe(stream(({ path }) => `sort ${path}`))
-    .pipe(dest('sorted'))
+    .pipe(gulp.dest('sorted'))
 ```
 
 Each file in the stream will spawn a separate process. This can consume lots of
@@ -154,22 +164,25 @@ Shell interpreters are slower, less secure and less cross-platform. However, you
 can still opt-in to using them with the
 [`shell` option](https://github.com/sindresorhus/execa#shell).
 
+<!-- eslint-disable node/no-extraneous-import -->
+
 ```js
-const { writeFileStream } = require('fs')
+import { writeFileStream } from 'fs'
 
-const { series } = require('gulp')
-
-// Wrong
-module.exports.check = task('npm audit && npm outdated')
-
-// Correct
-module.exports.check = series(task('npm audit'), task('npm outdated'))
+import gulp from 'gulp'
+import { task } from 'gulp-execa'
 
 // Wrong
-module.exports.install = task('npm install > log.txt')
+// export const check = task('npm audit && npm outdated')
 
 // Correct
-module.exports.install = task('npm install', {
+export const check = gulp.series(task('npm audit'), task('npm outdated'))
+
+// Wrong
+// export const install = task('npm install > log.txt')
+
+// Correct
+export const install = task('npm install', {
   stdout: writeFileStream('log.txt'),
 })
 ```
@@ -233,15 +246,16 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 - `save`: [be pushed](https://github.com/sindresorhus/execa#childprocessresult)
   to the `file.execa` array property
 
-<!-- eslint-disable unicorn/no-null -->
+<!-- eslint-disable unicorn/no-null, node/no-extraneous-import -->
 
 ```js
-const { src } = require('gulp')
-const { stream } = require('gulp-execa')
-const through = require('through2')
+import gulp from 'gulp'
+import { stream } from 'gulp-execa'
+import through from 'through2'
 
-module.exports.default = () =>
-  src('*.js')
+export const task = () =>
+  gulp
+    .src('*.js')
     // Prints the number of lines of each file
     .pipe(stream(({ path }) => `wc -l ${path}`, { result: 'save' }))
     .pipe(
@@ -260,15 +274,16 @@ _Default_: `'stdout'`
 
 Which output stream to use with [`result: 'replace'`](#result).
 
-<!-- eslint-disable unicorn/no-null -->
+<!-- eslint-disable unicorn/no-null, node/no-extraneous-import -->
 
 ```js
-const { src } = require('gulp')
-const { stream } = require('gulp-execa')
-const through = require('through2')
+import gulp from 'gulp'
+import { stream } from 'gulp-execa'
+import through from 'through2'
 
-module.exports.default = () =>
-  src('*.js')
+export const task = () =>
+  gulp
+    .src('*.js')
     // Prints the number of lines of each file, including `stderr`
     .pipe(
       stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),
