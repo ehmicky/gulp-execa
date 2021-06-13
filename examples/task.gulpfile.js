@@ -5,8 +5,8 @@
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/gulp-execa
 
-'use strict'
+// eslint-disable-next-line node/no-extraneous-import
+import { task } from 'gulp-execa'
 
-const { task } = require('gulp-execa')
-
-module.exports.default = task('npm --version')
+// eslint-disable-next-line import/no-default-export
+export default task('npm --version')

@@ -5,10 +5,10 @@
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/gulp-execa
 
-'use strict'
+// eslint-disable-next-line node/no-extraneous-import, filenames/match-exported
+import { exec } from 'gulp-execa'
 
-const { exec } = require('gulp-execa')
-
-module.exports.default = async () => {
+// eslint-disable-next-line import/no-default-export
+export default async function task() {
   await exec('npm --version')
 }

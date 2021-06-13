@@ -6,23 +6,31 @@
 //   https://repl.it/@ehmicky/gulp-execa
 /* jscpd:ignore-start */
 
-'use strict'
+// eslint-disable-next-line filenames/match-exported
+import { src } from 'gulp'
+// eslint-disable-next-line node/no-extraneous-import
+import { stream } from 'gulp-execa'
+// eslint-disable-next-line node/no-extraneous-import
+import through from 'through2'
 
-const { src } = require('gulp')
-const { stream } = require('gulp-execa')
-const through = require('through2')
-
-module.exports.default = () =>
-  src('*.js')
-    // Prints the number of lines of each file, including `stderr`
-    .pipe(
-      stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),
-    )
-    .pipe(
-      through.obj((file, encoding, func) => {
-        console.log(file.contents.toString())
-        // eslint-disable-next-line unicorn/no-null
-        func(null, file)
-      }),
-    )
+// eslint-disable-next-line import/no-default-export
+export default function task() {
+  return (
+    src('*.js')
+      // Prints the number of lines of each file, including `stderr`
+      .pipe(
+        stream(({ path }) => `wc -l ${path}`, {
+          result: 'replace',
+          from: 'all',
+        }),
+      )
+      .pipe(
+        through.obj((file, encoding, func) => {
+          console.log(file.contents.toString())
+          // eslint-disable-next-line unicorn/no-null
+          func(null, file)
+        }),
+      )
+  )
+}
 /* jscpd:ignore-end */
