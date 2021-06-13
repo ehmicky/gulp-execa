@@ -1,8 +1,10 @@
+import { fileURLToPath } from 'url'
+
 import execa from 'execa'
 
 import { normalizeMessage } from './normalize.js'
 
-const GULPFILES_DIR = `${__dirname}/gulpfiles`
+const GULPFILES_DIR = fileURLToPath(new URL('gulpfiles', import.meta.url))
 
 // Almost all unit tests follow the same principle by calling this helper:
 //   - `gulp --gulpfile GULPFILE TASK` is fired using `execa`

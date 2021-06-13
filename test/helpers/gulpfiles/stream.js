@@ -1,4 +1,5 @@
 import { Buffer } from 'buffer'
+import { fileURLToPath } from 'url'
 import { callbackify } from 'util'
 
 import getStream from 'get-stream'
@@ -11,8 +12,8 @@ import { getInput } from './input.js'
 
 const { command, opts, buffer, read } = getInput()
 
-const DUMMY = `${__dirname}/dummy.txt`
-const DUMMY_TWO = `${__dirname}/dummy_two.txt`
+const DUMMY = fileURLToPath(new URL('dummy.txt', import.meta.url))
+const DUMMY_TWO = fileURLToPath(new URL('dummy_two.txt', import.meta.url))
 
 // Task used in most tests
 export const main = () =>
