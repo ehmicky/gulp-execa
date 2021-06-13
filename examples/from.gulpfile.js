@@ -7,7 +7,7 @@
 /* jscpd:ignore-start */
 
 // eslint-disable-next-line filenames/match-exported
-import { src } from 'gulp'
+import gulp from 'gulp'
 // eslint-disable-next-line node/no-extraneous-import
 import { stream } from 'gulp-execa'
 // eslint-disable-next-line node/no-extraneous-import
@@ -16,7 +16,8 @@ import through from 'through2'
 // eslint-disable-next-line import/no-default-export
 export default function task() {
   return (
-    src('*.js')
+    gulp
+      .src('*.js')
       // Prints the number of lines of each file, including `stderr`
       .pipe(
         stream(({ path }) => `wc -l ${path}`, {

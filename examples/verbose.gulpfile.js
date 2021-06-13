@@ -6,8 +6,8 @@
 //   https://repl.it/@ehmicky/gulp-execa
 
 // eslint-disable-next-line node/no-extraneous-import
-import { task } from 'gulp-execa'
+import gulp from 'gulp-execa'
 
 // Does not print the command nor output to the console
 // eslint-disable-next-line import/no-default-export
-export default task('npm --version', { verbose: false })
+export default gulp.task('npm --version', { verbose: false })

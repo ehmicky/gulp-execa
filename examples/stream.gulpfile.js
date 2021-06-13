@@ -6,13 +6,14 @@
 //   https://repl.it/@ehmicky/gulp-execa
 
 // eslint-disable-next-line filenames/match-exported
-import { src, dest } from 'gulp'
+import gulp from 'gulp'
 // eslint-disable-next-line node/no-extraneous-import
 import { stream } from 'gulp-execa'
 
 // eslint-disable-next-line import/no-default-export
 export default function task() {
-  return src('*.js')
+  return gulp
+    .src('*.js')
     .pipe(stream(({ path }) => `sort ${path}`))
-    .pipe(dest('sorted'))
+    .pipe(gulp.dest('sorted'))
 }

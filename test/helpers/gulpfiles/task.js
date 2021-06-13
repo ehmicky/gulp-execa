@@ -1,4 +1,4 @@
-import { parallel } from 'gulp'
+import gulp from 'gulp'
 // eslint-disable-next-line node/no-extraneous-import
 import { task } from 'gulp-execa'
 
@@ -8,4 +8,4 @@ const { command, opts } = getInput()
 
 export const main = task(command, opts)
 
-export const nested = parallel(main)
+export const nested = gulp.parallel(main)

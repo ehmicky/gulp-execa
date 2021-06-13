@@ -6,13 +6,13 @@
 //   https://repl.it/@ehmicky/gulp-execa
 
 // eslint-disable-next-line filenames/match-exported
-import { src } from 'gulp'
+import gulp from 'gulp'
 // eslint-disable-next-line node/no-extraneous-import
 import { stream } from 'gulp-execa'
 
 // eslint-disable-next-line import/no-default-export
 export default function task() {
-  return src('*.js').pipe(
+  return gulp.src('*.js').pipe(
     // Only one command will be fired at once
     stream(({ path }) => `echo ${path}`, { echo: true, maxConcurrency: 1 }),
   )

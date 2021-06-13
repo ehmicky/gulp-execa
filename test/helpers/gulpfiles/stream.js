@@ -2,7 +2,7 @@ import { Buffer } from 'buffer'
 import { callbackify } from 'util'
 
 import getStream from 'get-stream'
-import { src } from 'gulp'
+import gulp from 'gulp'
 // eslint-disable-next-line node/no-extraneous-import
 import { stream } from 'gulp-execa'
 import through from 'through2-concurrent'
@@ -16,19 +16,22 @@ const DUMMY_TWO = `${__dirname}/dummy_two.txt`
 
 // Task used in most tests
 export const main = () =>
-  src(DUMMY, { buffer })
+  gulp
+    .src(DUMMY, { buffer })
     .pipe(stream(() => command, opts))
     .pipe(through.obj(execVinyl))
 
 // `input` should be an async function
 export const inputAsync = () =>
-  src(DUMMY, { buffer })
+  gulp
+    .src(DUMMY, { buffer })
     .pipe(stream(() => Promise.resolve(command), opts))
     .pipe(through.obj(execVinyl))
 
 // `input` should be fired with the Vinyl file
 export const inputFile = () =>
-  src(DUMMY, { buffer })
+  gulp
+    .src(DUMMY, { buffer })
     .pipe(stream(({ basename }) => `${command} ${basename}`, opts))
     .pipe(through.obj(execVinyl))
 
@@ -37,28 +40,33 @@ const noop = function () {}
 
 // File should be skipped when returning a non-string
 export const inputUndefined = () =>
-  src(DUMMY, { buffer }).pipe(stream(noop, opts)).pipe(through.obj(execVinyl))
+  gulp
+    .src(DUMMY, { buffer })
+    .pipe(stream(noop, opts))
+    .pipe(through.obj(execVinyl))
 
 // Should allow several files
 export const severalFiles = () =>
-  src([DUMMY, DUMMY_TWO], { buffer })
+  gulp
+    .src([DUMMY, DUMMY_TWO], { buffer })
     .pipe(stream(() => command, opts))
     .pipe(through.obj(execVinyl))
 
 // Should allow doing several times
 export const severalTimes = () =>
-  src(DUMMY, { buffer })
+  gulp
+    .src(DUMMY, { buffer })
     .pipe(stream(() => command, opts))
     .pipe(stream(() => command, opts))
     .pipe(through.obj(execVinyl))
 
 // `input` should be a function
 export const inputNotFunc = () =>
-  src(DUMMY, { buffer }).pipe(stream(command, opts))
+  gulp.src(DUMMY, { buffer }).pipe(stream(command, opts))
 
 // `input` exceptions should be propagated
 export const inputThrows = () =>
-  src(DUMMY, { buffer }).pipe(
+  gulp.src(DUMMY, { buffer }).pipe(
     stream(() => {
       throw new Error('error')
     }, opts),
@@ -66,9 +74,9 @@ export const inputThrows = () =>
 
 // `input` async exceptions should be propagated
 export const inputThrowsAsync = () =>
-  src(DUMMY, { buffer }).pipe(
-    stream(() => Promise.reject(new Error('error')), opts),
-  )
+  gulp
+    .src(DUMMY, { buffer })
+    .pipe(stream(() => Promise.reject(new Error('error')), opts))
 
 const cExecVinyl = async function (file) {
   // When `file.contents` is a stream and an `error` event should be emitted,
