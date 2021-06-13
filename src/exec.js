@@ -28,9 +28,9 @@ export const execCommand = async function (input, opts) {
 export const streamCommand = function (input, opts) {
   printEcho({ input, opts })
 
+  /* c8 ignore start */
   try {
     return execa.command(input, opts)
-    /* c8 ignore start */
   } catch (error) {
     // At the moment, `execa` never throws synchronously.
     // This is just a safety catch in case it has a bug.
