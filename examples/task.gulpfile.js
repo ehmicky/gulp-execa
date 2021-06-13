@@ -6,7 +6,7 @@
 //   https://repl.it/@ehmicky/gulp-execa
 
 // eslint-disable-next-line node/no-extraneous-import
-import gulp from 'gulp-execa'
+import { task } from 'gulp-execa'
 
 // eslint-disable-next-line import/no-default-export
-export default gulp.task('npm --version')
+export default task('npm --version')

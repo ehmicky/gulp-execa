@@ -6,7 +6,6 @@
 # An online demo is also available at:
 #   https://repl.it/@ehmicky/gulp-execa
 
-# Ignore the following line: this is only needed for internal purposes.
-. "$(dirname "$BASH_SOURCE")/utils.sh"
+examplesDir="$(dirname $BASH_SOURCE)"
 
-gulp --gulpfile="$dir/exec.gulpfile.js"
+gulp --gulpfile="$examplesDir/exec.gulpfile.js"
