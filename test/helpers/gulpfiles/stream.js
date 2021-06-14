@@ -3,9 +3,9 @@ import { callbackify } from 'util'
 
 import getStream from 'get-stream'
 import { src } from 'gulp'
+// eslint-disable-next-line node/no-extraneous-import
+import { stream } from 'gulp-execa'
 import through from 'through2-concurrent'
-
-import { stream } from '../../../src/main.js'
 
 import { getInput } from './input.js'
 

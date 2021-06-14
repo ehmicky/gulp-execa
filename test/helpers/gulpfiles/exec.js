@@ -1,4 +1,5 @@
-import { exec } from '../../../src/main.js'
+// eslint-disable-next-line node/no-extraneous-import
+import { exec } from 'gulp-execa'
 
 import { getInput } from './input.js'
 
