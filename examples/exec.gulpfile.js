@@ -7,9 +7,6 @@
 
 'use strict'
 
-// Ignore the following line: this is only needed for internal purposes.
-require('./utils.js')
-
 const { exec } = require('gulp-execa')
 
 module.exports.default = async () => {

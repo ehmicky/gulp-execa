@@ -7,9 +7,6 @@
 
 'use strict'
 
-// Ignore the following line: this is only needed for internal purposes.
-require('./utils.js')
-
 const { src, dest } = require('gulp')
 const { stream } = require('gulp-execa')
 
