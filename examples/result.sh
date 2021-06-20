@@ -8,4 +8,4 @@
 
 examplesDir="$(dirname $BASH_SOURCE)"
 
-gulp --gulpfile="$examplesDir/result.gulpfile.js"
+npx gulp --gulpfile="$examplesDir/result.gulpfile.js"

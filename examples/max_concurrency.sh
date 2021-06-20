@@ -8,4 +8,4 @@
 
 examplesDir="$(dirname $BASH_SOURCE)"
 
-gulp --gulpfile="$examplesDir/max_concurrency.gulpfile.js"
+npx gulp --gulpfile="$examplesDir/max_concurrency.gulpfile.js"
