@@ -4,7 +4,6 @@
 //   - then `bash node_modules/gulp-execa/examples/from.sh`
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/gulp-execa
-/* jscpd:ignore-start */
 
 import gulp from 'gulp'
 import { stream } from 'gulp-execa'
@@ -30,4 +29,3 @@ export default function task() {
       )
   )
 }
-/* jscpd:ignore-end */
