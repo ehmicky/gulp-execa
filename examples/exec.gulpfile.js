@@ -5,7 +5,6 @@
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/gulp-execa
 
-// eslint-disable-next-line filenames/match-exported
 import { exec } from 'gulp-execa'
 
 export default async function task() {

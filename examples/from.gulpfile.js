@@ -6,7 +6,6 @@
 //   https://repl.it/@ehmicky/gulp-execa
 /* jscpd:ignore-start */
 
-// eslint-disable-next-line filenames/match-exported
 import gulp from 'gulp'
 import { stream } from 'gulp-execa'
 import through from 'through2'
