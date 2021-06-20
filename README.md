@@ -38,8 +38,6 @@ Commands can be executed either directly or inside a
 
 `gulpfile.js`:
 
-<!-- eslint-disable node/no-extraneous-import -->
-
 ```js
 import gulp from 'gulp'
 import { task, exec, stream } from 'gulp-execa'
@@ -78,8 +76,6 @@ This plugin requires Gulp 4.
 
 Returns a Gulp task that executes `command`.
 
-<!-- eslint-disable node/no-extraneous-import -->
-
 ```js
 import { task } from 'gulp-execa'
 
@@ -97,8 +93,6 @@ the command failed, the promise will be rejected with a nice
 [error](https://github.com/sindresorhus/execa#childprocessresult). If the
 [`reject: false`](https://github.com/sindresorhus/execa#reject) option was used,
 the promise will be resolved with that error instead.
-
-<!-- eslint-disable node/no-extraneous-import -->
 
 ```js
 import { exec } from 'gulp-execa'
@@ -122,8 +116,6 @@ Returns a stream that executes a `command` on each input file.
   - a `command` string
   - an `options` object with a `command` property
   - `undefined`
-
-<!-- eslint-disable node/no-extraneous-import -->
 
 ```js
 import gulp from 'gulp'
@@ -163,8 +155,6 @@ should not be used. All of this can be done directly in Node.js instead.
 Shell interpreters are slower, less secure and less cross-platform. However, you
 can still opt-in to using them with the
 [`shell` option](https://github.com/sindresorhus/execa#shell).
-
-<!-- eslint-disable node/no-extraneous-import -->
 
 ```js
 import { writeFileStream } from 'fs'
@@ -246,7 +236,7 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 - `save`: [be pushed](https://github.com/sindresorhus/execa#childprocessresult)
   to the `file.execa` array property
 
-<!-- eslint-disable unicorn/no-null, node/no-extraneous-import -->
+<!-- eslint-disable unicorn/no-null -->
 
 ```js
 import gulp from 'gulp'
@@ -274,7 +264,7 @@ _Default_: `'stdout'`
 
 Which output stream to use with [`result: 'replace'`](#result).
 
-<!-- eslint-disable unicorn/no-null, node/no-extraneous-import -->
+<!-- eslint-disable unicorn/no-null -->
 
 ```js
 import gulp from 'gulp'
