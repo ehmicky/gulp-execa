@@ -1,3 +1,9 @@
+# 3.0.2
+
+## Bug fixes
+
+- Fix examples
+
 # 3.0.1
 
 ## Bug fixes
