@@ -35,7 +35,6 @@ export const inputFile = () =>
     .pipe(stream(({ basename }) => `${command} ${basename}`, opts))
     .pipe(through.obj(execVinyl))
 
-// eslint-disable-next-line no-empty-function
 const noop = function () {}
 
 // File should be skipped when returning a non-string
