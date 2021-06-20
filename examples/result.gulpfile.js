@@ -7,12 +7,9 @@
 
 // eslint-disable-next-line filenames/match-exported
 import gulp from 'gulp'
-// eslint-disable-next-line node/no-extraneous-import
 import { stream } from 'gulp-execa'
-// eslint-disable-next-line node/no-extraneous-import
 import through from 'through2'
 
-// eslint-disable-next-line import/no-default-export
 export default function task() {
   return (
     gulp

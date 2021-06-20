@@ -5,9 +5,7 @@
 // An online demo is also available at:
 //   https://repl.it/@ehmicky/gulp-execa
 
-// eslint-disable-next-line node/no-extraneous-import
 import { task } from 'gulp-execa'
 
 // Does not print the command nor output to the console
-// eslint-disable-next-line import/no-default-export
 export default task('npm --version', { verbose: false })
