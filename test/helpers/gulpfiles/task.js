@@ -1,5 +1,4 @@
 import gulp from 'gulp'
-// eslint-disable-next-line node/no-extraneous-import
 import { task } from 'gulp-execa'
 
 import { getInput } from './input.js'

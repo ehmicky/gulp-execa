@@ -4,7 +4,6 @@ import { callbackify } from 'util'
 
 import getStream from 'get-stream'
 import gulp from 'gulp'
-// eslint-disable-next-line node/no-extraneous-import
 import { stream } from 'gulp-execa'
 import through from 'through2-concurrent'
 
