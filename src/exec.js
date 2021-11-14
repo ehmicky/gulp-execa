@@ -1,4 +1,4 @@
-import execa from 'execa'
+import { execaCommand } from 'execa'
 
 import { printEcho } from './echo.js'
 import { throwError } from './error.js'
@@ -13,23 +13,23 @@ export const exec = function (input, opts) {
   return execCommand(input, optsA)
 }
 
-// Fire the command with `execa.command()` in promise mode
+// Fire the command with `execaCommand()` in promise mode
 export const execCommand = async function (input, opts) {
   printEcho({ input, opts })
 
   try {
-    return await execa.command(input, opts)
+    return await execaCommand(input, opts)
   } catch (error) {
     throwError(error)
   }
 }
 
-// Fire the command with `execa.command()` in stream mode
+// Fire the command with `execaCommand()` in stream mode
 export const streamCommand = function (input, opts) {
   printEcho({ input, opts })
 
   try {
-    return execa.command(input, opts)
+    return execaCommand(input, opts)
     /* c8 ignore start */
   } catch (error) {
     // At the moment, `execa` never throws synchronously.
