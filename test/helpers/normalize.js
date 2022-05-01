@@ -27,7 +27,7 @@ const REPLACEMENTS = [
   // Those are printed by `util.inspect()`. However they contain `stack` and
   // `domainEmitter`, so we remove them.
   [/^([ \t]+)at [^\r\n]+\{[^]+/gmu, ''],
-  // Node 14 prints errors differently
+  // Node 14 prints this specific error differently
   [/[^]*uid" (property )?must be[^]*/gu, 'invalid options.uid'],
   // Stack traces
   [/^([ \t]+)at [^\r\n]+$/gmu, '$1at STACK TRACE'],
