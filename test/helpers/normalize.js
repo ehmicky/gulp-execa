@@ -29,7 +29,6 @@ const REPLACEMENTS = [
   [/^([ \t]+)at [^\r\n]+\{[^]+/gmu, ''],
   // Node 14 prints errors differently
   [/[^]*uid" (property )?must be[^]*/gu, 'invalid options.uid'],
-  [/\]$/u, ''],
   // Stack traces
   [/^([ \t]+)at [^\r\n]+$/gmu, '$1at STACK TRACE'],
   [/(([ \t]+)at STACK TRACE(\r?\n)?)+/gu, '$2at STACK TRACE$3'],
