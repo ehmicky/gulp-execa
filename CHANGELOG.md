@@ -1,3 +1,9 @@
+# 3.1.0
+
+## Features
+
+- The [`cwd` option](https://github.com/sindresorhus/execa#cwd) can now be a URL
+
 # 3.0.2
 
 ## Bug fixes
