@@ -35,7 +35,7 @@ export const EXECA_OPTS = {
   reject: true,
   cleanup: true,
   all: true,
-  execPath: '/usr/bin/noed',
+  execPath: '/usr/bin/node',
   timeout: 5000,
   buffer: true,
   maxBuffer: 1e8,
