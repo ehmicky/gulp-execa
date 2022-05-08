@@ -4,7 +4,7 @@ import { multipleValidOptions } from 'jest-validate'
 
 // Examples for the core `child_process.spawn()` options
 export const CHILD_PROCESS_OPTS = {
-  cwd: '/home/user',
+  cwd: multipleValidOptions('/home/user', new URL('.', import.meta.url)),
   env: { HOME: '/home/user' },
   argv0: 'command',
   stdio: multipleValidOptions('pipe', ['pipe', 'pipe', 'pipe']),
