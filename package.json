@@ -51,7 +51,7 @@
     "fancy-log": "^2.0.0",
     "filter-obj": "^3.0.0",
     "is-plain-obj": "^4.1.0",
-    "jest-validate": "^27.5.1",
+    "jest-validate": "^28.1.1",
     "plugin-error": "^1.0.1",
     "rename-fn": "^2.0.0",
     "through2-concurrent": "^2.0.0"
