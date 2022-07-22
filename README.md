@@ -1,4 +1,7 @@
-<img src="https://raw.githubusercontent.com/ehmicky/design/main/gulp-execa/gulp-execa.svg?sanitize=true" width="500"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ehmicky/design/main/gulp-execa/gulp-execa_dark.svg"/>
+  <img alt="gulp-execa logo" src="https://raw.githubusercontent.com/ehmicky/design/main/gulp-execa/gulp-execa.svg" width="500"/>
+</picture>
 
 [![Codecov](https://img.shields.io/codecov/c/github/ehmicky/gulp-execa.svg?label=tested&logo=codecov)](https://codecov.io/gh/ehmicky/gulp-execa)
 [![Node](https://img.shields.io/node/v/gulp-execa.svg?logo=node.js)](https://www.npmjs.com/package/gulp-execa)
