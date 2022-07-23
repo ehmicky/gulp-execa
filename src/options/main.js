@@ -1,4 +1,4 @@
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 import isPlainObj from 'is-plain-obj'
 import { validate } from 'jest-validate'
 
@@ -20,7 +20,7 @@ export const parseOpts = function ({
 }) {
   validateBasic(opts)
 
-  const optsA = filterObj(opts, isDefined)
+  const optsA = excludeKeys(opts, isUndefined)
 
   validateOpts({ opts: optsA, defaultOpts, forcedOpts })
 
@@ -35,16 +35,16 @@ const validateBasic = function (opts) {
   }
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 const validateOpts = function ({ opts, defaultOpts, forcedOpts }) {
   validateCustom({ opts })
 
-  const exampleConfig = filterObj(
+  const exampleConfig = excludeKeys(
     { ...EXAMPLE_OPTS, ...defaultOpts },
-    (key) => !hasOwnProperty.call(forcedOpts, key),
+    (key) => hasOwnProperty.call(forcedOpts, key),
   )
 
   try {
