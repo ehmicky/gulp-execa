@@ -36,7 +36,7 @@
     "spawn"
   ],
   "license": "Apache-2.0",
-  "homepage": "https://git.io/fhp8z",
+  "homepage": "https://www.github.com/ehmicky/gulp-execa",
   "repository": "ehmicky/gulp-execa",
   "bugs": {
     "url": "https://github.com/ehmicky/gulp-execa/issues"
