@@ -1,5 +1,4 @@
-This directory contains examples of this library. They can be run and
-edited:
+This directory contains examples of this library. They can be run and edited:
 
 - either directly [in your browser](https://repl.it/@ehmicky/gulp-execa)
 - or in a terminal by cloning this repository
