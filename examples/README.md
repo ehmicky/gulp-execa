@@ -1,16 +1,8 @@
-This directory contains examples of this library.
+This directory contains examples of this library. They can be run and
+edited:
 
-To execute them:
-
-```bash
-npm install -D gulp-execa gulp
-bash node_modules/gulp-execa/examples/FILE.sh
-```
-
-You can edit the examples.
-
-They can also be run directly
-[in your browser](https://repl.it/@ehmicky/gulp-execa).
+- either directly [in your browser](https://repl.it/@ehmicky/gulp-execa)
+- or in a terminal by cloning this repository
 
 ## Methods
 
