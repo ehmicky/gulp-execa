@@ -1,4 +1,4 @@
-import { env } from 'process'
+import { env } from 'node:process'
 
 // Some information is passed by calling test to the gulpfile using the
 // environment variable `INPUT`

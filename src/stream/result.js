@@ -1,4 +1,4 @@
-import { Buffer } from 'buffer'
+import { Buffer } from 'node:buffer'
 
 import { createError, throwError } from '../error.js'
 import { execCommand, streamCommand } from '../exec.js'

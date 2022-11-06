@@ -1,6 +1,6 @@
-import { Buffer } from 'buffer'
-import { fileURLToPath } from 'url'
-import { callbackify } from 'util'
+import { Buffer } from 'node:buffer'
+import { fileURLToPath } from 'node:url'
+import { callbackify } from 'node:util'
 
 import getStream from 'get-stream'
 import gulp from 'gulp'

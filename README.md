@@ -164,7 +164,7 @@ can still opt-in to using them with the
 [`shell` option](https://github.com/sindresorhus/execa#shell).
 
 ```js
-import { writeFileStream } from 'fs'
+import { writeFileStream } from 'node:fs'
 
 import gulp from 'gulp'
 import { task } from 'gulp-execa'

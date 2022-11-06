@@ -1,4 +1,4 @@
-import { callbackify } from 'util'
+import { callbackify } from 'node:util'
 
 import isPlainObj from 'is-plain-obj'
 import through from 'through2-concurrent'
