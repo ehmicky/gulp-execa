@@ -8,7 +8,7 @@ import {
   expectError,
 } from 'tsd'
 
-import { exec, task, stream, Options } from './main.js'
+import { exec, task, stream, Options } from 'gulp-execa'
 
 const childProcess = exec('command')
 expectType<Readable>(childProcess.stdout!)
