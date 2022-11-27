@@ -1,8 +1,8 @@
 import test from 'ava'
 import { each } from 'test-each'
 
-import { STREAM_METHODS } from './helpers/methods.test.js'
-import { snapshotTest } from './helpers/snapshot.test.js'
+import { STREAM_METHODS } from '../helpers/methods.test.js'
+import { snapshotTest } from '../helpers/snapshot.test.js'
 
 each(
   STREAM_METHODS,
