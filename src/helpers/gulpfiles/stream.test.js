@@ -11,8 +11,9 @@ import { getInput } from './input.test.js'
 
 const { command, opts, buffer, read } = getInput()
 
-const DUMMY = fileURLToPath(new URL('dummy.txt', import.meta.url))
-const DUMMY_TWO = fileURLToPath(new URL('dummy_two.txt', import.meta.url))
+const FIXTURES_DIR = fileURLToPath(new URL('../../fixtures', import.meta.url))
+const DUMMY = `${FIXTURES_DIR}/dummy.txt`
+const DUMMY_TWO = `${FIXTURES_DIR}/dummy_two.txt`
 
 // Task used in most tests
 export const main = () =>
