@@ -58,7 +58,7 @@
     "is-plain-obj": "^4.1.0",
     "jest-validate": "^29.0.1",
     "plugin-error": "^2.0.0",
-    "rename-fn": "^2.0.0",
+    "rename-fn": "^2.1.0",
     "through2-concurrent": "^2.0.0"
   },
   "devDependencies": {
