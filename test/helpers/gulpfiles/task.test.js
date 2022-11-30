@@ -1,7 +1,7 @@
 import gulp from 'gulp'
 import { task } from 'gulp-execa'
 
-import { getInput } from './input.js'
+import { getInput } from './input.test.js'
 
 const { command, opts } = getInput()
 

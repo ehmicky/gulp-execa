@@ -7,7 +7,7 @@ import gulp from 'gulp'
 import { stream } from 'gulp-execa'
 import through from 'through2-concurrent'
 
-import { getInput } from './input.js'
+import { getInput } from './input.test.js'
 
 const { command, opts, buffer, read } = getInput()
 

@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url'
 
 import { execaCommand } from 'execa'
 
-import { normalizeMessage } from './normalize.js'
+import { normalizeMessage } from './normalize.test.js'
 
 const GULPFILES_DIR = fileURLToPath(new URL('gulpfiles', import.meta.url))
 
@@ -55,7 +55,7 @@ const fireTask = async function ({
   const execaOptsA = getExecaOpts({ command, opts, buffer, read, execaOpts })
 
   const { exitCode, stdout, stderr } = await execaCommand(
-    `gulp --gulpfile ${GULPFILES_DIR}/${method}.js ${task}`,
+    `gulp --gulpfile ${GULPFILES_DIR}/${method}.test.js ${task}`,
     execaOptsA,
   )
   const stdoutA = normalizeMessage(stdout)

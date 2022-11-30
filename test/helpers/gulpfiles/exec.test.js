@@ -1,6 +1,6 @@
 import { exec } from 'gulp-execa'
 
-import { getInput } from './input.js'
+import { getInput } from './input.test.js'
 
 const { command, opts } = getInput()
 
