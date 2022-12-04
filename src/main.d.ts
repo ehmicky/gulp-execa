@@ -1,4 +1,4 @@
-import type { Transform } from 'stream'
+import type { Transform } from 'node:stream'
 
 import type { Options as ExecaOptions, ExecaChildProcess } from 'execa'
 import type File = require('vinyl')

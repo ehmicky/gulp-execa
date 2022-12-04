@@ -1,9 +1,8 @@
-import type { Readable, Transform } from 'stream'
+import type { Readable, Transform } from 'node:stream'
 
-import type File = require('vinyl')
+import { exec, task, stream, type Options } from 'gulp-execa'
 import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
-
-import { exec, task, stream, Options } from 'gulp-execa'
+import type File = require('vinyl')
 
 const childProcess = exec('command')
 expectType<Readable>(childProcess.stdout!)
