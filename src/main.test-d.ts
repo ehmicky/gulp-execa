@@ -2,7 +2,8 @@ import type { Readable, Transform } from 'node:stream'
 
 import { exec, task, stream, type Options } from 'gulp-execa'
 import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
-import type File = require('vinyl')
+// eslint-disable-next-line n/no-extraneous-import
+import type File from 'vinyl'
 
 const childProcess = exec('command')
 expectType<Readable>(childProcess.stdout!)
@@ -16,14 +17,14 @@ const streamResult = stream(() => 'command')
 expectType<Transform>(streamResult)
 
 // @ts-expect-error
-exec()
+await exec()
 // @ts-expect-error
 task()
 // @ts-expect-error
 stream()
 
 // @ts-expect-error
-exec(true)
+await exec(true)
 // @ts-expect-error
 task(true)
 // @ts-expect-error
@@ -46,37 +47,37 @@ stream((file: File, arg: boolean) => 'command')
 // @ts-expect-error
 stream((arg: boolean) => 'command')
 
-exec('command', {})
+await exec('command', {})
 task('command', {})
 stream(() => 'command', {})
 expectAssignable<Options>({})
 // @ts-expect-error
-exec('command', true)
+await exec('command', true)
 // @ts-expect-error
 task('command', true)
 // @ts-expect-error
 stream(() => 'command', true)
 expectNotAssignable<Options>(true)
 
-exec('command', { echo: true })
+await exec('command', { echo: true })
 task('command', { echo: true })
 stream(() => 'command', { echo: true })
 expectAssignable<Options>({ echo: true })
 // @ts-expect-error
-exec('command', { echo: 'true' })
+await exec('command', { echo: 'true' })
 // @ts-expect-error
 task('command', { echo: 'true' })
 // @ts-expect-error
 stream(() => 'command', { echo: 'true' })
 expectNotAssignable<Options>({ echo: 'true' })
 
-exec('command', { verbose: true })
+await exec('command', { verbose: true })
 task('command', { verbose: true })
 // @ts-expect-error
 stream(() => 'command', { verbose: true })
 expectAssignable<Options>({ verbose: true })
 // @ts-expect-error
-exec('command', { verbose: 'true' })
+await exec('command', { verbose: 'true' })
 // @ts-expect-error
 task('command', { verbose: 'true' })
 expectNotAssignable<Options>({ verbose: 'true' })

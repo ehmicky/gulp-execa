@@ -1,7 +1,8 @@
 import type { Transform } from 'node:stream'
 
 import type { Options as ExecaOptions, ExecaChildProcess } from 'execa'
-import type File = require('vinyl')
+// eslint-disable-next-line n/no-extraneous-import
+import type File from 'vinyl'
 
 type NonStreamOptions = ExecaOptions &
   Readonly<
