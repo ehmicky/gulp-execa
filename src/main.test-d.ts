@@ -1,12 +1,7 @@
 import type { Readable, Transform } from 'stream'
 
 import type File = require('vinyl')
-import {
-  expectType,
-  expectAssignable,
-  expectNotAssignable,
-  expectError,
-} from 'tsd'
+import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
 
 import { exec, task, stream, Options } from 'gulp-execa'
 
@@ -21,70 +16,98 @@ expectType<number>(taskResult.exitCode)
 const streamResult = stream(() => 'command')
 expectType<Transform>(streamResult)
 
-expectError(exec())
-expectError(task())
-expectError(stream())
+// @ts-expect-error
+exec()
+// @ts-expect-error
+task()
+// @ts-expect-error
+stream()
 
-expectError(exec(true))
-expectError(task(true))
-expectError(stream(true))
+// @ts-expect-error
+exec(true)
+// @ts-expect-error
+task(true)
+// @ts-expect-error
+stream(true)
 
 stream(() => undefined)
 stream(() => ({ command: 'command' }))
 stream(() => ({ command: 'command', maxConcurrency: 0 }))
-expectError(stream(() => ({ maxConcurrency: 0 })))
-expectError(stream(() => ({ command: 'command', maxConcurrency: true })))
-expectError(stream(() => ({ command: 'command', shell: 0 })))
-expectError(stream(() => true))
+// @ts-expect-error
+stream(() => ({ maxConcurrency: 0 }))
+// @ts-expect-error
+stream(() => ({ command: 'command', maxConcurrency: true }))
+// @ts-expect-error
+stream(() => ({ command: 'command', shell: 0 }))
+// @ts-expect-error
+stream(() => true)
 stream((file: File) => 'command')
-expectError(stream((file: File, arg: boolean) => 'command'))
-expectError(stream((arg: boolean) => 'command'))
+// @ts-expect-error
+stream((file: File, arg: boolean) => 'command')
+// @ts-expect-error
+stream((arg: boolean) => 'command')
 
 exec('command', {})
 task('command', {})
 stream(() => 'command', {})
 expectAssignable<Options>({})
-expectError(exec('command', true))
-expectError(task('command', true))
-expectError(stream(() => 'command', true))
+// @ts-expect-error
+exec('command', true)
+// @ts-expect-error
+task('command', true)
+// @ts-expect-error
+stream(() => 'command', true)
 expectNotAssignable<Options>(true)
 
 exec('command', { echo: true })
 task('command', { echo: true })
 stream(() => 'command', { echo: true })
 expectAssignable<Options>({ echo: true })
-expectError(exec('command', { echo: 'true' }))
-expectError(task('command', { echo: 'true' }))
-expectError(stream(() => 'command', { echo: 'true' }))
+// @ts-expect-error
+exec('command', { echo: 'true' })
+// @ts-expect-error
+task('command', { echo: 'true' })
+// @ts-expect-error
+stream(() => 'command', { echo: 'true' })
 expectNotAssignable<Options>({ echo: 'true' })
 
 exec('command', { verbose: true })
 task('command', { verbose: true })
-expectError(stream(() => 'command', { verbose: true }))
+// @ts-expect-error
+stream(() => 'command', { verbose: true })
 expectAssignable<Options>({ verbose: true })
-expectError(exec('command', { verbose: 'true' }))
-expectError(task('command', { verbose: 'true' }))
+// @ts-expect-error
+exec('command', { verbose: 'true' })
+// @ts-expect-error
+task('command', { verbose: 'true' })
 expectNotAssignable<Options>({ verbose: 'true' })
 
-expectError(stream(() => 'command', { stdout: 'inherit' }))
-expectError(stream(() => 'command', { stderr: 'inherit' }))
-expectError(stream(() => 'command', { all: 'inherit' }))
-expectError(stream(() => 'command', { stdio: 'inherit' }))
+// @ts-expect-error
+stream(() => 'command', { stdout: 'inherit' })
+// @ts-expect-error
+stream(() => 'command', { stderr: 'inherit' })
+// @ts-expect-error
+stream(() => 'command', { all: 'inherit' })
+// @ts-expect-error
+stream(() => 'command', { stdio: 'inherit' })
 
 stream(() => 'command', { maxConcurrency: 0 })
 expectAssignable<Options>({ maxConcurrency: 0 })
-expectError(stream(() => 'command', { maxConcurrency: true }))
+// @ts-expect-error
+stream(() => 'command', { maxConcurrency: true })
 expectNotAssignable<Options>({ maxConcurrency: true })
 
 stream(() => 'command', { from: 'stderr' })
 stream(() => 'command', { from: 'stdout' })
 stream(() => 'command', { from: 'all' })
 expectAssignable<Options>({ from: 'stderr' })
-expectError(stream(() => 'command', { from: 'other' }))
+// @ts-expect-error
+stream(() => 'command', { from: 'other' })
 expectNotAssignable<Options>({ from: 'other' })
 
 stream(() => 'command', { result: 'save' })
 stream(() => 'command', { result: 'replace' })
 expectAssignable<Options>({ result: 'save' })
-expectError(stream(() => 'command', { result: 'other' }))
+// @ts-expect-error
+stream(() => 'command', { result: 'other' })
 expectNotAssignable<Options>({ result: 'other' })
