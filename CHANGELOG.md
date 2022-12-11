@@ -1,3 +1,9 @@
+# 4.4.1
+
+## Bug fixes
+
+- Fix TypeScript types
+
 # 4.4.0
 
 ## Features
