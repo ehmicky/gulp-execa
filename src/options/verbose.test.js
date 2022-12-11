@@ -18,7 +18,8 @@ each(
     { opts: { verbose: true, stdio: 'pipe', stdout: 'pipe', stderr: 'pipe' } },
   ],
   ({ title }, methodProps, data) =>
-    test(`'verbose' option | ${title}`, async (t) => {
+    // Use `serial()`, otherwise Windows CI crashes with OOM
+    test.serial(`'verbose' option | ${title}`, async (t) => {
       await snapshotTest({ t, methodProps, data })
     }),
 )
