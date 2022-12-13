@@ -3,16 +3,14 @@
 import stripAnsi from 'strip-ansi'
 
 // Normalize Gulp output so it's predictable across time and environments
-export const normalizeMessage = function (message) {
+export const normalizeMessage = (message) => {
   const messageA = stripAnsi(message)
   const messageB = REPLACEMENTS.reduce(replacePart, messageA)
   const messageC = messageB.trim()
   return messageC
 }
 
-const replacePart = function (message, [before, after]) {
-  return message.replace(before, after)
-}
+const replacePart = (message, [before, after]) => message.replace(before, after)
 
 const REPLACEMENTS = [
   // Windows

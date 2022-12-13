@@ -8,9 +8,8 @@
 import gulp from 'gulp'
 import { stream } from 'gulp-execa'
 
-export default function task() {
-  return gulp
+export default () =>
+  gulp
     .src('*.js')
     .pipe(stream(({ path }) => `sort ${path}`))
     .pipe(gulp.dest('sorted'))
-}

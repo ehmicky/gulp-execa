@@ -20,9 +20,7 @@ export const CHILD_PROCESS_OPTS = {
 
 // Hack to make `jest-validate` validate Streams but print them nicely
 const stream = {
-  toJSON() {
-    return 'Stream'
-  },
+  toJSON: () => 'Stream',
 }
 
 // Examples for the `execa` options

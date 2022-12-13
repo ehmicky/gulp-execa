@@ -8,9 +8,8 @@
 import gulp from 'gulp'
 import { stream } from 'gulp-execa'
 
-export default function task() {
-  return gulp.src('*.js').pipe(
+export default () =>
+  gulp.src('*.js').pipe(
     // Only one command will be fired at once
     stream(({ path }) => `echo ${path}`, { echo: true, maxConcurrency: 1 }),
   )
-}

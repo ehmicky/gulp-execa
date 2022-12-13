@@ -5,7 +5,7 @@ import { validateInput } from './input.js'
 import { parseOpts } from './options/main.js'
 
 // Create a Gulp task that fires a child process (command + arguments)
-export const task = function (input, opts) {
+export const task = (input, opts) => {
   try {
     validateInput(input)
     const optsA = parseOpts({ opts })
@@ -26,7 +26,7 @@ export const task = function (input, opts) {
 // are instances of custom errors. This makes input|options validation errors
 // of `task()` (which are likely to become uncaught exceptions) not print as
 // nicely. We fix this by re-throwing the error but with a normal `Error`.
-const handleTask = function (error) {
+const handleTask = (error) => {
   const errorA = new Error(error.message)
   // eslint-disable-next-line fp/no-mutation
   errorA.stack = error.stack

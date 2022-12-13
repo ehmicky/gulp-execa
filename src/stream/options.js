@@ -1,21 +1,19 @@
-export const getDefaultOpts = function ({
+export const getDefaultOpts = ({
   opts: { result = 'replace', from } = {},
-}) {
-  return {
-    // This is too verbose if done on each iteration, even on CI
-    verbose: false,
-    // We use `through2-concurrent` because `through2` processes files serially.
-    // The default is 16 which is too low.
-    maxConcurrency: 100,
-    // What to do with the result. Either 'save' or 'replace'.
-    result: 'replace',
-    // With `result: 'replace'` which stream to use: `stdout`, `stderr` or `all`
-    from: 'stdout',
-    // `from: 'all`` requires the `all` option
-    all: from === 'all',
-    ...resultDefaultOpts[result],
-  }
-}
+}) => ({
+  // This is too verbose if done on each iteration, even on CI
+  verbose: false,
+  // We use `through2-concurrent` because `through2` processes files serially.
+  // The default is 16 which is too low.
+  maxConcurrency: 100,
+  // What to do with the result. Either 'save' or 'replace'.
+  result: 'replace',
+  // With `result: 'replace'` which stream to use: `stdout`, `stderr` or `all`
+  from: 'stdout',
+  // `from: 'all`` requires the `all` option
+  all: from === 'all',
+  ...resultDefaultOpts[result],
+})
 
 const resultDefaultOpts = {
   // `save` should retrieve output as string, but this is not needed for

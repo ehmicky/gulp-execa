@@ -7,6 +7,6 @@
 
 import { exec } from 'gulp-execa'
 
-export default async function task() {
+export default async () => {
   await exec('npm --version')
 }

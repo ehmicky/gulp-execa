@@ -7,7 +7,7 @@ import { isValidInput } from '../input.js'
 // Decides what to do with the child process result according to `opts.result`:
 //  - `save`: pushed to `file.execa`
 //  - `replace`: overwrite file's content
-export const setResult = function ({ file, input, opts, resultOpt }) {
+export const setResult = ({ file, input, opts, resultOpt }) => {
   initSave({ file, resultOpt })
 
   // Returning `undefined` or invalid command skips it silently.
@@ -31,7 +31,7 @@ export const setResult = function ({ file, input, opts, resultOpt }) {
 }
 
 // Make sure `file.execa` is always set even if all inputs are invalid
-const initSave = function ({ file, file: { execa }, resultOpt }) {
+const initSave = ({ file, file: { execa }, resultOpt }) => {
   if (resultOpt !== 'save' || execa !== undefined) {
     return
   }
@@ -40,13 +40,13 @@ const initSave = function ({ file, file: { execa }, resultOpt }) {
   file.execa = []
 }
 
-const saveResult = async function ({ file, file: { execa }, input, opts }) {
+const saveResult = async ({ file, file: { execa }, input, opts }) => {
   const execaResult = await execCommand(input, opts)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.execa = [...execa, execaResult]
 }
 
-const streamResult = function ({ file, input, opts, opts: { from } }) {
+const streamResult = ({ file, input, opts, opts: { from } }) => {
   const execaPromise = streamCommand(input, opts)
   const { [from]: stream } = execaPromise
 
@@ -67,7 +67,7 @@ const streamResult = function ({ file, input, opts, opts: { from } }) {
   file.contents = stream
 }
 
-const bufferResult = async function ({ file, input, opts, opts: { from } }) {
+const bufferResult = async ({ file, input, opts, opts: { from } }) => {
   const { [from]: output } = await execCommand(input, opts)
   // Stream output can be either string or buffer depending on `opts.encoding`
   // However `file.contents` cannot be a string.

@@ -9,18 +9,15 @@ import gulp from 'gulp'
 import { stream } from 'gulp-execa'
 import through from 'through2'
 
-export default function task() {
-  return (
-    gulp
-      .src('*.js')
-      // Prints the number of lines of each file
-      .pipe(stream(({ path }) => `wc -l ${path}`, { result: 'save' }))
-      .pipe(
-        through.obj((file, encoding, func) => {
-          console.log(file.execa[0].stdout)
-          // eslint-disable-next-line unicorn/no-null
-          func(null, file)
-        }),
-      )
-  )
-}
+export default () =>
+  gulp
+    .src('*.js')
+    // Prints the number of lines of each file
+    .pipe(stream(({ path }) => `wc -l ${path}`, { result: 'save' }))
+    .pipe(
+      through.obj((file, encoding, func) => {
+        console.log(file.execa[0].stdout)
+        // eslint-disable-next-line unicorn/no-null
+        func(null, file)
+      }),
+    )
