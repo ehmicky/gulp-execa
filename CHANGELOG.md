@@ -1,3 +1,9 @@
+# 4.5.0
+
+## Features
+
+- Upgrade Execa
+
 # 4.4.1
 
 ## Bug fixes
