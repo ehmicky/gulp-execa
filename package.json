@@ -63,7 +63,7 @@
     "through2-concurrent": "^2.0.0"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^2.0.61",
+    "@ehmicky/dev-tasks": "^2.0.62",
     "@types/node": "^18.11.16",
     "get-stream": "^6.0.0",
     "gulp": "^4.0.2",
