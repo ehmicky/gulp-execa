@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@types/vinyl": "^2.0.7",
-    "colors-option": "^4.5.0",
+    "colors-option": "^5.0.0",
     "execa": "^7.1.1",
     "fancy-log": "^2.0.0",
     "filter-obj": "^5.1.0",
