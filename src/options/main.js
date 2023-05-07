@@ -8,10 +8,6 @@ import { validateCustom } from './custom.js'
 import { CHILD_PROCESS_OPTS, EXECA_OPTS } from './upstream.js'
 import { addVerbose } from './verbose.js'
 
-// Makes it work with `Object.create(null)`
-// eslint-disable-next-line no-shadow
-const { hasOwnProperty } = Object.prototype
-
 // Parse options
 export const parseOpts = ({ opts = {}, defaultOpts = {}, forcedOpts = {} }) => {
   validateBasic(opts)
@@ -38,7 +34,7 @@ const validateOpts = ({ opts, defaultOpts, forcedOpts }) => {
 
   const exampleConfig = excludeKeys(
     { ...EXAMPLE_OPTS, ...defaultOpts },
-    (key) => hasOwnProperty.call(forcedOpts, key),
+    (key) => Object.hasOwn(forcedOpts, key),
   )
 
   try {
