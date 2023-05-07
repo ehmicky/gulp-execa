@@ -1,5 +1,3 @@
-// TODO: use `util.stripVTControlCharacters()` after dropping support for
-// Node <16.11.0
 import stripAnsi from 'strip-ansi'
 
 // Normalize Gulp output so it's predictable across time and environments
