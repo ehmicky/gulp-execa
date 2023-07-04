@@ -1,9 +1,8 @@
 import { Buffer } from 'node:buffer'
-import { Readable } from 'node:stream'
-import { text } from 'node:stream/consumers'
 import { fileURLToPath } from 'node:url'
 import { callbackify } from 'node:util'
 
+import getStream from 'get-stream'
 import gulp from 'gulp'
 import { stream } from 'gulp-execa'
 import through from 'through2-concurrent'
@@ -100,7 +99,7 @@ const cExecVinyl = async (file) => {
 const execVinyl = callbackify(cExecVinyl)
 
 // Each method must be stringified differently
-const stringifyContents = async ({ contents, execa }) => {
+const stringifyContents = ({ contents, execa }) => {
   if (execa !== undefined) {
     return JSON.stringify(execa, undefined, 2)
   }
@@ -109,5 +108,5 @@ const stringifyContents = async ({ contents, execa }) => {
     return contents.toString()
   }
 
-  return await text(Readable.toWeb(contents))
+  return getStream(contents)
 }
