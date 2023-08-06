@@ -42,7 +42,10 @@
   ],
   "license": "Apache-2.0",
   "homepage": "https://www.github.com/ehmicky/gulp-execa",
-  "repository": "ehmicky/gulp-execa",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehmicky/gulp-execa.git"
+  },
   "bugs": {
     "url": "https://github.com/ehmicky/gulp-execa/issues"
   },
