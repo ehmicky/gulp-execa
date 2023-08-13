@@ -33,7 +33,7 @@ const validateOpts = ({ opts, defaultOpts, forcedOpts }) => {
   validateCustom({ opts })
 
   const exampleConfig = excludeKeys(
-    { ...EXAMPLE_OPTS, ...defaultOpts },
+    { ...EXAMPLE_OPTS, ...excludeKeys(defaultOpts, FORCE_EXAMPLE_KEYS) },
     (key) => Object.hasOwn(forcedOpts, key),
   )
 
@@ -56,3 +56,7 @@ const EXAMPLE_OPTS = {
   ...DEFAULT_OPTS,
   echo: true,
 }
+
+// Some `EXAMPLE_OPTS[key]` uses `multipleValidOptions()` from `jest-validate`,
+// which requires them not be overwritten by `defaultOpts`
+const FORCE_EXAMPLE_KEYS = ['encoding']

@@ -1,4 +1,4 @@
-# Snapshot report for `src/options/verbose.test.js`
+# Snapshot report for `build/src/options/verbose.test.js`
 
 The actual snapshot is saved in `verbose.test.js.snap`.
 

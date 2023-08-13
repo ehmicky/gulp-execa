@@ -1,4 +1,4 @@
-# Snapshot report for `src/stream/main.test.js`
+# Snapshot report for `build/src/stream/main.test.js`
 
 The actual snapshot is saved in `main.test.js.snap`.
 

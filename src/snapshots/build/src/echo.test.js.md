@@ -1,4 +1,4 @@
-# Snapshot report for `src/echo.test.js`
+# Snapshot report for `build/src/echo.test.js`
 
 The actual snapshot is saved in `echo.test.js.snap`.
 

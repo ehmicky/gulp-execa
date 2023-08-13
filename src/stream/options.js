@@ -18,7 +18,8 @@ export const getDefaultOpts = ({
 const resultDefaultOpts = {
   // `save` should retrieve output as string, but this is not needed for
   // `replace`. Same thing with final newline stripping.
-  replace: { encoding: 'buffer', stripFinalNewline: false },
+  // eslint-disable-next-line unicorn/no-null
+  replace: { encoding: null, stripFinalNewline: false },
 }
 
 export const forcedOpts = {

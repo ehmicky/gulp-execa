@@ -1,4 +1,4 @@
-# Snapshot report for `src/input.test.js`
+# Snapshot report for `build/src/input.test.js`
 
 The actual snapshot is saved in `input.test.js.snap`.
 

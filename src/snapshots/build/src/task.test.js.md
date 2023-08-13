@@ -1,4 +1,4 @@
-# Snapshot report for `src/task.test.js`
+# Snapshot report for `build/src/task.test.js`
 
 The actual snapshot is saved in `task.test.js.snap`.
 

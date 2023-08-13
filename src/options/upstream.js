@@ -15,7 +15,8 @@ export const CHILD_PROCESS_OPTS = {
   shell: multipleValidOptions(true, '/bin/bash'),
   windowsVerbatimArguments: true,
   windowsHide: true,
-  encoding: 'utf8',
+  // eslint-disable-next-line unicorn/no-null
+  encoding: multipleValidOptions('utf8', null),
 }
 
 // Hack to make `jest-validate` validate Streams but print them nicely
