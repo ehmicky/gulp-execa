@@ -1,3 +1,10 @@
+# 5.0.1
+
+## Bug fixes
+
+- Fixes not being able to set the
+  [`encoding` option](https://github.com/sindresorhus/execa/#encoding) to `null`
+
 # 5.0.0
 
 ## Breaking changes
