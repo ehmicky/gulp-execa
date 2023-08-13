@@ -2,9 +2,9 @@ import { Buffer } from 'node:buffer'
 import { fileURLToPath } from 'node:url'
 import { callbackify } from 'node:util'
 
-import getStream from 'get-stream'
 import gulp from 'gulp'
 import { stream } from 'gulp-execa'
+import rawBody from 'raw-body'
 import through from 'through2-concurrent'
 
 import { getInput } from './input.test.js'
@@ -108,5 +108,7 @@ const stringifyContents = ({ contents, execa }) => {
     return contents.toString()
   }
 
-  return getStream(contents)
+  // TODO: use `get-stream` once Gulp upgrade to `vinyl-fs@v4`.
+  // See https://github.com/sindresorhus/get-stream/issues/103
+  return rawBody(contents, {encoding: 'utf8'})
 }
