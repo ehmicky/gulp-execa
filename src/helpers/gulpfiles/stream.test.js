@@ -110,5 +110,5 @@ const stringifyContents = ({ contents, execa }) => {
 
   // TODO: use `get-stream` once Gulp upgrade to `vinyl-fs@v4`.
   // See https://github.com/sindresorhus/get-stream/issues/103
-  return rawBody(contents, {encoding: 'utf8'})
+  return rawBody(contents, { encoding: 'utf8' })
 }
