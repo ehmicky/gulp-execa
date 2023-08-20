@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^2.0.93",
-    "@types/node": "^20.4.8",
+    "@types/node": "^20.5.3",
     "gulp": "^4.0.2",
     "raw-body": "^2.5.2",
     "strip-ansi": "^7.1.0",
