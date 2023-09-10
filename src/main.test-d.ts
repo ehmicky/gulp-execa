@@ -2,7 +2,7 @@ import type { Readable, Transform } from 'node:stream'
 
 import { exec, task, stream, type Options } from 'gulp-execa'
 import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
-// eslint-disable-next-line n/no-extraneous-import
+// eslint-disable-next-line n/no-extraneous-import, @typescript-eslint/no-shadow
 import type File from 'vinyl'
 
 const childProcess = exec('command')

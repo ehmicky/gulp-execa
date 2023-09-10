@@ -1,7 +1,7 @@
 import type { Transform } from 'node:stream'
 
 import type { Options as ExecaOptions, ExecaChildProcess } from 'execa'
-// eslint-disable-next-line n/no-extraneous-import
+// eslint-disable-next-line n/no-extraneous-import, @typescript-eslint/no-shadow
 import type File from 'vinyl'
 
 type NonStreamOptions = ExecaOptions &
