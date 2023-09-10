@@ -60,7 +60,7 @@
     "fancy-log": "^2.0.0",
     "filter-obj": "^5.1.0",
     "is-plain-obj": "^4.1.0",
-    "jest-validate": "^29.6.3",
+    "jest-validate": "^29.7.0",
     "plugin-error": "^2.0.1",
     "rename-fn": "^2.1.0",
     "through2-concurrent": "^2.0.0"
