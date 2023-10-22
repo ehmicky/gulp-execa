@@ -1,8 +1,8 @@
-import stripAnsi from 'strip-ansi'
+import { stripVTControlCharacters } from 'node:util'
 
 // Normalize Gulp output so it's predictable across time and environments
 export const normalizeMessage = (message) => {
-  const messageA = stripAnsi(message)
+  const messageA = stripVTControlCharacters(message)
   const messageB = REPLACEMENTS.reduce(replacePart, messageA)
   const messageC = messageB.trim()
   return messageC

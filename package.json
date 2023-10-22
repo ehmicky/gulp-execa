@@ -70,7 +70,6 @@
     "@types/node": "^20.8.9",
     "gulp": "^4.0.2",
     "raw-body": "^2.5.2",
-    "strip-ansi": "^7.1.0",
     "test-each": "^6.0.1"
   },
   "engines": {
