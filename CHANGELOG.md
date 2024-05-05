@@ -1,3 +1,11 @@
+# 7.0.0
+
+## Breaking changes
+
+- Upgrade Execa to
+  [`9.0.0`](https://github.com/sindresorhus/execa/releases/tag/v9.0.0)
+- Rename `verbose` option to [`debug`](README.md#debug)
+
 # 6.0.0
 
 ## Breaking changes
