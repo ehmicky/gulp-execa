@@ -64,7 +64,6 @@ const bufferResult = async ({ file, input, opts, opts: { from } }) => {
   const { [from]: output } = await execCommand(input, opts)
   // Stream output can be either string or buffer depending on `opts.encoding`
   // However `file.contents` cannot be a string.
-  const buffer = Buffer.isBuffer(output) ? output : Buffer.from(output)
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = buffer
+  file.contents = Buffer.from(output)
 }
