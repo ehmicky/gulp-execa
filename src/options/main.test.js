@@ -1,3 +1,6 @@
+import { dirname } from 'node:path'
+import { execPath } from 'node:process'
+
 import test from 'ava'
 import { each } from 'test-each'
 
@@ -9,34 +12,8 @@ each(
   [
     { opts: false },
     { opts: { cwd: false } },
-    { opts: { env: false } },
-    { opts: { argv0: false } },
-    { opts: { stdio: false } },
-    { opts: { serialization: false } },
-    { opts: { detached: '' } },
-    { opts: { uid: false } },
-    { opts: { gid: false } },
-    { opts: { shell: 0 } },
-    { opts: { windowsVerbatimArguments: '' } },
-    { opts: { windowsHide: '' } },
-    { opts: { encoding: false } },
-    { opts: { extendEnv: '' } },
-    { opts: { stripFinalNewline: '' } },
-    { opts: { preferLocal: '' } },
-    { opts: { localDir: false } },
-    { opts: { input: false } },
-    { opts: { reject: '' } },
-    { opts: { cleanup: '' } },
-    { opts: { all: '' } },
-    { opts: { execPath: false } },
-    { opts: { timeout: false } },
-    { opts: { buffer: '' } },
-    { opts: { maxBuffer: false } },
-    { opts: { killSignal: false } },
-    { opts: { stdin: false } },
-    { opts: { stdout: false } },
-    { opts: { stderr: false } },
-    { opts: { invalid: false } },
+    { opts: { echo: 0 } },
+    { opts: { verbose: 0 } },
     { opts: { result: 'invalid' } },
     { opts: { from: 'invalid' } },
   ],
@@ -63,7 +40,7 @@ each(METHODS, [{}, { opts: {} }], ({ title }, methodProps, data) =>
 
 each(
   METHODS,
-  [{ command: 'gulp --version', opts: { env: { PATH: '' } } }],
+  [{ command: 'gulp --version', opts: { env: { PATH: dirname(execPath) } } }],
   ({ title }, methodProps, data) =>
     test(`Default options | ${title}`, async (t) => {
       await snapshotTest({ t, methodProps, data })

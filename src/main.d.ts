@@ -1,6 +1,6 @@
 import type { Transform } from 'node:stream'
 
-import type { Options as ExecaOptions, ExecaChildProcess } from 'execa'
+import type { Options as ExecaOptions, ResultPromise } from 'execa'
 // eslint-disable-next-line n/no-extraneous-import, @typescript-eslint/no-shadow
 import type File from 'vinyl'
 
@@ -114,10 +114,10 @@ export type Options = StreamOptions & NonStreamOptions
  * }
  * ```
  */
-export function exec(
+export function exec<CallOptions extends NonStreamOptions = {}>(
   command: string,
-  options?: NonStreamOptions,
-): ExecaChildProcess
+  options?: CallOptions,
+): ResultPromise<CallOptions>
 
 /**
  * Returns a Gulp task that executes `command`.
@@ -127,10 +127,10 @@ export function exec(
  * export const audit = task('npm audit')
  * ```
  */
-export function task(
+export function task<CallOptions extends NonStreamOptions = {}>(
   command: string,
-  options?: NonStreamOptions,
-): () => ExecaChildProcess
+  options?: CallOptions,
+): () => ResultPromise<CallOptions>
 
 /**
  * Returns a stream that executes a `command` on each input file.

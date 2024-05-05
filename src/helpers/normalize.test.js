@@ -28,6 +28,7 @@ const REPLACEMENTS = [
   // Stack traces
   [/^([ \t]+)at [^\r\n]+$/gmu, '$1at STACK TRACE'],
   [/(([ \t]+)at STACK TRACE(\r?\n)?)+/gu, '$2at STACK TRACE$3'],
+  [/node:.*:\d+/gu, 'node:module'],
   // Gulp shows file content that triggered an error
   [/[^]+Error:/gu, ''],
   // Gulp warning
@@ -37,6 +38,7 @@ const REPLACEMENTS = [
   [/\[\d{2}:\d{2}:\d{2}\]/gu, '[12:00:00]'],
   // Duration
   [/(\d+\.)?\d+ (([μnm]?s)|(min))/gu, '100 ms'],
+  [/"durationMs": .*,/gu, '"durationMs": 1,'],
   // Versions
   [/\d+\.\d+\.\d+/gu, '1.0.0'],
   // Make snapshots less verbose

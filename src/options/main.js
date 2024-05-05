@@ -5,7 +5,6 @@ import { validate } from 'jest-validate'
 import { throwError } from '../error.js'
 
 import { validateCustom } from './custom.js'
-import { CHILD_PROCESS_OPTS, EXECA_OPTS } from './upstream.js'
 import { addVerbose } from './verbose.js'
 
 // Parse options
@@ -33,12 +32,14 @@ const validateOpts = ({ opts, defaultOpts, forcedOpts }) => {
   validateCustom({ opts })
 
   const exampleConfig = excludeKeys(
-    { ...EXAMPLE_OPTS, ...excludeKeys(defaultOpts, FORCE_EXAMPLE_KEYS) },
+    { ...EXAMPLE_OPTS, ...defaultOpts },
     (key) => Object.hasOwn(forcedOpts, key),
   )
 
   try {
-    validate(opts, { exampleConfig, recursiveDenylist: ['env'] })
+    // Let Execa validate its own options
+    // eslint-disable-next-line no-empty-function
+    validate(opts, { exampleConfig, unknown: () => {} })
   } catch (error) {
     // `jest-validate` `error.stack` just repeats `error.message`
     throwError(error, { showStack: false })
@@ -51,12 +52,6 @@ const DEFAULT_OPTS = {
 }
 
 const EXAMPLE_OPTS = {
-  ...CHILD_PROCESS_OPTS,
-  ...EXECA_OPTS,
   ...DEFAULT_OPTS,
   echo: true,
 }
-
-// Some `EXAMPLE_OPTS[key]` uses `multipleValidOptions()` from `jest-validate`,
-// which requires them not be overwritten by `defaultOpts`
-const FORCE_EXAMPLE_KEYS = ['encoding']
