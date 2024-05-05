@@ -18,6 +18,7 @@ const REPLACEMENTS = [
   [/exit code 2 \(ENOENT\)/gu, 'ENOENT'],
   [/spawn gulp ENOENT\n/gu, ''],
   // File paths
+  [/"cwd": .*,/gu, '"cwd": /path'],
   [/[^ (\n]+\/[^ )\n]+/gu, '/path'],
   // execa errors have additional properties.
   // Those are printed by `util.inspect()`. However they contain `stack` and
