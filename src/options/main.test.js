@@ -13,7 +13,7 @@ each(
     { opts: false },
     { opts: { cwd: false } },
     { opts: { echo: 0 } },
-    { opts: { verbose: 0 } },
+    { opts: { debug: 0 } },
     { opts: { result: 'invalid' } },
     { opts: { from: 'invalid' } },
   ],

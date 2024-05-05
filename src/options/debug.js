@@ -1,6 +1,6 @@
-// Translate `verbose` option into `stdout|stderr|echo` options
-export const addVerbose = ({ opts: { verbose, ...opts }, opts: { stdio } }) => {
-  if (!verbose) {
+// Translate `debug` option into `stdout|stderr|echo` options
+export const addDebug = ({ opts: { debug, ...opts }, opts: { stdio } }) => {
+  if (!debug) {
     // The default value for `echo` must be added here, not in `DEFAULT_OPTS`
     return { echo: false, ...opts }
   }

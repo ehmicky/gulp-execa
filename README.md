@@ -153,7 +153,7 @@ as:
 - passing several files, a directory or a globbing pattern as arguments to the
   command
 
-The [`verbose`](#verbose),
+The [`debug`](#debug),
 [`stdout`](https://github.com/sindresorhus/execa#stdout-1),
 [`stderr`](https://github.com/sindresorhus/execa#stderr-1),
 [`all`](https://github.com/sindresorhus/execa#all-2) and
@@ -219,7 +219,7 @@ $ gulp audit
 [13:09:44] Finished 'audit' after 4.96 s
 ```
 
-## verbose
+## debug
 
 _Type_: `boolean`\
 _Default_: `true` for [`task()`](#taskcommand-options) and [`exec()`](#execcommand-options),

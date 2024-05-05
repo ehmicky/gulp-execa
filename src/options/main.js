@@ -5,7 +5,7 @@ import { validate } from 'jest-validate'
 import { throwError } from '../error.js'
 
 import { validateCustom } from './custom.js'
-import { addVerbose } from './verbose.js'
+import { addDebug } from './debug.js'
 
 // Parse options
 export const parseOpts = ({ opts = {}, defaultOpts = {}, forcedOpts = {} }) => {
@@ -16,7 +16,7 @@ export const parseOpts = ({ opts = {}, defaultOpts = {}, forcedOpts = {} }) => {
   validateOpts({ opts: optsA, defaultOpts, forcedOpts })
 
   const optsB = { ...DEFAULT_OPTS, ...defaultOpts, ...optsA, ...forcedOpts }
-  const optsC = addVerbose({ opts: optsB })
+  const optsC = addDebug({ opts: optsB })
   return optsC
 }
 
@@ -47,7 +47,7 @@ const validateOpts = ({ opts, defaultOpts, forcedOpts }) => {
 }
 
 const DEFAULT_OPTS = {
-  verbose: true,
+  debug: true,
   preferLocal: true,
 }
 

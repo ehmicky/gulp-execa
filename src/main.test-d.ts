@@ -71,16 +71,16 @@ task('command', { echo: 'true' })
 stream(() => 'command', { echo: 'true' })
 expectNotAssignable<Options>({ echo: 'true' })
 
-await exec('command', { verbose: true })
-task('command', { verbose: true })
+await exec('command', { debug: true })
+task('command', { debug: true })
 // @ts-expect-error
-stream(() => 'command', { verbose: true })
-expectAssignable<Options>({ verbose: true })
+stream(() => 'command', { debug: true })
+expectAssignable<Options>({ debug: true })
 // @ts-expect-error
-await exec('command', { verbose: 'true' })
+await exec('command', { debug: 'true' })
 // @ts-expect-error
-task('command', { verbose: 'true' })
-expectNotAssignable<Options>({ verbose: 'true' })
+task('command', { debug: 'true' })
+expectNotAssignable<Options>({ debug: 'true' })
 
 // @ts-expect-error
 stream(() => 'command', { stdout: 'inherit' })

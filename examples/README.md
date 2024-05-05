@@ -12,7 +12,7 @@ This directory contains examples of this library. They can be run and edited:
 ## Options
 
 - [`echo`](echo.gulpfile.js)
-- [`verbose`](verbose.gulpfile.js)
+- [`debug`](debug.gulpfile.js)
 - [`result`](result.gulpfile.js)
 - [`from`](from.gulpfile.js)
 - [`maxConcurrency`](max_concurrency.gulpfile.js)

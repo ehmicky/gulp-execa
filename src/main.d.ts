@@ -20,13 +20,13 @@ type NonStreamOptions = ExecaOptions &
        *
        * @default `true` for `task()` and `exec()`, `false` for `stream()`
        */
-      verbose: boolean
+      debug: boolean
     }>
   >
 
 type StreamOptions = Omit<
   NonStreamOptions,
-  'verbose' | 'stdout' | 'stderr' | 'stdio' | 'all'
+  'debug' | 'stdout' | 'stderr' | 'stdio' | 'all'
 > &
   Readonly<
     Partial<{
