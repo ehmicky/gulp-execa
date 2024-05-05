@@ -49,32 +49,17 @@ const fireTask = async ({
   buffer,
   // See `stream()` gulpfile
   read,
-  // `execa` options
-  execaOpts,
-}) => {
-  const execaOptsA = getExecaOpts({ command, opts, buffer, read, execaOpts })
-
-  const { exitCode, stdout, stderr } = await execa(
-    'gulp',
-    ['--gulpfile', `${GULPFILES_DIR}/${method}.test.js`, task],
-    execaOptsA,
-  )
-  const stdoutA = normalizeMessage(stdout)
-  const stderrA = normalizeMessage(stderr)
-  return { exitCode, stdout: stdoutA, stderr: stderrA }
-}
-
-const getExecaOpts = ({
-  command,
-  opts,
-  buffer,
-  read,
-  execaOpts: { env, ...execaOpts } = {},
 }) => {
   // Some information is passed to the gulpfile using the environment variable
   // `INPUT`, which is a JSON object.
   const input = JSON.stringify({ command, opts, buffer, read })
 
-  const execaEnv = { INPUT: input, ...env }
-  return { reject: false, env: execaEnv, ...execaOpts }
+  const { exitCode, stdout, stderr } = await execa(
+    'gulp',
+    ['--gulpfile', `${GULPFILES_DIR}/${method}.test.js`, task],
+    { reject: false, env: { INPUT: input } },
+  )
+  const stdoutA = normalizeMessage(stdout)
+  const stderrA = normalizeMessage(stderr)
+  return { exitCode, stdout: stdoutA, stderr: stderrA }
 }
