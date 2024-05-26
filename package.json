@@ -58,7 +58,7 @@
     "colors-option": "^6.0.0",
     "execa": "^9.0.1",
     "fancy-log": "^2.0.0",
-    "filter-obj": "^5.1.0",
+    "filter-obj": "^6.1.0",
     "is-plain-obj": "^4.1.0",
     "jest-validate": "^29.7.0",
     "plugin-error": "^2.0.1",
