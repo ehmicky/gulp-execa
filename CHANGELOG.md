@@ -1,3 +1,10 @@
+# 7.0.1
+
+## Dependencies
+
+- Upgrade Execa to
+  [`9.2.0`](https://github.com/sindresorhus/execa/releases/tag/v9.2.0)
+
 # 7.0.0
 
 ## Breaking changes

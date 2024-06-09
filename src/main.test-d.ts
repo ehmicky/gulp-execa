@@ -1,4 +1,4 @@
-import type { Writable, Transform } from 'node:stream'
+import type { Readable, Transform } from 'node:stream'
 
 import { exec, task, stream, type Options } from 'gulp-execa'
 import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
@@ -6,7 +6,7 @@ import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
 import type File from 'vinyl'
 
 const childProcess = exec('command')
-expectType<Writable>(childProcess.stdout)
+expectType<Readable>(childProcess.stdout)
 const execResult = await childProcess
 expectType<number | undefined>(execResult.exitCode)
 
