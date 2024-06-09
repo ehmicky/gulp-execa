@@ -1,4 +1,4 @@
-import { execaCommand } from 'execa'
+import { execa, parseCommandString } from 'execa'
 
 import { printEcho } from './echo.js'
 import { throwError } from './error.js'
@@ -37,4 +37,9 @@ export const streamCommand = (input, opts) => {
     throwError(error)
   }
   /* c8 ignore stop */
+}
+
+const execaCommand = (input, opts) => {
+  const [command, ...args] = parseCommandString(input)
+  return execa(command, args, opts)
 }
