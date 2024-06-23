@@ -54,7 +54,7 @@
     "lib": "src"
   },
   "dependencies": {
-    "@types/vinyl": "^2.0.9",
+    "@types/vinyl": "^2.0.12",
     "colors-option": "^6.0.0",
     "execa": "^9.3.0",
     "fancy-log": "^2.0.0",
