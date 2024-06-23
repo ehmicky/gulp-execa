@@ -47,17 +47,8 @@ const saveResult = async ({ file, file: { execa }, input, opts }) => {
 }
 
 const streamResult = ({ file, input, opts, opts: { from } }) => {
-  const execaPromise = streamCommand(input, opts)
-  const { [from]: stream } = execaPromise
-
-  // Make stream fail if the command fails
-  // eslint-disable-next-line promise/prefer-await-to-then, promise/prefer-await-to-callbacks
-  execaPromise.catch((error) => {
-    stream.emit('error', createError(error))
-  })
-
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
-  file.contents = stream
+  file.contents = streamCommand(input, opts)
 }
 
 const bufferResult = async ({ file, input, opts, opts: { from } }) => {
