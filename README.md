@@ -67,13 +67,6 @@ export const sort = () =>
     .pipe(gulp.dest('sorted'))
 ```
 
-# Demo
-
-You can try this library:
-
-- either directly [in your browser](https://repl.it/@ehmicky/gulp-execa).
-- or by executing the [`examples` files](examples/README.md) in a terminal.
-
 # Install
 
 ```
