@@ -1,3 +1,13 @@
+# 8.0.0
+
+## Breaking changes
+
+- Drop support for Gulp 4
+
+## Features
+
+- Support [Gulp 5](https://github.com/gulpjs/gulp/releases/tag/v5.0.0)
+
 # 7.0.1
 
 ## Dependencies
