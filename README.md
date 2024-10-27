@@ -205,9 +205,7 @@ The following options are available as well.
 ## echo
 
 _Type_: `boolean`\
-_Default_: `true` for [`task()`](#taskcommand-options) and
-[`exec()`](#execcommand-options), `false` for
-[`stream()`](#streamfunction-options).
+_Default_: [`debug`](#debug) option's value
 
 Whether the `command` should be printed on the console.
 

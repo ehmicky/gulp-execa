@@ -10,7 +10,7 @@ type NonStreamOptions = ExecaOptions &
       /**
        * Whether the `command` should be printed on the console.
        *
-       * @default `true` for `task()` and `exec()`, `false` for `stream()`
+       * @default `debug` option's value
        */
       echo: boolean
 
