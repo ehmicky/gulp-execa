@@ -1,6 +1,5 @@
 import { Buffer } from 'node:buffer'
 
-import { createError } from '../error.js'
 import { execCommand, streamCommand } from '../exec.js'
 import { isValidInput } from '../input.js'
 
@@ -46,7 +45,7 @@ const saveResult = async ({ file, file: { execa }, input, opts }) => {
   file.execa = [...execa, execaResult]
 }
 
-const streamResult = ({ file, input, opts, opts: { from } }) => {
+const streamResult = ({ file, input, opts }) => {
   // eslint-disable-next-line no-param-reassign, fp/no-mutation
   file.contents = streamCommand(input, opts)
 }
