@@ -30,13 +30,11 @@ export const streamCommand = (input, opts) => {
 
   try {
     return execaCommand(input, opts).readable({ from: opts.from })
-    /* c8 ignore start */
   } catch (error) {
     // At the moment, `execa` never throws synchronously.
     // This is just a safety catch in case it has a bug.
     throwError(error)
   }
-  /* c8 ignore stop */
 }
 
 const execaCommand = (input, opts) => {
