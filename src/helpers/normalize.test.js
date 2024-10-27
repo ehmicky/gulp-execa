@@ -26,12 +26,16 @@ const REPLACEMENTS = [
   [/^([ \t]+)at [^\r\n]+\{[^]+/gmu, ''],
   // Node 14 prints this specific error differently
   [/[^]*uid" (property )?must be[^]*/gu, 'invalid options.uid'],
+  // Node >=23 prints this warning message with Gulp
+  [/^.*ExperimentalWarning: CommonJS module.*$/gmu, ''],
+  [/^.*loading ES Module.*$/gmu, ''],
+  [/^.*--trace-warnings.*$/gmu, ''],
   // Stack traces
   [/^([ \t]+)at [^\r\n]+$/gmu, '$1at STACK TRACE'],
   [/(([ \t]+)at STACK TRACE(\r?\n)?)+/gu, '$2at STACK TRACE$3'],
   [/node:.*:\d+/gu, 'node:module'],
   // Gulp shows file content that triggered an error
-  [/[^]+Error:/gu, ''],
+  [/[^]*Error:/gu, ''],
   // Gulp warning
   [/.*DEP0097.*/gu, ''],
   [/.*node --trace-deprecation.*/gu, ''],
