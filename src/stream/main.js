@@ -6,11 +6,11 @@ import through from 'through2-concurrent'
 import { throwError } from '../error.js'
 import { parseOpts } from '../options/main.js'
 
-import { getDefaultOpts, forcedOpts } from './options.js'
+import { forcedOpts, getDefaultOpts } from './options.js'
 import { setResult } from './result.js'
 
 // Creates a stream that fires child processes on each file:
-//   gulp.src(...).pipe(stream(({ path }) => `command ${path}`))
+//   pipeline(gulp.src(...), stream(({ path }) => `command ${path}`))
 export const stream = (getInput, opts) => {
   validateGetInput(getInput)
 

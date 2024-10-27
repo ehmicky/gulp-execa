@@ -40,20 +40,22 @@ type StreamOptions = Omit<
        *
        * @example
        * ```js
+       * import { pipeline } from 'node:stream/promises'
+       *
        * import gulp from 'gulp'
+       * import { stream } from 'gulp-execa'
        * import through from 'through2'
        *
        * export const task = () =>
-       *   gulp
-       *     .src('*.js')
+       *   pipeline(
+       *     gulp.src('*.js'),
        *     // Prints the number of lines of each file
-       *     .pipe(stream(({ path }) => `wc -l ${path}`, { result: 'save' }))
-       *     .pipe(
-       *       through.obj((file, encoding, func) => {
-       *         console.log(file.execa[0].stdout)
-       *         func(null, file)
-       *       }),
-       *     )
+       *     stream(({ path }) => `wc -l ${path}`, { result: 'save' }),
+       *     through.obj((file, encoding, func) => {
+       *       console.log(file.execa[0].stdout)
+       *       func(null, file)
+       *     }),
+       *   )
        * ```
        */
       result: 'save' | 'replace'
@@ -65,22 +67,22 @@ type StreamOptions = Omit<
        *
        * @example
        * ```js
+       * import { pipeline } from 'node:stream/promises'
+       *
        * import gulp from 'gulp'
+       * import { stream } from 'gulp-execa'
        * import through from 'through2'
        *
        * export const task = () =>
-       *   gulp
-       *     .src('*.js')
+       *   pipeline(
+       *     gulp.src('*.js'),
        *     // Prints the number of lines of each file, including `stderr`
-       *     .pipe(
-       *       stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),
-       *     )
-       *     .pipe(
-       *       through.obj((file, encoding, func) => {
-       *         console.log(file.contents.toString())
-       *         func(null, file)
-       *       }),
-       *     )
+       *     stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),
+       *     through.obj((file, encoding, func) => {
+       *       console.log(file.contents.toString())
+       *       func(null, file)
+       *     }),
+       *   )
        * ```
        */
       from: 'stdout' | 'stderr' | 'all'
@@ -137,13 +139,17 @@ export function task<CallOptions extends NonStreamOptions = object>(
  *
  * @example
  * ```js
+ * import { pipeline } from 'node:stream/promises'
+ *
  * import gulp from 'gulp'
+ * import { stream } from 'gulp-execa'
  *
  * export const sort = () =>
- *   gulp
- *     .src('*.txt')
- *     .pipe(stream(({ path }) => `sort ${path}`))
- *     .pipe(gulp.dest('sorted'))
+ *   pipeline(
+ *     gulp.src('*.txt'),
+ *     stream(({ path }) => `sort ${path}`),
+ *     gulp.dest('sorted'),
+ *   )
  * ```
  */
 export function stream(

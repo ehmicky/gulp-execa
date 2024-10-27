@@ -1,7 +1,7 @@
 import type { Readable, Transform } from 'node:stream'
 
-import { exec, task, stream, type Options } from 'gulp-execa'
-import { expectType, expectAssignable, expectNotAssignable } from 'tsd'
+import { exec, stream, task, type Options } from 'gulp-execa'
+import { expectAssignable, expectNotAssignable, expectType } from 'tsd'
 // eslint-disable-next-line n/no-extraneous-import, @typescript-eslint/no-shadow
 import type File from 'vinyl'
 

@@ -51,8 +51,10 @@ technical lead for 2.5 years. I am available for full-time remote positions.
 `gulpfile.js`:
 
 ```js
+import { pipeline } from 'node:stream/promises'
+
 import gulp from 'gulp'
-import { task, exec, stream } from 'gulp-execa'
+import { exec, stream, task } from 'gulp-execa'
 
 export const audit = task('npm audit')
 
@@ -61,10 +63,11 @@ export const outdated = async () => {
 }
 
 export const sort = () =>
-  gulp
-    .src('*.txt')
-    .pipe(stream(({ path }) => `sort ${path}`))
-    .pipe(gulp.dest('sorted'))
+  pipeline(
+    gulp.src('*.txt'),
+    stream(({ path }) => `sort ${path}`),
+    gulp.dest('sorted'),
+  )
 ```
 
 # Install
@@ -128,14 +131,17 @@ Returns a stream that executes a `command` on each input file.
   - `undefined`
 
 ```js
+import { pipeline } from 'node:stream/promises'
+
 import gulp from 'gulp'
 import { stream } from 'gulp-execa'
 
 export const sort = () =>
-  gulp
-    .src('*.txt')
-    .pipe(stream(({ path }) => `sort ${path}`))
-    .pipe(gulp.dest('sorted'))
+  pipeline(
+    gulp.src('*.txt'),
+    stream(({ path }) => `sort ${path}`),
+    gulp.dest('sorted'),
+  )
 ```
 
 Each file in the stream will spawn a separate process. This can consume lots of
@@ -251,21 +257,22 @@ With [`stream()`](#streamfunction-options), whether the command result should:
 <!-- eslint-disable unicorn/no-null -->
 
 ```js
+import { pipeline } from 'node:stream/promises'
+
 import gulp from 'gulp'
 import { stream } from 'gulp-execa'
 import through from 'through2'
 
 export const task = () =>
-  gulp
-    .src('*.js')
+  pipeline(
+    gulp.src('*.js'),
     // Prints the number of lines of each file
-    .pipe(stream(({ path }) => `wc -l ${path}`, { result: 'save' }))
-    .pipe(
-      through.obj((file, encoding, func) => {
-        console.log(file.execa[0].stdout)
-        func(null, file)
-      }),
-    )
+    stream(({ path }) => `wc -l ${path}`, { result: 'save' }),
+    through.obj((file, encoding, func) => {
+      console.log(file.execa[0].stdout)
+      func(null, file)
+    }),
+  )
 ```
 
 ## from
@@ -279,23 +286,22 @@ Which output stream to use with [`result: 'replace'`](#result).
 <!-- eslint-disable unicorn/no-null -->
 
 ```js
+import { pipeline } from 'node:stream/promises'
+
 import gulp from 'gulp'
 import { stream } from 'gulp-execa'
 import through from 'through2'
 
 export const task = () =>
-  gulp
-    .src('*.js')
+  pipeline(
+    gulp.src('*.js'),
     // Prints the number of lines of each file, including `stderr`
-    .pipe(
-      stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),
-    )
-    .pipe(
-      through.obj((file, encoding, func) => {
-        console.log(file.contents.toString())
-        func(null, file)
-      }),
-    )
+    stream(({ path }) => `wc -l ${path}`, { result: 'replace', from: 'all' }),
+    through.obj((file, encoding, func) => {
+      console.log(file.contents.toString())
+      func(null, file)
+    }),
+  )
 ```
 
 ## maxConcurrency

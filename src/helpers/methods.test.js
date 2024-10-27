@@ -10,11 +10,20 @@ export const TASK_METHODS = [
 ]
 
 export const STREAM_METHODS = [
-  // `gulp.src(...).pipe(stream(..., { result: 'replace' }))`
+  // `pipeline(
+  //    gulp.src(...),
+  //    stream(..., { result: 'replace' }),
+  //  )`
   { title: 'stream-buffer', method: 'stream' },
-  // `gulp.src(..., { buffer: false }).pipe(stream(..., { result: 'replace' }))`
+  // `pipeline(
+  //    gulp.src(..., { buffer: false }),
+  //    stream(..., { result: 'replace' }),
+  //  )`
   { title: 'stream-stream', method: 'stream', buffer: false },
-  // `gulp.src(...).pipe(stream(..., { result: 'save' }))`
+  // `pipeline(
+  //    gulp.src(...),
+  //    stream(..., { result: 'save' }),
+  //  )`
   { title: 'stream-save', method: 'stream', opts: { result: 'save' } },
 ]
 
