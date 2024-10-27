@@ -114,7 +114,7 @@ export type Options = StreamOptions & NonStreamOptions
  * }
  * ```
  */
-export function exec<CallOptions extends NonStreamOptions = {}>(
+export function exec<CallOptions extends NonStreamOptions = object>(
   command: string,
   options?: CallOptions,
 ): ResultPromise<CallOptions>
@@ -127,7 +127,7 @@ export function exec<CallOptions extends NonStreamOptions = {}>(
  * export const audit = task('npm audit')
  * ```
  */
-export function task<CallOptions extends NonStreamOptions = {}>(
+export function task<CallOptions extends NonStreamOptions = object>(
   command: string,
   options?: CallOptions,
 ): () => ResultPromise<CallOptions>
