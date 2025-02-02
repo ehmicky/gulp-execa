@@ -69,7 +69,7 @@
     "@ehmicky/dev-tasks": "^3.0.30",
     "@ehmicky/eslint-config": "^20.0.24",
     "@ehmicky/prettier-config": "^1.0.4",
-    "@types/node": "^22.12.0",
+    "@types/node": "^22.13.1",
     "gulp": "^5.0.0",
     "raw-body": "^3.0.0",
     "test-each": "^7.0.0"
