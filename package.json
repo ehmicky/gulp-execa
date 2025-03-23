@@ -72,7 +72,7 @@
     "@types/node": "^22.13.14",
     "gulp": "^5.0.0",
     "raw-body": "^3.0.0",
-    "test-each": "^7.0.0"
+    "test-each": "^7.0.1"
   },
   "engines": {
     "node": ">=18.18.0"
