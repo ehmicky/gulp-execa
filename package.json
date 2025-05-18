@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^3.0.34",
-    "@ehmicky/eslint-config": "^20.0.31",
+    "@ehmicky/eslint-config": "^20.0.32",
     "@ehmicky/prettier-config": "^1.0.6",
     "@types/node": "^22.13.14",
     "gulp": "^5.0.0",
